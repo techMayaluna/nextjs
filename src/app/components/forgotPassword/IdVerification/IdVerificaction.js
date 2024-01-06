@@ -13,7 +13,8 @@ function IdVerificaction({ send, context }) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      if (verificationCode !== context.idChangePass) return setError(true);
+      if (Number(verificationCode) !== context.idChangePass)
+        return setError(true);
       send({ type: "CONTINUE" });
     }, 1000);
   };
@@ -60,8 +61,8 @@ function IdVerificaction({ send, context }) {
             "Ingresar"
           )}
         </button>
+        {error ? <p className="text-red-500">El código ingresado no es correcto</p> : null}
       </div>
-      {error ? <p>El código ingresado no es correcto</p> : null}
     </div>
   );
 }

@@ -20,6 +20,7 @@ function ChangePassword({ context }) {
   const sendEmailCode = () => {
     setLoading(true);
     if (passwords.password != passwords.newPass) {
+      console.log("no coinciden");
       setError(true);
       setLoading(false);
       return;
@@ -30,7 +31,7 @@ function ChangePassword({ context }) {
         setSuccess(true);
       })
       .catch((error) => {
-        return setError(error.message);
+        console.log(error)
       })
       .finally(() => {
         setLoading(false);
@@ -103,7 +104,7 @@ function ChangePassword({ context }) {
               "Cambiar contraseña"
             )}
           </button>
-          {error ? <p>{error || "Las contraseñas no coinciden"}</p> : null}
+        {error ? <p>Las contraseñas no coinciden</p> : null}{" "}
         </div>
       </div>
 
