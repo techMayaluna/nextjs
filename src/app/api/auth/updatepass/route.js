@@ -3,14 +3,10 @@ import User from "@/models/users";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_URI);
-
 export async function POST(request) {
   try {
     await connectDB();
-    const { newPassword, idUser, email } = await request.json();
+    const { newPassword, idUser } = await request.json();
 
     console.log(idUser);
     const user = await User.findOne({ _id: idUser });
@@ -31,18 +27,6 @@ export async function POST(request) {
         password: bcrypt.hashSync(newPassword, 10),
       }
     );
-
-    try {
-      const data = await resend.emails.send({
-        from: "Acme <onboarding@resend.dev>",
-        to: [email],
-        subject: "Correo al mail del user",
-        html: `<strong>Contraseña modificada con éxito</strong>`,
-      });
-    } catch (error) {
-      console.log(error);
-      return NextResponse.error();
-    }
 
     return NextResponse.json(
       {
