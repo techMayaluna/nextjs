@@ -51,6 +51,7 @@ const useUserStore = create((set) => {
           fechaNacimiento: res.data.fechaNacimiento,
           fechaVencimientoLicencia: res.data.fechaVencimientoLicencia,
           isActive: res.data.isActive,
+          email: res.data.email,
           _id: res.data._id,
           documentos: res.data.documentos,
         });

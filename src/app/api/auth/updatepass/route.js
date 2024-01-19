@@ -8,7 +8,6 @@ export async function POST(request) {
     await connectDB();
     const { newPassword, idUser } = await request.json();
 
-    console.log(idUser);
     const user = await User.findOne({ _id: idUser });
     if (!user)
       return NextResponse.json(

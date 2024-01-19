@@ -28,6 +28,7 @@ function FormModificarUser() {
     _id: state._id,
   }));
 
+  console.log(email)
   return (
       <section className="pb-28">
         <div>

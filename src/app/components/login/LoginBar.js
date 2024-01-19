@@ -9,6 +9,8 @@ export default function LoginBar() {
   const { nombre } = useUserStore((state) => ({
     nombre: state.nombre,
   }));
+
+  const [acceptedPolicies, setAcceptedPolicies] = useState(false);
   const router = useRouter();
 
   const userIdRef = useRef(null);
@@ -24,26 +26,30 @@ export default function LoginBar() {
   }, []);
 
   const handleClick = (e) => {
-    setLoading(true);
+    if (!acceptedPolicies) {
+      setError("Debes aceptar las políticas de privacidad para continuar");
+      return;
+    } else {
+      setLoading(true);
 
-    const userid = userIdRef.current.value;
-    const password = passwordRef.current.value;
-    e.preventDefault();
+      const userid = userIdRef.current.value;
+      const password = passwordRef.current.value;
+      e.preventDefault();
 
-    login(userid, password)
-      .then((res) => {
-        console.log(res);
-        if (res != undefined) {
-          router.push("/home");
-        }
-      })
-      .catch((error) => {
-        //TODO HANDLE ERROR
-        setError(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      login(userid, password)
+        .then((res) => {
+          console.log(res);
+          if (res != undefined) {
+            router.push("/home");
+          }
+        })
+        .catch((error) => {
+          setError(error.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   };
 
   return (
@@ -94,12 +100,37 @@ export default function LoginBar() {
                 />
               </div>
             </div>
+
+            <div className="mt-3">
+              <input
+                type="radio"
+                id="accept"
+                name="privacy"
+                value="accept"
+                checked={acceptedPolicies}
+                onChange={() => setAcceptedPolicies(!acceptedPolicies)}
+              />
+              <label
+                htmlFor="accept"
+                className="text-sm font-medium leading-6 ml-1 text-gray-900"
+              >
+                Acepto las{" "}
+                <a
+                  href="https://wildchamo.me/"
+                  target="_blank"
+                  className="underline"
+                >
+                  políticas de privacidad
+                </a>
+              </label>
+              <br />
+            </div>
           </div>
 
-          <Link href="/home" onClick={handleClick}>
             <button
               type="submit"
               className="flex w-80 justify-center rounded-2xl bg-secondary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              onClick={handleClick}
             >
               {loading ? (
                 <svg
@@ -122,7 +153,6 @@ export default function LoginBar() {
                 "Iniciar Sesión"
               )}
             </button>
-          </Link>
 
           <p className="mt-10 text-center text-sm text-gray-500">
             {error && <span className=" text-sm text-red-500"> {error}</span>}

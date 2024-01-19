@@ -27,7 +27,7 @@ export async function POST(request) {
     try {
       const data= await resend.emails.send({
         from: "Acme <onboarding@resend.dev>",
-        to: ["wildchamo@gmail.com", email],
+        to: ["noreply@mayalunaseguros.com", email],
         subject: "Tu codigo de Recuperación ✅ - Mayaluna",
         react: ForgotPasswordTemplate({ code: code }),
       });
