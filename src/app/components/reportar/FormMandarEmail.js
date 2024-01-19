@@ -241,7 +241,6 @@ function FormMandarEmail({ params }) {
     try {
       const res = await axios.post("/api/email2", formData);
       console.log(res);
-      console.log(res.data.id)
     } catch (error) {
       console.log(error);
     } finally {
@@ -415,9 +414,8 @@ function ModalTipo() {
 function ModalLoading() {
   return (
     <Modal>
-      <h3 className="text-md text-left font-bold mb-4">Cargando</h3>A tu correo
-      electronico llegara un mensaje con el reporte de tu caso.
-    </Modal>
+      <h3 className="text-md text-left font-bold mb-4">Cargando</h3>
+      En un momento tu solicitud será exitosa </Modal>
   );
 }
 

@@ -26,7 +26,7 @@ export async function POST(request) {
 
     try {
       const data= await resend.emails.send({
-        from: "Acme <onboarding@resend.dev>",
+        from: "Seguros Mayaluna <onboarding@resend.dev>",
         to: ["noreply@mayalunaseguros.com", email],
         subject: "Tu codigo de Recuperación ✅ - Mayaluna",
         react: ForgotPasswordTemplate({ code: code }),
