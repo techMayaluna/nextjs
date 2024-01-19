@@ -14,7 +14,7 @@ import "jspdf-autotable";
 function FormMandarEmail({ params }) {
   const doc = new jsPDF();
 
-  const {tipo,placa} = params;
+  const {tipo, placa} = params;
 
 
   const router = useRouter();
@@ -69,6 +69,8 @@ function FormMandarEmail({ params }) {
 
     return base64Images;
   }
+
+
 
   async function generatePDF() {
     // Convert all images
@@ -228,7 +230,7 @@ function FormMandarEmail({ params }) {
       prevY += 75;
     }
 
-    doc.save("reporte.pdf");
+//    doc.save("reporte.pdf");
 
     const blob = new Blob([doc.output("blob")], { type: "application/pdf" });
 
@@ -239,6 +241,7 @@ function FormMandarEmail({ params }) {
     try {
       const res = await axios.post("/api/email2", formData);
       console.log(res);
+      console.log(res.data.id)
     } catch (error) {
       console.log(error);
     } finally {
@@ -376,7 +379,7 @@ function FormMandarEmail({ params }) {
         </div>
       </form>
 
-      {isOpen && <ModalTipo id={123123123} onClose={() => setIsOpen(false)} />}
+      {isOpen && <ModalTipo onClose={() => setIsOpen(false)} />}
       {isLoading && <ModalLoading />}
       {missingImage && (
         <ModalMissingImage onClose={() => setMissingImage(false)} />
@@ -385,7 +388,7 @@ function FormMandarEmail({ params }) {
   );
 }
 
-function ModalTipo({ id }) {
+function ModalTipo() {
   const router = useRouter();
 
   const sendBack = () => {
@@ -397,9 +400,6 @@ function ModalTipo({ id }) {
       <h3 className="text-md text-left font-bold mb-4">
         Reporte enviado exitosamente. Gracias por confiar en seguros Mayaluna
       </h3>
-      A tu correo electronico llegara un mensaje con el reporte de tu caso.
-      Radicado Número:
-      <p>{id}</p>
       <div className="text-right mt-5">
         <button
           className="bg-secondary w-24 text-white px-4 py-2 rounded-lg"

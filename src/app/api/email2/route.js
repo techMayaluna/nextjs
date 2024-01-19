@@ -14,8 +14,9 @@ export async function POST(request) {
   try {
     const data = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
-      to: ["noreply@mayalunaseguros.com", "emaya@mayalunaseguros.com"],
+      to: ["noreply@mayalunaseguros.com", "emaya@mayalunaseguros.com", "wildchamo@gmail.com"],
       subject: "Envio de reporte de siniestro",
+      html: "Se adjunta el reporte de siniestro",
       attachments: [
         {
           filename: "reporte.pdf",
