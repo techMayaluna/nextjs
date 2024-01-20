@@ -1,3 +1,4 @@
+"use client";
 import Navbar from "./components/LandingPage/Navbar";
 import Hero from "./components/LandingPage/Hero";
 import AboutCard from "./components/LandingPage/AboutCard";
@@ -12,7 +13,7 @@ export default function LandingPage() {
   return (
     <main className="relative z-0 bg-background">
       <div className="bg-hero-background bg-cover bg-no-repeat bg-center">
-        <Navbar />
+        <Navbar atHome={true} />
         <Hero />
       </div>
       <AboutCard />

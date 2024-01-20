@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { navLinks } from "./constants";
 import Image from "next/image";
 
-const Navbar = () => {
-  const [active, setActive] = useState("Inicio");
+const Navbar = ({ atHome }) => {
+  const [active, setActive] = useState(atHome ? "Inicio" : "Politica");
   // const [toggle, setToggle] = useState(false);
   // const [animate, setAnimate] = useState(false);
 
@@ -19,10 +19,10 @@ const Navbar = () => {
       <header className="bg-background pt-2 lg:pt-1.5 fixed top-0 w-full h-20 z-40 border-b-2 border-muted-foreground">
         <nav className="flex flex-row items-center justify-between mx-4 sm:mx-20">
           <a
-            href="#"
+            href={atHome ? "#" : "/politica"}
             className="flex flex-row items-center text-background cursor-pointer"
             onClick={() => {
-              setActive("Inicio");
+              setActive(atHome ? "Inicio" : "Politica");
               window.scrollTo(0, 0);
             }}
           >
@@ -48,7 +48,7 @@ const Navbar = () => {
                   }}
                 >
                   <a
-                    href={link.ref}
+                    href={atHome ? link.ref : link.ref !== "/politica" ? `/${link.ref}` : "/politica"}
                     className={`${
                       active === link.title ? "nav-link-active" : "nav-link"
                     } nav-link-ltr`}

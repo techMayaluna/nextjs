@@ -10,6 +10,10 @@ export const navLinks = [
   {
     title: "Cotizador",
     ref: "#calculator",
+  },
+  {
+    title: "Politica",
+    ref: "/politica",
   }
 ];
 

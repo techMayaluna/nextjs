@@ -1,3 +1,4 @@
+"use client";
 import LoginBar from "../components/login/LoginBar";
 import Image from "next/image";
 
