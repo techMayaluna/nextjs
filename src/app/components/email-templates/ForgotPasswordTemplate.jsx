@@ -29,23 +29,6 @@ export const ForgotPasswordTemplate = ({ code }) => {
           }}
         >
           <tr>
-            <td style={{ textAlign: "center", padding: "20px 0" }}>
-              <img
-                alt="Logo_mayaluna"
-                src="https://github.com/wildchamo/nextjs/assets/56313573/34274806-6d9f-4d20-a361-c0d7e985665f"
-                width="190"
-                height="70"
-                style={{
-                  display: "block",
-                  outline: "none",
-                  border: "none",
-                  textDecoration: "none",
-                  margin: "0 auto",
-                }}
-              />
-            </td>
-          </tr>
-          <tr>
             <td style={{ padding: "0 20px", textAlign: "center" }}>
               <p
                 style={{
