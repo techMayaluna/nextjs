@@ -115,13 +115,12 @@ export default function LoginBar() {
                 className="text-sm font-medium leading-6 ml-1 text-gray-900"
               >
                 Acepto las{" "}
-                <a
-                  href="https://wildchamo.me/"
-                  target="_blank"
+                <Link
+                  href="/politica"
                   className="underline"
                 >
                   políticas de privacidad
-                </a>
+                </Link>
               </label>
               <br />
             </div>

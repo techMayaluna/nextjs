@@ -1,5 +1,4 @@
-"use client";
-import React from "react";
+import Link from "next/link";
 import Navbar from "../components/LandingPage/Navbar";
 
 export default function page() {
@@ -31,14 +30,14 @@ export default function page() {
             Manual de Políticas para la Protección y Tratamiento de Datos
             Personales.
           </p>
-          <a href="/">
-            <button
-              type="button"
+          <div className="text-end">
+            <Link
+              href="/"
               className="mt-5 py-3 px-6 w-full sm:w-1/4 font-bold uppercase text-sm text-background rounded-2xl bg-button hover:bg-button/80 transition-all duration-150"
             >
               Aceptar
-            </button>
-          </a>
+            </Link>
+          </div>
         </div>
       </section>
     </main>

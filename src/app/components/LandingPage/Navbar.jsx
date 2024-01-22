@@ -1,25 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { navLinks } from "./constants";
 import Image from "next/image";
+import Link from "next/link";
 
 const Navbar = ({ atHome }) => {
   const [active, setActive] = useState(atHome ? "Inicio" : "Politica");
-  // const [toggle, setToggle] = useState(false);
-  // const [animate, setAnimate] = useState(false);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setAnimate(toggle);
-  //   }, 0);
-  // }, [toggle]);
 
   return (
     <>
       <header className="bg-background pt-2 lg:pt-1.5 fixed top-0 w-full h-20 z-40 border-b-2 border-muted-foreground">
         <nav className="flex flex-row items-center justify-between mx-4 sm:mx-20">
-          <a
-            href={atHome ? "#" : "/politica"}
+          <Link
+            href="/"
             className="flex flex-row items-center text-background cursor-pointer"
             onClick={() => {
               setActive(atHome ? "Inicio" : "Politica");
@@ -34,7 +27,7 @@ const Navbar = ({ atHome }) => {
               priority={true}
               alt="logoMayaluna"
             />
-          </a>
+          </Link>
           <div className="hidden md:flex flex-row space-x-4">
             <ul className="flex flex-row lg:space-x-10 tracking-wide text-lg lg:mr-5">
               {navLinks.map((link, index) => (
@@ -47,14 +40,20 @@ const Navbar = ({ atHome }) => {
                     setActive(link.title);
                   }}
                 >
-                  <a
-                    href={atHome ? link.ref : link.ref !== "/politica" ? `/${link.ref}` : "/politica"}
+                  <Link
+                    href={
+                      atHome
+                        ? link.ref
+                        : link.ref !== "/politica"
+                        ? `/${link.ref}`
+                        : "/politica"
+                    }
                     className={`${
                       active === link.title ? "nav-link-active" : "nav-link"
                     } nav-link-ltr`}
                   >
                     {link.title}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -80,37 +79,12 @@ const Navbar = ({ atHome }) => {
             </div>
           </div>
           <div className="sm:hidden flex flex-1 justify-end items-center">
-            <a
+            <Link
               href="/login"
               className="bg-button text-white py-2 px-4 rounded-2xl"
             >
               Iniciar Sesión
-            </a>
-
-            {/* <div
-              className={`${!toggle ? "hidden" : "flex"} ${
-                !animate ? "opacity-0" : "opacity-100"
-              } flex-col transition-all ease-in-out duration-250 y p-6 bg-background border-2 border-tertiary absolute top-20 right-0 mx-2 my-2 min-w-[140px] z-10 rounded-xl`}
-            >
-              <ul className="list-none flex justify-end items-start flex-col gap-4">
-                {navLinks.map((link, index) => (
-                  <li
-                    key={index}
-                    className={`${
-                      active === link.title
-                        ? "text-secondary font-bold"
-                        : "text-foreground"
-                    }`}
-                    onClick={() => {
-                      setToggle(!toggle);
-                      setActive(link.title);
-                    }}
-                  >
-                    <a href={link.ref}>{link.title}</a>
-                  </li>
-                ))}
-              </ul>
-            </div> */}
+            </Link>
           </div>
         </nav>
       </header>
