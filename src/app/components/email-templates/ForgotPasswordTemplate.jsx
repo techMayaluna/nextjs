@@ -28,6 +28,24 @@ export const ForgotPasswordTemplate = ({ code }) => {
             borderCollapse: "collapse",
           }}
         >
+           <tr>
+            <td style={{ textAlign: "center", padding: "20px 0" }}>
+              <img
+                alt="Logo_mayaluna"
+                src="https://res.cloudinary.com/dz7keixqs/image/upload/v1705961749/ph4rxkpobvkzfqjbh3yk.jpg"
+                width="190"
+                height="70"
+                style={{
+                  display: "block",
+                  outline: "none",
+                  border: "none",
+                  textDecoration: "none",
+                  margin: "0 auto",
+                }}
+              />
+            </td>
+          </tr>
+
           <tr>
             <td style={{ padding: "0 20px", textAlign: "center" }}>
               <p
