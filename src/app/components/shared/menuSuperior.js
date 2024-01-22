@@ -10,24 +10,42 @@ import { usePathname, useRouter } from "next/navigation";
 const MenuSuperior = () => {
   const router = useRouter();
 
-  const { nombre, error, updateGeo } = useUserStore((state) => state);
+  const { nombre, error, updateGeo, fechaNacimiento } = useUserStore(
+    (state) => state
+  );
 
   useEffect(() => {
-    // if (!nombre) {
-    //   router.push("/");
-    // }
     updateGeo();
+    console.log(fechaNacimiento);
   }, []);
 
   const goBack = () => {
     router.back();
   };
 
+  const isBirthday = () => {
+    const birthDate = new Date(fechaNacimiento);
+    const currentDate = new Date();
+
+    console.log(currentDate)
+
+    console.log(birthDate)
+
+    return (
+      birthDate.getDate() === currentDate.getDate() &&
+      birthDate.getMonth() === currentDate.getMonth()
+    );
+  };
+
   return (
     <>
       <div className="flex justify-between mr-8 ml-8 mt-8">
         {usePathname() === "/home" ? (
-          <h3>¡Bienvenido {nombre} !</h3>
+          isBirthday() ? (
+            <h3>¡Feliz cumpleaños {nombre}!</h3>
+          ) : (
+            <h3>¡Bienvenido {nombre}!</h3>
+          )
         ) : (
           <div onClick={goBack} className="uppercase">
             Regresar
