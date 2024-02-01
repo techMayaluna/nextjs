@@ -5,6 +5,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  tipoPersona: {
+    type: String,
+    required: true,
+  },
+  tipoDocumento: {
+    type: String,
+    required: true,
+  },
   identificacion: {
     type: String,
     required: true,
@@ -31,16 +39,14 @@ const userSchema = new Schema({
   },
   fechaNacimiento: {
     type: Date,
-    required: true,
   },
   fechaVencimientoLicencia: {
     type: Date,
-    required: true,
   },
   rol: {
     type: String,
-    enum: ["Usuario"],
-    default: "Usuario",
+    enum: ["Individual", "Colectivo", "admin"],
+    default: "Individual",
   },
   isActive: {
     type: Boolean,

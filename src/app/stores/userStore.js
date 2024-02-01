@@ -7,9 +7,9 @@ const useUserStore = create((set) => {
   const storedUser = userCookie ? JSON.parse(userCookie) : null;
 
   return {
-    _id: storedUser ? storedUser._id : null,
+    _id: storedUser ? storedUser.userId : null,
     nombre: null,
-    identificacion: null,
+    identificacion: storedUser ? storedUser.identificacion : null,
     email: null,
     celular: null,
     direccion: null,
@@ -24,10 +24,10 @@ const useUserStore = create((set) => {
 
     seguros: [],
 
-
     updateUser: (userData) => {
       set((state) => {
         const updatedState = { ...state, ...userData };
+        console.log(userData);
         Cookies.set("user", JSON.stringify(updatedState));
         return updatedState;
       });
@@ -38,7 +38,7 @@ const useUserStore = create((set) => {
           identificacion: userid,
           password: password,
         });
-
+        console.log(res.data);
         set({
           nombre: res.data.nombre,
           identificacion: res.data.identificacion,
@@ -53,7 +53,12 @@ const useUserStore = create((set) => {
           _id: res.data._id,
           documentos: res.data.documentos,
         });
-        Cookies.set("user", JSON.stringify(res.data._id));
+
+        const cookieValue = {
+          userId: res.data._id,
+          identificacion: res.data.identificacion,
+        };
+        Cookies.set("user", JSON.stringify(cookieValue));
         return res.data;
       } catch (error) {
         throw new Error(error.response.data.message);
@@ -61,11 +66,11 @@ const useUserStore = create((set) => {
     },
 
     getUser: async (id) => {
-      console.warn(id)
       try {
         const res = await axios.post("/api/user", {
           idUser: id,
         });
+
         set({
           nombre: res.data.nombre,
           identificacion: res.data.identificacion,
@@ -80,13 +85,11 @@ const useUserStore = create((set) => {
           _id: res.data._id,
           documentos: res.data.documentos,
         });
-        console.log(res)
         return res;
       } catch (error) {
         throw new Error(error.response);
       }
     },
-
 
     getSeguros: async (idUser) => {
       try {

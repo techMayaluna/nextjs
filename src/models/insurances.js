@@ -21,10 +21,26 @@ const insuranceSchema = new Schema({
     type: Date,
     required: true,
   },
+  fechaInicial: {
+    type: Date,
+    required: true,
+  },
   documentos: {
     type: [String], // This assumes that documents are stored as an array of strings (e.g., URLs or file names)
     default: [],
   },
+  tipo: {
+    type: String,
+    required: true,
+  },
+  vehiculos: [
+    {
+      placa: String,
+      vencimientoExtintor: String,
+      vencimientoTarjetaOperacion: String,
+      vencimientoTecnomecanica: String,
+    },
+  ],
 });
 const Insurance = models.Insurance || model("Insurance", insuranceSchema);
 

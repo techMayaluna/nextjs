@@ -10,12 +10,12 @@ import { usePathname, useRouter } from "next/navigation";
 const MenuSuperior = () => {
   const router = useRouter();
 
-  const { nombre, error, updateGeo, fechaNacimiento, getUser, _id } = useUserStore(
-    (state) => state
-  );
+  const { nombre, error, updateGeo, fechaNacimiento, getUser, identificacion } =
+    useUserStore((state) => state);
 
   useEffect(() => {
-    getUser(_id);
+    getUser(identificacion);
+
     updateGeo();
   }, []);
 
