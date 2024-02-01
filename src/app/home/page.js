@@ -10,7 +10,6 @@ export default async function Home() {
   const usuario = await fetchUserData(user.value);
   const seguros = await fetchInsurance(user.value);
 
-  console.log(seguros)
 
 
   return (
