@@ -21,7 +21,8 @@ const useUserStore = create((set) => {
     geo: null,
     error: null,
     documentos: null,
-
+    tipoDocumento: null,
+    tipoPersona: null,
     seguros: [],
 
     updateUser: (userData) => {
@@ -52,6 +53,8 @@ const useUserStore = create((set) => {
           email: res.data.email,
           _id: res.data._id,
           documentos: res.data.documentos,
+          tipoDocumento: res.data.tipoDocumento,
+          tipoPersona: res.data.tipoPersona,
         });
 
         const cookieValue = {
@@ -84,6 +87,8 @@ const useUserStore = create((set) => {
           email: res.data.email,
           _id: res.data._id,
           documentos: res.data.documentos,
+          tipoDocumento: res.data.tipoDocumento,
+          tipoPersona: res.data.tipoPersona,
         });
         return res;
       } catch (error) {
