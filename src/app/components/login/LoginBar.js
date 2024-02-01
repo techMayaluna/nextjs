@@ -6,9 +6,6 @@ import { useRouter } from "next/navigation";
 
 export default function LoginBar() {
   const { login } = useUserStore();
-  const { nombre } = useUserStore((state) => ({
-    nombre: state.nombre,
-  }));
 
   const [acceptedPolicies, setAcceptedPolicies] = useState(false);
   const router = useRouter();
@@ -19,11 +16,11 @@ export default function LoginBar() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (nombre) {
-      router.push("/home");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (nombre) {
+  //     router.push("/home");
+  //   }
+  // }, []);
 
   const handleClick = (e) => {
     if (!acceptedPolicies) {

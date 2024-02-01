@@ -7,22 +7,20 @@ const useUserStore = create((set) => {
   const storedUser = userCookie ? JSON.parse(userCookie) : null;
 
   return {
-    nombre: storedUser ? storedUser.nombre : null,
-    identificacion: storedUser ? storedUser.identificacion : 0,
-    email: storedUser ? storedUser.email : null,
-    celular: storedUser ? storedUser.celular : null,
-    direccion: storedUser ? storedUser.direccion : null,
-    ciudad: storedUser ? storedUser.ciudad : null,
-    rol: storedUser ? storedUser.rol : null,
-    fechaNacimiento: storedUser ? storedUser.fechaNacimiento : null,
-    fechaVencimientoLicencia: storedUser
-      ? storedUser.fechaVencimientoLicencia
-      : null,
-    isActive: storedUser ? storedUser.isActive : null,
+    nombre: null,
+    identificacion: null,
+    email: null,
+    celular: null,
+    direccion: null,
+    ciudad: null,
+    rol: null,
+    fechaNacimiento: null,
+    fechaVencimientoLicencia: null,
+    isActive: null,
     _id: storedUser ? storedUser._id : null,
     geo: null,
     error: null,
-    documentos: storedUser ? storedUser.documentos : [],
+    documentos: [],
 
     seguros: [],
 
@@ -55,13 +53,9 @@ const useUserStore = create((set) => {
           _id: res.data._id,
           documentos: res.data.documentos,
         });
-        Cookies.set("user", JSON.stringify(res.data));
 
-        // // Ahora que el usuario ha iniciado sesión, obtén sus seguros
-        // const segurosRes = await axios.get(
-        //   `/api/seguros?userId=${res.data._id}`
-        // );
-        // set({ seguros: segurosRes.data });
+        Cookies.set("user", JSON.stringify(res.data._id));
+
 
         return res.data;
       } catch (error) {

@@ -1,3 +1,6 @@
+import axios from "axios";
+
+
 export function getDiaHoy() {
   return diasSemana[new Date().getDay()];
 }
@@ -145,4 +148,26 @@ export function generateCode() {
     .map(() => Math.floor(Math.random() * 10))
     .join('');
   return Number(code);
+}
+
+export async function fetchUserData(userId) {
+  const response = await fetch("http://localhost:3000/api/user", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ _id: userId }),
+  });
+
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchInsurance(userId) {
+  console.log(userId)
+  const res = await axios.post("http://localhost:3000/api/get-seguros", {
+    idUser: userId,
+  });
+
+  return res.data;
 }
