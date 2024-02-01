@@ -54,18 +54,39 @@ const useUserStore = create((set) => {
           documentos: res.data.documentos,
         });
         Cookies.set("user", JSON.stringify(res.data._id));
-
-        // // Ahora que el usuario ha iniciado sesión, obtén sus seguros
-        // const segurosRes = await axios.get(
-        //   `/api/seguros?userId=${res.data._id}`
-        // );
-        // set({ seguros: segurosRes.data });
-
         return res.data;
       } catch (error) {
         throw new Error(error.response.data.message);
       }
     },
+
+    getUser: async (id) => {
+      console.warn(id)
+      try {
+        const res = await axios.post("/api/user", {
+          idUser: id,
+        });
+        set({
+          nombre: res.data.nombre,
+          identificacion: res.data.identificacion,
+          rol: res.data.rol,
+          ciudad: res.data.ciudad,
+          direccion: res.data.direccion,
+          celular: res.data.celular,
+          fechaNacimiento: res.data.fechaNacimiento,
+          fechaVencimientoLicencia: res.data.fechaVencimientoLicencia,
+          isActive: res.data.isActive,
+          email: res.data.email,
+          _id: res.data._id,
+          documentos: res.data.documentos,
+        });
+        console.log(res)
+        return res;
+      } catch (error) {
+        throw new Error(error.response);
+      }
+    },
+
 
     getSeguros: async (idUser) => {
       try {

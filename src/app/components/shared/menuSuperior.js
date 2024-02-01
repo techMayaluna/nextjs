@@ -10,13 +10,13 @@ import { usePathname, useRouter } from "next/navigation";
 const MenuSuperior = () => {
   const router = useRouter();
 
-  const { nombre, error, updateGeo, fechaNacimiento } = useUserStore(
+  const { nombre, error, updateGeo, fechaNacimiento, getUser, _id } = useUserStore(
     (state) => state
   );
 
   useEffect(() => {
+    getUser(_id);
     updateGeo();
-    console.log(fechaNacimiento);
   }, []);
 
   const goBack = () => {
@@ -26,10 +26,6 @@ const MenuSuperior = () => {
   const isBirthday = () => {
     const birthDate = new Date(fechaNacimiento);
     const currentDate = new Date();
-
-    console.log(currentDate)
-
-    console.log(birthDate)
 
     return (
       birthDate.getDate() === currentDate.getDate() &&
