@@ -151,7 +151,8 @@ export function generateCode() {
 }
 
 export async function fetchUserData(userId) {
-  const response = await fetch("http://localhost:3000/api/user", {
+  // const response = await fetch("http://localhost:3000/api/user", {
+  const response = await fetch("https://nextjs-swart-kappa-92.vercel.app/api/user", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -165,7 +166,7 @@ export async function fetchUserData(userId) {
 
 export async function fetchInsurance(userId) {
   console.log(userId)
-  const res = await axios.post("http://localhost:3000/api/get-seguros", {
+  const res = await axios.post("https://nextjs-swart-kappa-92.vercel.app/api/get-seguros", {
     idUser: userId,
   });
 
