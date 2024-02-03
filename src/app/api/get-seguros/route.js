@@ -6,7 +6,8 @@ export async function POST(request) {
     try {
         await connectDB();
 
-        const { idUser } = await request.json();
+        let { idUser } = await request.json();
+        idUser = idUser.replace(/"/g, '');
         const insurances = await Insurance.find({ idUser });
 
         return NextResponse.json(insurances);

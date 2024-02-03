@@ -1,15 +1,13 @@
-"use client";
-import React from "react";
-import { useEffect } from "react";
-import useUserStore from "../../stores/userStore";
 import Link from "next/link";
+import { cookies } from "next/headers";
+import { fetchInsurance } from "@/app/utils/todayDay";
 
-const InsuranceList = () => {
-  const { seguros, getSeguros, _id } = useUserStore((state) => state);
+const InsuranceList = async () => {
 
-  useEffect(() => {
-    getSeguros(_id);
-  }, [_id]);
+  const cookiesStore = cookies()
+  const user = cookiesStore.get("user");
+
+  const seguros = await fetchInsurance(user.value);
 
   return (
     <section className="bg-primary py-4 px-4 rounded-2xl">
