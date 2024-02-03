@@ -1,10 +1,18 @@
+"use client";
 import Link from "next/link";
 import ActionSection from "./ActionSection";
+import useUserStore from "@/app/stores/userStore";
 import InsuranceButton from "./InsuranceButton";
+import { useEffect } from "react";
 import MisReportes from "./MisReportes";
 
+export default function MisSeguros() {
+  const { seguros, getSeguros, _id } = useUserStore((state) => state);
 
-export default function MisSeguros({ seguros }) {
+  useEffect(() => {
+    getSeguros(_id);
+  }, [_id]);
+
   return (
     <>
       <section className="pt-6">
@@ -31,7 +39,7 @@ export default function MisSeguros({ seguros }) {
           )}
         </div>
       </section>
-      <MisReportes seguros={seguros} />
+      <MisReportes seguros={seguros}/>
     </>
   );
 }

@@ -18,7 +18,6 @@ function FormModificarUser() {
     tipoPersona,
   } = useUserStore((state) => state);
 
-  console.log(email);
 
   return (
     <section className="pb-28">

@@ -8,11 +8,11 @@ export default function MisReportes({ seguros }) {
   const [showModal2, setShowModal2] = useState(false);
   const [showVehiculoModal, setShowVehiculoModal] = useState(false);
 
-  const hasAutoInsurance = seguros.some((seguro) =>
+  const hasAutoInsurance = seguros?.some((seguro) =>
     seguro.tipoPoliza.includes("Autos")
   );
 
-  const autoInsurances = seguros.filter((seguro) =>
+  const autoInsurances = seguros?.filter((seguro) =>
     seguro.tipoPoliza.includes("Autos")
   );
 
