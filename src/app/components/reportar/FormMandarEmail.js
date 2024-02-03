@@ -14,8 +14,7 @@ import "jspdf-autotable";
 function FormMandarEmail({ params }) {
   const doc = new jsPDF();
 
-  const {tipo, placa} = params;
-
+  const { tipo, placa } = params;
 
   const router = useRouter();
 
@@ -70,8 +69,6 @@ function FormMandarEmail({ params }) {
     return base64Images;
   }
 
-
-
   async function generatePDF() {
     // Convert all images
     const base64Images = await convertImagesToBase64();
@@ -125,7 +122,7 @@ function FormMandarEmail({ params }) {
             rowSpan: 1,
             styles: {
               halign: "center",
-              fillColor: "#fee600",
+              fillColor: "#e3fcf7",
               textColor: "#000000",
             },
           },
@@ -133,12 +130,14 @@ function FormMandarEmail({ params }) {
       ],
       body: [
         [
+          "placa del vehiculo",
           "Fecha de Reporte",
           "Tipo de Accidente",
           "Ubicación",
           "Número de Heridos",
         ],
         [
+          `${placa}`,
           `${reportDateFormat()}`,
           `${tipo}`,
           `${geo.latitude}, ${geo.longitude}`,
@@ -230,7 +229,7 @@ function FormMandarEmail({ params }) {
       prevY += 75;
     }
 
-//    doc.save("reporte.pdf");
+    //    doc.save("reporte.pdf");
 
     const blob = new Blob([doc.output("blob")], { type: "application/pdf" });
 
@@ -415,7 +414,8 @@ function ModalLoading() {
   return (
     <Modal>
       <h3 className="text-md text-left font-bold mb-4">Cargando</h3>
-      En un momento tu solicitud será exitosa </Modal>
+      En un momento tu solicitud será exitosa{" "}
+    </Modal>
   );
 }
 

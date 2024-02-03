@@ -149,7 +149,7 @@ function FormModificarUser() {
       </div>
 
       <hr />
-
+{/* 
       <div className="py-4 px-4 mt-4  mb-4">
         <h2 className="font-bold pb-4 text-xl">Documentos</h2>
 
@@ -167,7 +167,7 @@ function FormModificarUser() {
         ) : (
           <p>No tienes documentos registrados</p>
         )}
-      </div>
+      </div> */}
 
       <hr />
 

@@ -71,9 +71,9 @@ function ModalVehiculoTipo({ seguros, onClose }) {
               <div
                 className="flex flex-shrink-0 flex-col justify-center items-center bg-secondary w-20 h-20 p-1 text-white rounded-2xl text-sm"
                 key={seguro._id}
-                onClick={() => handleVehiculoClick(seguro.nombrePoliza)}
+                onClick={() => handleVehiculoClick(seguro.placaVehiculo)}
               >
-                {seguro.nombrePoliza}
+                {seguro.placaVehiculo}
               </div>
             ))}
           </div>
