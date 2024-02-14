@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export function getDiaHoy() {
   return diasSemana[new Date().getDay()];
 }
@@ -104,6 +103,40 @@ const ciudades = [
       },
     ],
   },
+
+  {
+    nombre: "Armenia",
+    reglas: [
+      {
+        dia: "Lunes",
+        placas: ["5", "6"],
+      },
+      {
+        dia: "Martes",
+        placas: ["7", "8"],
+      },
+      {
+        dia: "Miércoles",
+        placas: ["9", "0"],
+      },
+      {
+        dia: "Jueves",
+        placas: ["1", "2"],
+      },
+      {
+        dia: "Viernes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Sábado",
+        placas: "No aplica",
+      },
+      {
+        dia: "Domingo",
+        placas: "No aplica",
+      },
+    ],
+  },
 ];
 const diasSemana = [
   "Domingo",
@@ -126,7 +159,13 @@ export function aplicaONo(city) {
     .find((ciudadArray) => ciudadArray.nombre === city)
     ?.reglas.find((regla) => regla.dia === diaHoy);
 
-  return aplica?.placas;
+  console.log(aplica);
+
+  if (!aplica) {
+    return "No aplica";
+  }
+
+  return aplica.placas.join("-");
 }
 
 export function reportDateFormat() {
@@ -142,20 +181,17 @@ export function reportDateFormat() {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
-
 export function generateCode() {
-  const code = [...Array(4)]
-    .map(() => Math.floor(Math.random() * 10))
-    .join('');
+  const code = [...Array(4)].map(() => Math.floor(Math.random() * 10)).join("");
   return Number(code);
 }
 const ruta = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchUserData(userId) {
   const response = await fetch(`${ruta}/api/user`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ _id: userId }),
   });
@@ -165,7 +201,7 @@ export async function fetchUserData(userId) {
 }
 
 export async function fetchInsurance(userId) {
-  console.log(userId)
+  console.log(userId);
   const res = await axios.post(`${ruta}/api/get-seguros`, {
     idUser: userId,
   });

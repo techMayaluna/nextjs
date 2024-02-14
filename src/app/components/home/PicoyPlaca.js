@@ -50,22 +50,6 @@ function ModalPico({ onClose, ciudad }) {
       <h2 className="text-lg font-bold mb-4">PICO Y PLACA</h2>
       <ScrollerPicoyPlaca ciudad={ciudad} />
 
-      {/* <div className="flex flex-col justify-between bg-primary h-40 p-6 rounded-2xl text-sm">
-
-
-        <p className="text-left">
-          Restricción para los <b>vehículos particulares</b> con placas
-          terminadas en <b>0 y 9</b> dentro del perímetro urbano durante las{" "}
-          <b>6:00am y 7:00pm</b>
-        </p>
-      </div>
-
-      <div className="flex flex-col justify-between bg-primary h-40 p-6 rounded-2xl text-sm">
-        <p>Sabías que...</p>
-        Una multa por infringir la restricción horaria del pico y placa podría
-        llegar a costar 20 SMMLV
-      </div> */}
-
       <div className="flex justify-end">
         <button
           className="bg-secondary text-white px-4 py-2 rounded-lg"

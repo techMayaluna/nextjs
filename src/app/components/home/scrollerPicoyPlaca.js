@@ -9,18 +9,13 @@ export default function ScrollerPicoyPlaca({ ciudad }) {
 
   let picoyplacahoy = picoyPlaca.find(
     (ciudadArray) => ciudadArray.nombre === ciudadScroller
-  );
+  ) || { reglas: [] };
 
   return (
     <div className="flex flex-col text-center">
-      
-      <select className="mb-2">
-        <option value="particulares">Vehiculos particulares</option>
-        <option value="taxis">Taxis</option>
-      </select>
       Prepara tu semana
       <select
-      className="mb-2 mt-2"
+        className="mb-2 mt-2"
         value={ciudadScroller}
         onChange={(e) => {
           setCiudadScroller(e.target.value);
@@ -32,9 +27,13 @@ export default function ScrollerPicoyPlaca({ ciudad }) {
           </option>
         ))}
       </select>
-      {diaHoy}
+      {picoyplacahoy.reglas.length === 0 ? (
+        <p>Explora el pico y placa en otras ciudades</p>
+      ) : (
+        <>{diaHoy}</>
+      )}
       <div className="mb-2">
-        {picoyplacahoy.reglas.map((regla) => (
+        {picoyplacahoy.reglas?.map((regla) => (
           <div
             key={regla.dia}
             className={`flex justify-between ${
