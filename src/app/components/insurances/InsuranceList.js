@@ -3,8 +3,7 @@ import { cookies } from "next/headers";
 import { fetchInsurance } from "@/app/utils/todayDay";
 
 const InsuranceList = async () => {
-
-  const cookiesStore = cookies()
+  const cookiesStore = cookies();
   const user = cookiesStore.get("user");
 
   const seguros = await fetchInsurance(user.value);

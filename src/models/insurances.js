@@ -29,10 +29,20 @@ const insuranceSchema = new Schema({
     type: [String], // This assumes that documents are stored as an array of strings (e.g., URLs or file names)
     default: [],
   },
+  placaVehiculo: {
+    type: String,
+  },
+  fechaVencimientoExtintor: {
+    type: Date,
+  },
+  fechaVencimientoTecnomecanica: {
+    type: Date,
+  },
   tipo: {
     type: String,
     required: true,
   },
+
   vehiculos: [
     {
       placa: String,

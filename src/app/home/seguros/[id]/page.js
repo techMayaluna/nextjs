@@ -14,6 +14,7 @@ const SeguroIndividual = ({ params }) => {
   useEffect(() => {
     const seguroEncontrado = seguros.find((seguro) => seguro._id === params.id);
     if (seguroEncontrado) {
+      console.log(seguroEncontrado);
       const companiaSeguro = companiasSeguros.find(
         (compania) => compania.nombre === seguroEncontrado.companiaAseguradora
       );
@@ -41,6 +42,36 @@ const SeguroIndividual = ({ params }) => {
           <p className="text-left">Compañia aseguradora</p>
           <p className="text-right">{seguro.companiaAseguradora}</p>
         </section>{" "}
+        {seguro.placaVehiculo ? (
+          <>
+            <section className="grid grid-cols-2">
+              <p className="text-left">Placa vehículo</p>
+              <p className="text-right">{seguro.placaVehiculo}</p>
+            </section>
+            <section className="grid grid-cols-2">
+              <p className="text-left">Fecha vencimiento extintor</p>
+              <p className="text-right">
+                {!isNaN(new Date(seguro.fechaVencimientoExtintor))
+                  ? new Date(seguro.fechaVencimientoExtintor)
+                      .toISOString()
+                      .split("T")[0]
+                  : "Fecha no disponible"}
+              </p>
+            </section>
+            <section className="grid grid-cols-2">
+              <p className="text-left">
+                Fecha vencimiento revisión tecnomecánica
+              </p>
+              <p className="text-right">
+                {!isNaN(new Date(seguro.fechaVencimientoTecnomecanica))
+                  ? new Date(seguro.fechaVencimientoTecnomecanica)
+                      .toISOString()
+                      .split("T")[0]
+                  : "Fecha no disponible"}
+              </p>
+            </section>
+          </>
+        ) : null}
         <section className="grid grid-cols-2">
           <p className="text-left">Número asistencia Compañia</p>
           <a className="text-right" href={"tel:" + seguro.asistencia}>
@@ -69,29 +100,6 @@ const SeguroIndividual = ({ params }) => {
           >
             Visualizar
           </a>{" "}
-          {seguro.tipoPoliza === "Autos Livianos" ||
-          seguro.tipoPoliza === "Autos Pesados" ? (
-            <>
-              <p className="text-left">Licencia transito</p>
-              <a
-                href={seguro?.documentos?.[1]}
-                target="_blank"
-                className="text-right underline"
-              >
-                Visualizar
-              </a>
-              <p className="text-left">Extintor</p>
-              <a
-                href={seguro?.documentos?.[2]}
-                target="_blank"
-                className="text-right underline"
-              >
-                Visualizar
-              </a>
-            </>
-          ) : (
-            ""
-          )}
         </section>{" "}
       </div>
     </>
