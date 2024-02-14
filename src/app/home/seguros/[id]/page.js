@@ -117,17 +117,19 @@ const SeguroIndividual = ({ params }) => {
         </section>{" "}
       </div>
 
-      <div className="bg-primary py-4 px-4 mt-4 rounded-2xl">
-        <h2 className="font-bold pb-4 text-xl">Vehiculos y Vencimientos </h2>
-        {seguro?.vehiculos?.length > 1 ? (
-          <Table data={seguro?.vehiculos} />
-        ) : (
-          <p className="text-center">
-            No hay vehiculos registrados, pide la plantilla del excel con la
-            información y envialo al area de asistencia!
-          </p>
-        )}
-      </div>
+      {seguro?.vehiculos?.length > 0 ? (
+        <div className="bg-primary py-4 px-4 mt-4 rounded-2xl">
+          <h2 className="font-bold pb-4 text-xl">Vehiculos y Vencimientos </h2>
+          {seguro?.vehiculos?.length > 1 ? (
+            <Table data={seguro?.vehiculos} />
+          ) : (
+            <p className="text-center">
+              No hay vehiculos registrados, pide la plantilla del excel con la
+              información y envialo al area de asistencia!
+            </p>
+          )}
+        </div>
+      ) : null}
     </section>
   );
 };
