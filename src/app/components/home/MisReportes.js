@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import ActionSection from "./ActionSection";
 import { useState } from "react";
 import Modal from "../shared/Modal";
@@ -12,9 +12,21 @@ export default function MisReportes({ seguros }) {
     seguro.tipoPoliza.includes("Autos")
   );
 
-  const autoInsurances = seguros?.filter((seguro) =>
-    seguro.tipoPoliza.includes("Autos")
+  const autoInsurances = seguros?.filter(
+    (seguro) =>
+      seguro.tipoPoliza.includes("Autos") || seguro.tipoPoliza.includes("SOAT")
   );
+
+  const autoInsurancesUnicos = autoInsurances.reduce(
+    (acc, seguro) => {
+      if (!acc.placas.has(seguro.placaVehiculo)) {
+        acc.placas.add(seguro.placaVehiculo);
+        acc.seguros.push(seguro);
+      }
+      return acc;
+    },
+    { placas: new Set(), seguros: [] }
+  ).seguros;
 
   const handleModalClick = () => {
     if (hasAutoInsurance) {
@@ -37,11 +49,10 @@ export default function MisReportes({ seguros }) {
 
       {showVehiculoModal && (
         <ModalVehiculoTipo
-          seguros={autoInsurances}
+          seguros={autoInsurancesUnicos}
           onClose={() => setShowVehiculoModal(false)}
         />
       )}
-
 
       {showModal2 && (
         <ModalNoAutoInsurance onClose={() => setShowModal2(false)} />
@@ -85,8 +96,8 @@ function ModalVehiculoTipo({ seguros, onClose }) {
             ¿Qué tipo de reporte desea generar?
           </h2>
           <p className="text-sm text-center mb-2 text-lighttext">
-            Los accidentes gravados tienen lesionados implicados, los simples son
-            solo daños materiales.
+            Los accidentes gravados tienen lesionados implicados, los simples
+            son solo daños materiales.
           </p>
 
           <div className="flex justify-around">
@@ -108,7 +119,6 @@ function ModalVehiculoTipo({ seguros, onClose }) {
     </Modal>
   );
 }
-
 
 function ModalNoAutoInsurance({ onClose }) {
   return (
