@@ -2,12 +2,23 @@
 
 import useUserStore from "@/app/stores/userStore";
 
+import { useEffect } from "react";
+
+import { useRouter } from "next/navigation";
+
 import Link from "next/link";
 
 const InsuranceList = () => {
-  const { seguros } = useUserStore((state) => state);
+  const { seguros, getSeguros, _id } = useUserStore((state) => state);
 
-  console.log(seguros);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!_id) {
+      router.push("/login");
+    }
+    getSeguros(_id);
+  }, []);
 
   return (
     <section className="bg-primary py-4 px-4 rounded-2xl">

@@ -4,6 +4,7 @@ import ActionSection from "./ActionSection";
 import useUserStore from "@/app/stores/userStore";
 import InsuranceButton from "./InsuranceButton";
 import { useEffect } from "react";
+
 import MisReportes from "./MisReportes";
 
 export default function MisSeguros() {
@@ -11,7 +12,9 @@ export default function MisSeguros() {
 
   useEffect(() => {
     getSeguros(_id);
-  }, [_id]);
+
+    console.log(seguros);
+  }, []);
 
   return (
     <>
@@ -39,7 +42,7 @@ export default function MisSeguros() {
           )}
         </div>
       </section>
-      <MisReportes seguros={seguros}/>
+      <MisReportes seguros={seguros} />
     </>
   );
 }
