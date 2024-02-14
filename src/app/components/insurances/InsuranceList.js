@@ -1,12 +1,13 @@
+"use client";
+
+import useUserStore from "@/app/stores/userStore";
+
 import Link from "next/link";
-import { cookies } from "next/headers";
-import { fetchInsurance } from "@/app/utils/todayDay";
 
-const InsuranceList = async () => {
-  const cookiesStore = cookies();
-  const user = cookiesStore.get("user");
+const InsuranceList = () => {
+  const { seguros } = useUserStore((state) => state);
 
-  const seguros = await fetchInsurance(user.value);
+  console.log(seguros);
 
   return (
     <section className="bg-primary py-4 px-4 rounded-2xl">
