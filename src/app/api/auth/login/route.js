@@ -1,5 +1,6 @@
 import { connectDB } from "@/app/utils/mongoose";
 import User from "@/models/users";
+import Insurance from "@/models/insurances";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
@@ -8,19 +9,29 @@ export async function POST(request) {
     await connectDB();
     const { identificacion, password } = await request.json();
 
-    console.log(identificacion, password)
+    console.log(identificacion, password);
 
-    const user = await User.findOne({ identificacion });
+    let user = await User.findOne({ identificacion });
 
-    if (!user)
-      return NextResponse.json(
-        {
-          message: "No existe un usuario con este número de identificación",
-        },
-        {
-          status: 400,
-        }
-      );
+    if (!user) {
+      const insurance = await Insurance.findOne({
+        "vehiculos.placa": identificacion,
+      });
+
+      if (insurance) {
+        user = await User.findById(insurance.idUser);
+        user.rol = "conductor";
+      } else {
+        return NextResponse.json(
+          {
+            message: "No existe un usuario con este número de identificación",
+          },
+          {
+            status: 400,
+          }
+        );
+      }
+    }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
@@ -37,7 +48,7 @@ export async function POST(request) {
 
     user.password = undefined;
 
-    console.log("USER", user)
+    console.log("USER", user);
 
     return NextResponse.json(user);
   } catch (error) {

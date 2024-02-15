@@ -14,6 +14,11 @@ const MenuSuperior = () => {
     useUserStore((state) => state);
 
   useEffect(() => {
+
+    if (!identificacion) {
+      router.push("/login");
+    }
+
     getUser(identificacion);
 
     updateGeo();

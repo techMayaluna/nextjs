@@ -159,8 +159,6 @@ export function aplicaONo(city) {
     .find((ciudadArray) => ciudadArray.nombre === city)
     ?.reglas.find((regla) => regla.dia === diaHoy);
 
-  console.log(aplica);
-
   if (!aplica) {
     return "No aplica";
   }

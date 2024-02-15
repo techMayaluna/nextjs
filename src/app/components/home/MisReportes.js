@@ -4,7 +4,7 @@ import { useState } from "react";
 import Modal from "../shared/Modal";
 import Link from "next/link";
 
-export default function MisReportes({ seguros }) {
+export default function MisReportes({ seguros, placaConductor, rol }) {
   const [showModal2, setShowModal2] = useState(false);
   const [showVehiculoModal, setShowVehiculoModal] = useState(false);
 
@@ -16,7 +16,6 @@ export default function MisReportes({ seguros }) {
     (seguro) =>
       seguro.tipoPoliza.includes("Autos") || seguro.tipoPoliza.includes("SOAT")
   );
-
   const autoInsurancesUnicos = autoInsurances.reduce(
     (acc, seguro) => {
       if (!acc.placas.has(seguro.placaVehiculo)) {
@@ -50,6 +49,8 @@ export default function MisReportes({ seguros }) {
       {showVehiculoModal && (
         <ModalVehiculoTipo
           seguros={autoInsurancesUnicos}
+          placaConductor={placaConductor}
+          rol={rol}
           onClose={() => setShowVehiculoModal(false)}
         />
       )}
@@ -61,7 +62,7 @@ export default function MisReportes({ seguros }) {
   );
 }
 
-function ModalVehiculoTipo({ seguros, onClose }) {
+function ModalVehiculoTipo({ seguros, onClose, placaConductor, rol }) {
   const [selectedVehiculo, setSelectedVehiculo] = useState(null);
 
   const handleVehiculoClick = (id) => {
@@ -79,15 +80,26 @@ function ModalVehiculoTipo({ seguros, onClose }) {
             Selecciona el vehículo
           </h2>
           <div className="flex overflow-x-auto gap-5 pb-4">
-            {seguros.map((seguro) => (
+            {rol === "Individual" ? (
+              <>
+                {seguros.map((seguro) => (
+                  <div
+                    className="flex flex-shrink-0 flex-col justify-center items-center bg-secondary w-20 h-20 p-1 text-white rounded-2xl text-sm"
+                    key={seguro._id}
+                    onClick={() => handleVehiculoClick(seguro.placaVehiculo)}
+                  >
+                    {seguro.placaVehiculo}
+                  </div>
+                ))}
+              </>
+            ) : (
               <div
                 className="flex flex-shrink-0 flex-col justify-center items-center bg-secondary w-20 h-20 p-1 text-white rounded-2xl text-sm"
-                key={seguro._id}
-                onClick={() => handleVehiculoClick(seguro.placaVehiculo)}
+                onClick={() => handleVehiculoClick(placaConductor)}
               >
-                {seguro.placaVehiculo}
+                {placaConductor}
               </div>
-            ))}
+            )}
           </div>
         </>
       ) : (

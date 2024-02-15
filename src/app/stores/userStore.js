@@ -14,7 +14,7 @@ const useUserStore = create((set) => {
     celular: null,
     direccion: null,
     ciudad: null,
-    rol: null,
+    rol: storedUser ? storedUser.rol : null,
     fechaNacimiento: null,
     fechaVencimientoLicencia: null,
     isActive: null,
@@ -24,6 +24,7 @@ const useUserStore = create((set) => {
     tipoDocumento: null,
     tipoPersona: null,
     seguros: [],
+    placaConductor: storedUser ? storedUser.placaConductor : null,
 
     updateUser: (userData) => {
       set((state) => {
@@ -55,11 +56,14 @@ const useUserStore = create((set) => {
           documentos: res.data.documentos,
           tipoDocumento: res.data.tipoDocumento,
           tipoPersona: res.data.tipoPersona,
+          placaConductor: userid,
         });
 
         const cookieValue = {
           userId: res.data._id,
           identificacion: res.data.identificacion,
+          rol: res.data.rol,
+          placaConductor: userid,
         };
         Cookies.set("user", JSON.stringify(cookieValue));
         return res.data;
@@ -77,7 +81,6 @@ const useUserStore = create((set) => {
         set({
           nombre: res.data.nombre,
           identificacion: res.data.identificacion,
-          rol: res.data.rol,
           ciudad: res.data.ciudad,
           direccion: res.data.direccion,
           celular: res.data.celular,
