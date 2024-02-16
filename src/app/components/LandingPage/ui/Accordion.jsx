@@ -1,11 +1,10 @@
-"use client"
-
+"use client";
 import { useState } from "react";
 
 const AccordionItem = ({ title, description, listItems, isOpen, onToggle }) => {
   return (
-    <div className="border border-mutedForeground/50">
-      <div
+    <details className="border border-mutedForeground/50">
+      <summary
         className={`bg-background p-4 cursor-pointer flex justify-between items-center ${isOpen && "border-b border-mutedForeground/50"}`}
         onClick={onToggle}
       >
@@ -24,7 +23,7 @@ const AccordionItem = ({ title, description, listItems, isOpen, onToggle }) => {
             d="M19 9l-7 7-7-7"
           ></path>
         </svg>
-      </div>
+      </summary>
       {isOpen && (
         <div className="bg-background p-4 rounded-xl text-mutedForeground">
           <p className="mb-4">{description}</p>
@@ -37,7 +36,7 @@ const AccordionItem = ({ title, description, listItems, isOpen, onToggle }) => {
           )}
         </div>
       )}
-    </div>
+    </details>
   );
 };
 

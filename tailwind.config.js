@@ -28,8 +28,10 @@ module.exports = {
         yellowCall: "#EDC949",
       },
       backgroundImage: {
-        "hero-background": "url('/familia2.webp')",
-        "section-background": "url('/fondoVerde.jpg')",
+        "hero-background":
+          "url('/familia2.jpg')",
+        "section-background":
+          "url('/fondoVerde.jpg')",
       },
     },
   },
