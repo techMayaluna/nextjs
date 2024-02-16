@@ -19,7 +19,7 @@ const MenuSuperior = () => {
     getUser,
     identificacion,
     seguros,
-    getSeguros,
+    rol,
   } = useUserStore((state) => state);
 
   useEffect(() => {
@@ -33,20 +33,24 @@ const MenuSuperior = () => {
 
     console.log(seguros);
 
-    const hoy = new Date();
-    const diasAviso = 10; // Número de días antes del vencimiento para mostrar el aviso
+    if (rol !== "conductor") {
+      const hoy = new Date();
+      const diasAviso = 10; // Número de días antes del vencimiento para mostrar el aviso
 
-    seguros.forEach((seguro) => {
-      const fechaVencimiento = new Date(seguro.fechaVencimiento);
-      const diasRestantes = Math.ceil(
-        (fechaVencimiento - hoy) / (1000 * 60 * 60 * 24)
-      );
+      seguros.forEach((seguro) => {
+        const fechaVencimiento = new Date(seguro.fechaVencimiento);
+        const diasRestantes = Math.ceil(
+          (fechaVencimiento - hoy) / (1000 * 60 * 60 * 24)
+        );
 
-      console.log(diasRestantes);
-      if (diasRestantes <= diasAviso) {
-        toast.info(`El seguro de ${seguro.tipoPoliza} está a punto de vencer`);
-      }
-    });
+        console.log(diasRestantes);
+        if (diasRestantes <= diasAviso) {
+          toast.info(
+            `El seguro de ${seguro.tipoPoliza} está a punto de vencer`
+          );
+        }
+      });
+    }
   }, []);
 
   const goBack = () => {
