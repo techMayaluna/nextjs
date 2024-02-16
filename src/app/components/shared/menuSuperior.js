@@ -6,15 +6,23 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import Modal from "./Modal";
 import { usePathname, useRouter } from "next/navigation";
+import { Toaster, toast } from "sonner";
 
 const MenuSuperior = () => {
   const router = useRouter();
 
-  const { nombre, error, updateGeo, fechaNacimiento, getUser, identificacion } =
-    useUserStore((state) => state);
+  const {
+    nombre,
+    error,
+    updateGeo,
+    fechaNacimiento,
+    getUser,
+    identificacion,
+    seguros,
+    getSeguros,
+  } = useUserStore((state) => state);
 
   useEffect(() => {
-
     if (!identificacion) {
       router.push("/login");
     }
@@ -22,6 +30,23 @@ const MenuSuperior = () => {
     getUser(identificacion);
 
     updateGeo();
+
+    console.log(seguros);
+
+    const hoy = new Date();
+    const diasAviso = 10; // Número de días antes del vencimiento para mostrar el aviso
+
+    seguros.forEach((seguro) => {
+      const fechaVencimiento = new Date(seguro.fechaVencimiento);
+      const diasRestantes = Math.ceil(
+        (fechaVencimiento - hoy) / (1000 * 60 * 60 * 24)
+      );
+
+      console.log(diasRestantes);
+      if (diasRestantes <= diasAviso) {
+        toast.info(`El seguro de ${seguro.tipoPoliza} está a punto de vencer`);
+      }
+    });
   }, []);
 
   const goBack = () => {
@@ -64,6 +89,8 @@ const MenuSuperior = () => {
         </Link>
       </div>
       {error ? <ModalError /> : ""}
+
+      <Toaster position="top-center" duration="1500" />
     </>
   );
 };
