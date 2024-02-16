@@ -86,7 +86,7 @@ function FormMandarEmail({ params }) {
             styles: {
               halign: "center",
               fillColor: "##e3fcf7",
-              textColor: "#000000",
+              textColor: "#fff",
             },
           },
         ],
@@ -122,7 +122,8 @@ function FormMandarEmail({ params }) {
             rowSpan: 1,
             styles: {
               halign: "center",
-              fillColor: "#e3fcf7",
+              fillColor: "#cee6fe",
+              fontStyle: "bold",
               textColor: "#000000",
             },
           },
@@ -183,7 +184,8 @@ function FormMandarEmail({ params }) {
             rowSpan: 1,
             styles: {
               halign: "center",
-              fillColor: "##e3fcf7",
+              fillColor: "#cee6fe",
+              fontStyle: "bold",
               textColor: "#000000",
             },
           },
@@ -210,7 +212,7 @@ function FormMandarEmail({ params }) {
             styles: {
               halign: "center",
               fillColor: "##e3fcf7",
-              textColor: "#000000",
+              textColor: "#fff",
             },
           },
         ],
