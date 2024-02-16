@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import { create } from "zustand";
 import axios from "axios";
 
+
 const useUserStore = create((set) => {
   const userCookie = Cookies.get("user");
   const storedUser = userCookie ? JSON.parse(userCookie) : null;

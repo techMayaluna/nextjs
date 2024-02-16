@@ -5,6 +5,7 @@ import useUserStore from "@/app/stores/userStore";
 import InsuranceButton from "./InsuranceButton";
 import { useEffect } from "react";
 import dynamic from "next/dynamic";
+import { Toaster, toast } from "sonner";
 
 import MisReportes from "./MisReportes";
 
@@ -14,9 +15,28 @@ function MisSeguros() {
   );
 
   useEffect(() => {
-    getSeguros(_id);
-
     console.log(rol);
+    getSeguros(_id).then(() => {
+      console.log(seguros);
+      if (rol !== "conductor") {
+        const hoy = new Date();
+        const diasAviso = 10; // Número de días antes del vencimiento para mostrar el aviso
+
+        seguros.forEach((seguro) => {
+          const fechaVencimiento = new Date(seguro.fechaVencimiento);
+          const diasRestantes = Math.ceil(
+            (fechaVencimiento - hoy) / (1000 * 60 * 60 * 24)
+          );
+
+          console.log(diasRestantes);
+          if (diasRestantes <= diasAviso) {
+            toast.info(
+              `El seguro de ${seguro.tipoPoliza} está a punto de vencer`
+            );
+          }
+        });
+      }
+    });
   }, [rol]);
 
   return (
@@ -57,6 +77,8 @@ function MisSeguros() {
           rol={rol}
         />
       ) : null}
+
+      <Toaster position="top-center" duration="1500" />
     </>
   );
 }
