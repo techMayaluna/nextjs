@@ -17,7 +17,7 @@ function PicoyPlaca() {
       <div className="flex flex-col justify-between bg-primary h-32 p-6 rounded-2xl text-sm">
         <p>
           {" "}
-          El pico y placa hoy en <b className="underline">{ciudad}</b> para{" "}
+          Pico y placa hoy en <b className="underline">{ciudad}</b> para{" "}
           <b className="underline">particulares</b>
           {aplicaONo(ciudad) === "No aplica" ? (
             <span> no aplica</span>

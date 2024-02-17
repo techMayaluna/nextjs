@@ -35,27 +35,33 @@ const SeguroIndividual = ({ params }) => {
   return (
     <section className="pb-52">
       <div className="bg-primary py-4 px-4 rounded-2xl">
-        <h2 className="font-bold pb-4 text-xl">Información general</h2>
+        <h2 className="font-bold pb-4 text-xl">Información General</h2>
         <section className="grid grid-cols-2">
-          <p className="text-left">Nombre póliza</p>
+          <p className="text-left">Nombre Placaóliza</p>
           <p className="text-right">{seguro.nombrePoliza}</p>
         </section>{" "}
         <section className="grid grid-cols-2">
-          <p className="text-left">Tipo póliza</p>
+          <p className="text-left">Tipo Póliza</p>
           <p className="text-right">{seguro.tipoPoliza}</p>
         </section>{" "}
         <section className="grid grid-cols-2">
-          <p className="text-left">Compañia aseguradora</p>
+          <p className="text-left">Compañia Aseguradora</p>
           <p className="text-right">{seguro.companiaAseguradora}</p>
+        </section>{" "}
+        <section className="grid grid-cols-2">
+          <p className="text-left">Asistencia Aseguradora</p>
+          <a className="text-right underline" href={"tel:" + seguro.asistencia}>
+            {seguro.asistencia}
+          </a>
         </section>{" "}
         {seguro.placaVehiculo ? (
           <>
             <section className="grid grid-cols-2">
-              <p className="text-left">Placa vehículo</p>
+              <p className="text-left">Placa Vehículo</p>
               <p className="text-right">{seguro.placaVehiculo}</p>
             </section>
             <section className="grid grid-cols-2">
-              <p className="text-left">Fecha vencimiento extintor</p>
+              <p className="text-left">Vencimiento Extintor</p>
               <p className="text-right">
                 {!isNaN(new Date(seguro.fechaVencimientoExtintor))
                   ? new Date(seguro.fechaVencimientoExtintor)
@@ -65,9 +71,7 @@ const SeguroIndividual = ({ params }) => {
               </p>
             </section>
             <section className="grid grid-cols-2">
-              <p className="text-left">
-                Fecha vencimiento revisión tecnomecánica
-              </p>
+              <p className="text-left">Vencimiento Revisión Tecnomecánica</p>
               <p className="text-right">
                 {!isNaN(new Date(seguro.fechaVencimientoTecnomecanica))
                   ? new Date(seguro.fechaVencimientoTecnomecanica)
@@ -78,12 +82,6 @@ const SeguroIndividual = ({ params }) => {
             </section>
           </>
         ) : null}
-        <section className="grid grid-cols-2">
-          <p className="text-left">Número asistencia Compañia</p>
-          <a className="text-right" href={"tel:" + seguro.asistencia}>
-            {seguro.asistencia}
-          </a>
-        </section>{" "}
         <section className="grid grid-cols-2">
           <p className="text-left">Fecha inicio</p>
           <p className="text-right">
