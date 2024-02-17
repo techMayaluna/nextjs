@@ -22,6 +22,8 @@ function FormMandarEmail({ params }) {
   const [isLoading, setIsLoading] = useState(false);
   const [missingImage, setMissingImage] = useState(false);
 
+  const [guardarDoc, setGuardarDoc] = useState(false);
+
   const [images, setImages] = useState([null, null, null, null]);
   const imgR1 = useRef();
   const imgR2 = useRef();
@@ -231,7 +233,7 @@ function FormMandarEmail({ params }) {
       prevY += 75;
     }
 
-    //    doc.save("reporte.pdf");
+    if (guardarDoc) doc.save("reporte.pdf");
 
     const blob = new Blob([doc.output("blob")], { type: "application/pdf" });
 
@@ -367,6 +369,18 @@ function FormMandarEmail({ params }) {
               inputRef={inputRefs[index]}
             />
           ))}
+
+          <div className="mt-3">
+            <span>
+              <input
+                type="checkbox"
+                value={guardarDoc}
+                className="form-checkbox h-4 w-4 text-green-600"
+                onChange={() => setGuardarDoc(!guardarDoc)}
+              ></input>{" "}
+              Descargar documento
+            </span>
+          </div>
         </div>
 
         <div className="mt-4 text-end">

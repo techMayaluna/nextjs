@@ -163,8 +163,7 @@ export function aplicaONo(city) {
     return "No aplica";
   }
 
-  return aplica.placas.join("-");
-}
+  return Array.isArray(aplica?.placas) ? aplica.placas.join("-") : aplica.placas;}
 
 export function reportDateFormat() {
   const currentDate = new Date();
