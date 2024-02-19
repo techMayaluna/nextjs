@@ -37,7 +37,7 @@ const SeguroIndividual = ({ params }) => {
       <div className="bg-primary py-4 px-4 rounded-2xl">
         <h2 className="font-bold pb-4 text-xl">Información General</h2>
         <section className="grid grid-cols-2">
-          <p className="text-left">Nombre Placaóliza</p>
+          <p className="text-left">Nombre Póliza</p>
           <p className="text-right">{seguro.nombrePoliza}</p>
         </section>{" "}
         <section className="grid grid-cols-2">
@@ -51,6 +51,7 @@ const SeguroIndividual = ({ params }) => {
         <section className="grid grid-cols-2">
           <p className="text-left">Asistencia Aseguradora</p>
           <a className="text-right underline" href={"tel:" + seguro.asistencia}>
+            {seguro.asistencia.length < 4 && "#"}
             {seguro.asistencia}
           </a>
         </section>{" "}
@@ -83,7 +84,7 @@ const SeguroIndividual = ({ params }) => {
           </>
         ) : null}
         <section className="grid grid-cols-2">
-          <p className="text-left">Fecha inicio</p>
+          <p className="text-left">Fecha Inicio</p>
           <p className="text-right">
             {seguro.fechaInicial && !isNaN(new Date(seguro.fechaInicial))
               ? new Date(seguro.fechaInicial).toISOString().split("T")[0]
@@ -91,7 +92,7 @@ const SeguroIndividual = ({ params }) => {
           </p>
         </section>
         <section className="grid grid-cols-2">
-          <p className="text-left">Fecha vencimiento</p>
+          <p className="text-left">Fecha Vencimiento</p>
           <p className="text-right">
             {seguro.fechaVencimiento &&
             !isNaN(new Date(seguro.fechaVencimiento))
@@ -103,16 +104,21 @@ const SeguroIndividual = ({ params }) => {
 
       <div className="bg-primary py-4 px-4 mt-4 rounded-2xl">
         <h2 className="font-bold pb-4 text-xl">Documentos</h2>
-        <section className="grid grid-cols-2">
-          <p className="text-left">Poliza</p>
-          <a
-            href={seguro?.documentos?.[0]}
-            target="_blank"
-            className="text-right underline"
-          >
-            Visualizar
-          </a>{" "}
-        </section>{" "}
+
+        {seguro?.documentos?.[0] ? (
+          <section className="grid grid-cols-2">
+            <p className="text-left">Poliza</p>
+            <a
+              href={seguro?.documentos?.[0]}
+              target="_blank"
+              className="text-right underline"
+            >
+              Visualizar
+            </a>{" "}
+          </section>
+        ) : (
+          <p>No hay documentos adjuntos</p>
+        )}
       </div>
 
       {seguro?.vehiculos?.length > 0 ? (
@@ -136,8 +142,8 @@ const Table = ({ data }) => (
   <table className="min-w-full divide-y divide-gray-200 mb-4">
     <thead className="">
       <th>Placa</th>
-      <th>tecnomecánica</th>
-      <th>extintor</th>
+      <th>Tecnomecánica</th>
+      <th>Extintor</th>
       <th>Tarjeta de operación</th>
     </thead>
     <tbody className="bg-white divide-y divide-gray-200">
