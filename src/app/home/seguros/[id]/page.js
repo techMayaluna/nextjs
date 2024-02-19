@@ -51,7 +51,7 @@ const SeguroIndividual = ({ params }) => {
         <section className="grid grid-cols-2">
           <p className="text-left">Asistencia Aseguradora</p>
           <a className="text-right underline" href={"tel:" + seguro.asistencia}>
-            {seguro.asistencia.length < 4 && "#"}
+            {seguro.asistencia?.length < 4 && "#"}
             {seguro.asistencia}
           </a>
         </section>{" "}

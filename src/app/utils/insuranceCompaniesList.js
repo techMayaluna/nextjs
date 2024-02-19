@@ -49,6 +49,8 @@ export const companiasSeguros = [
   { nombre: "SEGUROS BOLIVAR S.A", asistencia: "322" },
   { nombre: "SEGUROS DE VIDA DEL ESTADO", asistencia: "388" },
   { nombre: "SEGUROS DEL ESTADO S.A", asistencia: "388" },
+  { nombre: "SEGUROS COMERCIALES BOLÍVAR S.A.", asistencia: "#322" },
+  { nombre: "COMPAÑÍA DE SEGUROS BOLÍVAR", asistencia: "#322" },
   { nombre: "SEGUROS GENERALES SURAMERICANA S.A", asistencia: "888" },
   {
     nombre: "SOLUNION COLOMBIA SEGUROS DE CREDITO S.A",
