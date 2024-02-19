@@ -5,7 +5,7 @@ import useUserStore from "../../stores/userStore";
 import { useRouter } from "next/navigation";
 
 export default function LoginBar() {
-  const { login } = useUserStore();
+  const { login, nombre } = useUserStore();
 
   const [acceptedPolicies, setAcceptedPolicies] = useState(false);
   const router = useRouter();
@@ -16,11 +16,11 @@ export default function LoginBar() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // useEffect(() => {
-  //   if (nombre) {
-  //     router.push("/home");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (nombre) {
+      router.push("/home");
+    }
+  }, []);
 
   const handleClick = (e) => {
     if (!acceptedPolicies) {
@@ -112,10 +112,7 @@ export default function LoginBar() {
                 className="text-sm font-medium leading-6 ml-1 text-gray-900"
               >
                 Acepto las{" "}
-                <Link
-                  href="/politica"
-                  className="underline"
-                >
+                <Link href="/politica" className="underline">
                   políticas de privacidad
                 </Link>
               </label>
@@ -123,32 +120,32 @@ export default function LoginBar() {
             </div>
           </div>
 
-            <button
-              type="submit"
-              className="flex w-80 justify-center rounded-2xl bg-secondary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-              onClick={handleClick}
-            >
-              {loading ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  className="animate-spin"
-                >
-                  <path
-                    fill="none"
-                    stroke="#ffffff"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 3a9 9 0 1 0 9 9"
-                  />
-                </svg>
-              ) : (
-                "Iniciar Sesión"
-              )}
-            </button>
+          <button
+            type="submit"
+            className="flex w-80 justify-center rounded-2xl bg-secondary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            onClick={handleClick}
+          >
+            {loading ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                className="animate-spin"
+              >
+                <path
+                  fill="none"
+                  stroke="#ffffff"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 3a9 9 0 1 0 9 9"
+                />
+              </svg>
+            ) : (
+              "Iniciar Sesión"
+            )}
+          </button>
 
           <p className="mt-10 text-center text-sm text-gray-500">
             {error && <span className=" text-sm text-red-500"> {error}</span>}
