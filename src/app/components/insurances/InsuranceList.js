@@ -35,7 +35,7 @@ const InsuranceList = () => {
         </thead>
         <tbody>
           {seguros.map((seguro) => (
-            <tr>
+            <tr key={seguro._id}>
               <td className="text-left">{seguro.tipoPoliza}</td>
               <td className="text-left">
                 {seguro.placaVehiculo ? seguro.placaVehiculo : "N/A"}
