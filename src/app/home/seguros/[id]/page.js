@@ -54,7 +54,7 @@ const SeguroIndividual = ({ params }) => {
             className="text-right underline"
             href={
               "" + seguro.asistencia?.length < 4
-                ? `tel:#${seguro.asistencia}`
+                ? `tel:%23${seguro.asistencia}`
                 : `tel:${seguro.asistencia}`
             }
           >
