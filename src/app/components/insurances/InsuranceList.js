@@ -38,7 +38,7 @@ const InsuranceList = () => {
             <tr key={seguro._id}>
               <td className="text-left">{seguro.tipoPoliza}</td>
               <td className="text-left">
-                {seguro.placaVehiculo ? seguro.placaVehiculo : "N/A"}
+                {seguro.placaVehiculo ? seguro.placaVehiculo : ""}
               </td>
               <td className="text-left">
                 {new Date(seguro.fechaVencimiento).toISOString().split("T")[0]}
