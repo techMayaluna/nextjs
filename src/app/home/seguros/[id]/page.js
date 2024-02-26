@@ -20,12 +20,9 @@ const SeguroIndividual = ({ params }) => {
       seguros.find((seguro) => seguro._id === params.id) || null;
     if (seguroEncontrado) {
       console.log(seguroEncontrado);
-      const companiaSeguro = companiasSeguros.find(
-        (compania) => compania.nombre === seguroEncontrado.companiaAseguradora
-      );
+
       setSeguro({
         ...seguroEncontrado,
-        asistencia: companiaSeguro ? companiaSeguro.asistencia : undefined,
       });
     } else {
       router.push("/home");

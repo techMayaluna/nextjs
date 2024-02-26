@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import { create } from "zustand";
 import axios from "axios";
-
+import { companiasSeguros } from "../utils/insuranceCompaniesList";
 
 const useUserStore = create((set) => {
   const userCookie = Cookies.get("user");
@@ -105,8 +105,18 @@ const useUserStore = create((set) => {
         const res = await axios.post("/api/get-seguros", {
           idUser: idUser,
         });
-        set({ seguros: res.data });
-        return res.data;
+        let seguros = res.data;
+        seguros = seguros.map((seguro) => {
+          const companiaSeguro = companiasSeguros.find(
+            (compania) => compania.nombre === seguro.companiaAseguradora
+          );
+          return {
+            ...seguro,
+            asistencia: companiaSeguro ? companiaSeguro.asistencia : undefined,
+          };
+        });
+        set({ seguros: seguros });
+        return seguros;
       } catch (error) {
         throw new Error(error.response.data.message);
       }
