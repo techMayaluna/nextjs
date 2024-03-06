@@ -149,6 +149,7 @@ const Table = ({ data }) => (
       <th>Tecnomecánica</th>
       <th>Extintor</th>
       <th>Tarjeta de operación</th>
+      <th>SOAT</th>
     </thead>
     <tbody className="bg-white divide-y divide-gray-200">
       {data?.map((vehiculo) => (
@@ -164,6 +165,9 @@ const Table = ({ data }) => (
           </td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
             {vehiculo.vencimientoTarjetaOperacion}
+          </td>
+          <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+            {vehiculo.SOAT}
           </td>
         </tr>
       ))}
