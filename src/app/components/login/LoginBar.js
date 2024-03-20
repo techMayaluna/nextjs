@@ -23,6 +23,7 @@ export default function LoginBar() {
   }, []);
 
   const handleClick = (e) => {
+    e.preventDefault();
     if (!acceptedPolicies) {
       setError("Debes aceptar las políticas de privacidad para continuar");
       return;
