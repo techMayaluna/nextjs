@@ -3,6 +3,8 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_URI);
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request) {
   const reporte = await request.formData();
 

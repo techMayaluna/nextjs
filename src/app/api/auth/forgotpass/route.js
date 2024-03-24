@@ -38,7 +38,7 @@ export async function POST(request) {
       return NextResponse.error();
     }
 
-    return NextResponse.json(user);
+    return NextResponse.json("Correo enviado");
   } catch (error) {
     console.log("General error: ", error);
     return NextResponse.error();
