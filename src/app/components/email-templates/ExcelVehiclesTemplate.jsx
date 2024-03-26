@@ -57,8 +57,8 @@ export const ExcelVehiclesTemplate = ({ seguro }) => {
                 }}
               >
                 Adjunto a este correo encontrarás un archivo con la información
-                de los vehículos que has registrado en Mayaluna del seguro de{" "}
-                {seguro}.
+                de la poliza de {seguro} que has registrado con Mayaluna
+                Seguros.
               </p>
               <hr
                 style={{
