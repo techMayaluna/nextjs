@@ -3,6 +3,7 @@ import { connectDB } from "@/app/utils/mongoose";
 import Insurance from "@/models/insurances";
 import { Resend } from "resend";
 import User from "@/models/users";
+import { ExcelVehiclesTemplate } from "@/app/components/email-templates/ExcelVehiclesTemplate";
 
 export const dynamic = "force-dynamic";
 
@@ -81,6 +82,7 @@ export async function GET() {
       // Agrega el correo electrónico del usuario al seguro
       return {
         vehiculos: insurance.vehiculos,
+        tipoPoliza: insurance.tipoPoliza,
         userEmail: user.email,
       };
     })
@@ -134,7 +136,10 @@ export async function GET() {
         from: "Acme <onboarding@resend.dev>",
         to: ["noreply@mayalunaseguros.com", insurance.userEmail],
         subject: "Reporte mensual estado de vehículos",
-        html: "Se adjunta el reporte mensual estado de vehículos",
+
+        react: ExcelVehiclesTemplate({
+          seguro: insurance.tipoPoliza,
+        }),
         attachments: [
           {
             filename: "Vehiculos.xlsx",
