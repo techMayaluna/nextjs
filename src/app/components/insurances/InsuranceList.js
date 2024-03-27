@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import "./styles.css";
-import { companiasSeguros } from "@/app/utils/insuranceCompaniesList";
 
 const InsuranceList = () => {
   const { seguros, getSeguros, _id } = useUserStore((state) => state);
@@ -37,10 +36,11 @@ const InsuranceList = () => {
           {seguros.map((seguro, index) => (
             <tr
               key={seguro._id}
-              className={index % 2 === 0 ? "" : "bg-gray-100"}
+              className={
+                "border-b-4 " + (index % 2 === 0 ? "" : "bg-gray-100")
+              }
             >
               <td className="text-left">
-                Poliza {seguro.nombrePoliza} <br />
                 Tipo Poliza {seguro.tipoPoliza} <br />
                 {seguro.placaVehiculo ? (
                   <p className="font-bold">
@@ -50,10 +50,18 @@ const InsuranceList = () => {
                   ""
                 )}
                 Fecha Inicio{" "}
-                {new Date(seguro.fechaInicial).toISOString().split("T")[0]}{" "}
+                {new Date(seguro.fechaInicial).toLocaleDateString("es-ES", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
                 <br />
                 Fecha Fin{" "}
-                {new Date(seguro.fechaVencimiento).toISOString().split("T")[0]}
+                {new Date(seguro.fechaVencimiento).toLocaleDateString("es-ES", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
               </td>
 
               <td className="">
@@ -100,6 +108,28 @@ const InsuranceList = () => {
                       </svg>
                     </div>
                   </a>
+
+                  {seguro.documentos[0] ? (
+                    <a
+                      className="text-right underline"
+                      href={seguro.documentos[0]}
+                      target="_blank"
+                    >
+                      <div className="flex justify-center items-center bg-yellowCall rounded-full h-5 w-5">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="#ffffff"
+                            d="M8 13h8v-2H8Zm0 3h8v-2H8Zm0 3h5v-2H8Zm-2 3q-.825 0-1.412-.587Q4 20.825 4 20V4q0-.825.588-1.413Q5.175 2 6 2h8l6 6v12q0 .825-.587 1.413Q18.825 22 18 22Zm7-13h5l-5-5Z"
+                          />
+                        </svg>
+                      </div>
+                    </a>
+                  ) : null}
                 </div>
               </td>
             </tr>
