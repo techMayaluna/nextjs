@@ -28,20 +28,19 @@ const InsuranceList = () => {
       <table className="table-auto border-collapse w-full">
         <thead>
           <tr>
-            <th className="font-bold text-left">Seguro</th>
-            <th className="font-bold text-left">Acciones</th>
+            <th className="font-bold text-left uppercase">Seguro</th>
+            <th className="font-bold text-left uppercase">Acciones</th>
           </tr>
         </thead>
         <tbody>
           {seguros.map((seguro, index) => (
             <tr
               key={seguro._id}
-              className={
-                "border-b-4 " + (index % 2 === 0 ? "" : "bg-gray-100")
-              }
+              className={"border-b-4 " + (index % 2 === 0 ? "" : "bg-gray-100")}
             >
               <td className="text-left">
-                Tipo Poliza {seguro.tipoPoliza} <br />
+                <span className="uppercase">{seguro.tipoPoliza}</span>
+                <br />
                 {seguro.placaVehiculo ? (
                   <p className="font-bold">
                     {seguro.placaVehiculo} <br />
@@ -49,14 +48,16 @@ const InsuranceList = () => {
                 ) : (
                   ""
                 )}
-                Fecha Inicio{" "}
+             
+                VIGENCIA
+                <br /> Desde{" "}
                 {new Date(seguro.fechaInicial).toLocaleDateString("es-ES", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
                 })}
                 <br />
-                Fecha Fin{" "}
+                Hasta{" "}
                 {new Date(seguro.fechaVencimiento).toLocaleDateString("es-ES", {
                   year: "numeric",
                   month: "long",
