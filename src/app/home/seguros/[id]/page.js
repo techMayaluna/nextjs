@@ -34,7 +34,7 @@ const SeguroIndividual = ({ params }) => {
       <div className="bg-primary py-4 px-4 rounded-2xl">
         <h2 className="font-bold pb-4 text-xl">Información General</h2>
         <section className="grid grid-cols-2">
-          <p className="text-left">Nombre Póliza</p>
+          <p className="text-left">Póliza No.</p>
           <p className="text-right">{seguro.nombrePoliza}</p>
         </section>{" "}
         <section className="grid grid-cols-2">
@@ -42,11 +42,36 @@ const SeguroIndividual = ({ params }) => {
           <p className="text-right">{seguro.tipoPoliza}</p>
         </section>{" "}
         <section className="grid grid-cols-2">
-          <p className="text-left">Compañia Aseguradora</p>
+          <p className="text-left">Aseguradora</p>
           <p className="text-right">{seguro.companiaAseguradora}</p>
         </section>{" "}
         <section className="grid grid-cols-2">
-          <p className="text-left">Asistencia Aseguradora</p>
+          <p className="text-left">Fecha Inicio</p>
+          <p className="text-right">
+            {seguro.fechaInicial && !isNaN(new Date(seguro.fechaInicial))
+              ? new Date(seguro.fechaInicial).toLocaleDateString("es-ES", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              : "Fecha no disponible"}
+          </p>
+        </section>
+        <section className="grid grid-cols-2">
+          <p className="text-left">Fecha Vencimiento</p>
+          <p className="text-right">
+            {seguro.fechaVencimiento &&
+            !isNaN(new Date(seguro.fechaVencimiento))
+              ? new Date(seguro.fechaInicial).toLocaleDateString("es-ES", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              : "Fecha no disponible"}
+          </p>
+        </section>
+        <section className="grid grid-cols-2">
+          <p className="text-left">Asistencia</p>
           <a
             className="text-right underline"
             href={
@@ -62,48 +87,39 @@ const SeguroIndividual = ({ params }) => {
         {seguro.placaVehiculo ? (
           <>
             <section className="grid grid-cols-2">
-              <p className="text-left">Placa Vehículo</p>
+              <p className="text-left">Placa</p>
               <p className="text-right">{seguro.placaVehiculo}</p>
             </section>
             <section className="grid grid-cols-2">
-              <p className="text-left">Vencimiento Extintor</p>
+              <p className="text-left">Extintor Vence</p>
               <p className="text-right">
                 {!isNaN(new Date(seguro.fechaVencimientoExtintor))
-                  ? new Date(seguro.fechaVencimientoExtintor)
-                      .toISOString()
-                      .split("T")[0]
+                  ? new Date(
+                      seguro.fechaVencimientoExtintor
+                    ).toLocaleDateString("es-ES", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
                   : "Fecha no disponible"}
               </p>
             </section>
             <section className="grid grid-cols-2">
-              <p className="text-left">Vencimiento Revisión Tecnomecánica</p>
+              <p className="text-left">RTM Vence</p>
               <p className="text-right">
                 {!isNaN(new Date(seguro.fechaVencimientoTecnomecanica))
-                  ? new Date(seguro.fechaVencimientoTecnomecanica)
-                      .toISOString()
-                      .split("T")[0]
+                  ? new Date(
+                      seguro.fechaVencimientoTecnomecanica
+                    ).toLocaleDateString("es-ES", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
                   : "Fecha no disponible"}
               </p>
             </section>
           </>
         ) : null}
-        <section className="grid grid-cols-2">
-          <p className="text-left">Fecha Inicio</p>
-          <p className="text-right">
-            {seguro.fechaInicial && !isNaN(new Date(seguro.fechaInicial))
-              ? new Date(seguro.fechaInicial).toISOString().split("T")[0]
-              : "Fecha no disponible"}
-          </p>
-        </section>
-        <section className="grid grid-cols-2">
-          <p className="text-left">Fecha Vencimiento</p>
-          <p className="text-right">
-            {seguro.fechaVencimiento &&
-            !isNaN(new Date(seguro.fechaVencimiento))
-              ? new Date(seguro.fechaVencimiento).toISOString().split("T")[0]
-              : "Fecha no disponible"}
-          </p>
-        </section>
       </div>
 
       <div className="bg-primary py-4 px-4 mt-4 rounded-2xl">
