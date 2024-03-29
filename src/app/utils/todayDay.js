@@ -444,6 +444,8 @@ const ciudades = [
     ],
   },
 ];
+
+
 const diasSemana = [
   "Domingo",
   "Lunes",

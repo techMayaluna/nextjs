@@ -18,9 +18,7 @@ const MenuSuperior = () => {
       router.push("/login");
     }
 
-    getUser(identificacion).then(() => {
-      updateGeo();
-    });
+    getUser(identificacion).then(() => {});
   }, []);
 
   const goBack = () => {
@@ -83,6 +81,8 @@ function ModalError() {
         Si has denegado el acceso a la ubicación, por favor ve a la
         configuración de tu navegador y permite el acceso a la ubicación para
         este sitio.
+
+        Luego recarga la página.
       </p>
     </Modal>
   );

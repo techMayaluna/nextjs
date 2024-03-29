@@ -38,21 +38,23 @@ function FormMandarEmail({ params }) {
     numeroTestigo: "",
   });
 
-  const { nombre, identificacion, email, celular, direccion, ciudad, geo } =
-    useUserStore((state) => ({
-      nombre: state.nombre,
-      identificacion: state.identificacion,
-      email: state.email,
-      celular: state.celular,
-      direccion: state.direccion,
-      ciudad: state.ciudad,
-      geo: state.geo,
-    }));
+  const {
+    nombre,
+    identificacion,
+    email,
+    celular,
+    direccion,
+    ciudad,
+    geo,
+    updateGeo,
+  } = useUserStore((state) => state);
 
   useEffect(() => {
     if (!tipo) {
       router.push("/home");
     }
+
+   updateGeo();
   }, []);
 
   async function convertImagesToBase64() {
