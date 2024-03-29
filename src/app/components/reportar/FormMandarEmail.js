@@ -371,7 +371,7 @@ function FormMandarEmail({ params }) {
           ))}
 
           <div className="mt-3">
-            <span>
+            <label>
               <input
                 type="checkbox"
                 value={guardarDoc}
@@ -379,7 +379,7 @@ function FormMandarEmail({ params }) {
                 onChange={() => setGuardarDoc(!guardarDoc)}
               ></input>{" "}
               Descargar documento
-            </span>
+            </label>
           </div>
         </div>
 

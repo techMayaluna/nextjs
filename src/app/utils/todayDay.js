@@ -125,6 +125,312 @@ const ciudades = [
       },
       {
         dia: "Viernes",
+        placas: ["3", "4"],
+      },
+      {
+        dia: "Sábado",
+        placas: "No aplica",
+      },
+      {
+        dia: "Domingo",
+        placas: "No aplica",
+      },
+    ],
+  },
+
+  {
+    nombre: "Ipiales",
+    reglas: [
+      {
+        dia: "Lunes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Martes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Miércoles",
+        placas: "No aplica",
+      },
+      {
+        dia: "Jueves",
+        placas: "No aplica",
+      },
+      {
+        dia: "Viernes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Sábado",
+        placas: "No aplica",
+      },
+      {
+        dia: "Domingo",
+        placas: "No aplica",
+      },
+    ],
+  },
+
+  {
+    nombre: "Tulua",
+    reglas: [
+      {
+        dia: "Lunes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Martes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Miércoles",
+        placas: "No aplica",
+      },
+      {
+        dia: "Jueves",
+        placas: "No aplica",
+      },
+      {
+        dia: "Viernes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Sábado",
+        placas: "No aplica",
+      },
+      {
+        dia: "Domingo",
+        placas: "No aplica",
+      },
+    ],
+  },
+
+  {
+    nombre: "Pasto",
+    reglas: [
+      {
+        dia: "Lunes",
+        placas: ["0", "1"],
+      },
+      {
+        dia: "Martes",
+        placas: ["2", "3"],
+      },
+      {
+        dia: "Miércoles",
+        placas: ["4", "5"],
+      },
+      {
+        dia: "Jueves",
+        placas: ["6", "7"],
+      },
+      {
+        dia: "Viernes",
+        placas: ["8", "9"],
+      },
+      {
+        dia: "Sábado",
+        placas: "No aplica",
+      },
+      {
+        dia: "Domingo",
+        placas: "No aplica",
+      },
+    ],
+  },
+
+  {
+    nombre: "Popayan",
+    reglas: [
+      {
+        dia: "Lunes",
+        placas: ["9", "0"],
+      },
+      {
+        dia: "Martes",
+        placas: ["1", "2"],
+      },
+      {
+        dia: "Miércoles",
+        placas: ["3", "4"],
+      },
+      {
+        dia: "Jueves",
+        placas: ["5", "6"],
+      },
+      {
+        dia: "Viernes",
+        placas: ["7", "8"],
+      },
+      {
+        dia: "Sábado",
+        placas: "No aplica",
+      },
+      {
+        dia: "Domingo",
+        placas: "No aplica",
+      },
+    ],
+  },
+
+  {
+    nombre: "Ibagué",
+    reglas: [
+      {
+        dia: "Lunes",
+        placas: ["6", "7"],
+      },
+      {
+        dia: "Martes",
+        placas: ["8", "9"],
+      },
+      {
+        dia: "Miércoles",
+        placas: ["0", "1"],
+      },
+      {
+        dia: "Jueves",
+        placas: ["2", "3"],
+      },
+      {
+        dia: "Viernes",
+        placas: ["4", "5"],
+      },
+      {
+        dia: "Sábado",
+        placas: "No aplica",
+      },
+      {
+        dia: "Domingo",
+        placas: "No aplica",
+      },
+    ],
+  },
+
+  {
+    nombre: "Pereira",
+    reglas: [
+      {
+        dia: "Lunes",
+        placas: ["0", "1"],
+      },
+      {
+        dia: "Martes",
+        placas: ["2", "3"],
+      },
+      {
+        dia: "Miércoles",
+        placas: ["4", "5"],
+      },
+      {
+        dia: "Jueves",
+        placas: ["6", "7"],
+      },
+      {
+        dia: "Viernes",
+        placas: ["8", "9"],
+      },
+      {
+        dia: "Sábado",
+        placas: "No aplica",
+      },
+      {
+        dia: "Domingo",
+        placas: "No aplica",
+      },
+    ],
+  },
+
+  {
+    nombre: "Santander de Quilichao - Cauca",
+    reglas: [
+      {
+        dia: "Lunes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Martes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Miércoles",
+        placas: "No aplica",
+      },
+      {
+        dia: "Jueves",
+        placas: "No aplica",
+      },
+      {
+        dia: "Viernes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Sábado",
+        placas: "No aplica",
+      },
+      {
+        dia: "Domingo",
+        placas: "No aplica",
+      },
+    ],
+  },
+
+  {
+    nombre: "Morales - Cauca",
+    reglas: [
+      {
+        dia: "Lunes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Martes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Miércoles",
+        placas: "No aplica",
+      },
+      {
+        dia: "Jueves",
+        placas: "No aplica",
+      },
+      {
+        dia: "Viernes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Sábado",
+        placas: "No aplica",
+      },
+      {
+        dia: "Domingo",
+        placas: "No aplica",
+      },
+    ],
+  },
+
+  {
+    nombre: "Caldono - Cauca",
+    reglas: [
+      {
+        dia: "Lunes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Martes",
+        placas: "No aplica",
+      },
+      {
+        dia: "Miércoles",
+        placas: "No aplica",
+      },
+      {
+        dia: "Jueves",
+        placas: "No aplica",
+      },
+      {
+        dia: "Viernes",
         placas: "No aplica",
       },
       {
@@ -163,7 +469,10 @@ export function aplicaONo(city) {
     return "No aplica";
   }
 
-  return Array.isArray(aplica?.placas) ? aplica.placas.join("-") : aplica.placas;}
+  return Array.isArray(aplica?.placas)
+    ? aplica.placas.join("-")
+    : aplica.placas;
+}
 
 export function reportDateFormat() {
   const currentDate = new Date();
