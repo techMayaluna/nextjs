@@ -142,7 +142,7 @@ const SeguroIndividual = ({ params }) => {
               className="text-right underline"
             >
               Visualizar
-            </p>{" "}
+            </a>
           </section>
         ) : (
           <p>No hay documentos adjuntos</p>

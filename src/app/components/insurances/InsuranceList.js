@@ -118,7 +118,7 @@ const InsuranceList = () => {
                   </a>
 
                   {seguro.documentos[0] ? (
-                    <p
+                    <a
                       className="text-right underline"
                       href={seguro.documentos[0]}
                       download
@@ -136,7 +136,7 @@ const InsuranceList = () => {
                           />
                         </svg>
                       </div>
-                    </p>
+                    </a>
                   ) : null}
                 </div>
               </td>
