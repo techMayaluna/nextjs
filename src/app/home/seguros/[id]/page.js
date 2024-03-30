@@ -142,6 +142,7 @@ const SeguroIndividual = ({ params }) => {
         )}
       </div>
 
+
       {seguro?.vehiculos?.length > 0 ? (
         <div className="bg-primary py-4 px-4 mt-4 rounded-2xl">
           <h2 className="font-bold pb-4 text-xl">Vehiculos y Vencimientos </h2>
