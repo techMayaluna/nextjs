@@ -130,7 +130,7 @@ const SeguroIndividual = ({ params }) => {
             <p className="text-left">Poliza</p>
             <a
               href={seguro?.documentos?.[0]}
-              target="_blank"
+              download
               className="text-right underline"
             >
               Visualizar

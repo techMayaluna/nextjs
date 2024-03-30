@@ -48,7 +48,6 @@ const InsuranceList = () => {
                 ) : (
                   ""
                 )}
-             
                 VIGENCIA
                 <br /> Desde{" "}
                 {new Date(seguro.fechaInicial).toLocaleDateString("es-ES", {
@@ -114,7 +113,7 @@ const InsuranceList = () => {
                     <a
                       className="text-right underline"
                       href={seguro.documentos[0]}
-                      target="_blank"
+                      download
                     >
                       <div className="flex justify-center items-center bg-yellowCall rounded-full h-5 w-5">
                         <svg
