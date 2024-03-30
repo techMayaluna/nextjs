@@ -1,10 +1,10 @@
 "use client";
-import Link from "next/link";
 import useUserStore from "../../../stores/userStore";
 import { useState, useEffect } from "react";
-import { companiasSeguros } from "../../../utils/insuranceCompaniesList";
 
 import { useRouter } from "next/navigation";
+
+import axios from "axios";
 
 const SeguroIndividual = ({ params }) => {
   const router = useRouter();
@@ -29,6 +29,25 @@ const SeguroIndividual = ({ params }) => {
       router.push("/home");
     }
   }, [seguros, params.id]);
+
+  const downloadPdf = async () => {
+    try {
+      const response = await axios.get(
+        `/api/download/poliza.pdf?url=${seguro.documentos[0]}`,
+        {
+          responseType: "blob",
+        }
+      );
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "poliza.pdf");
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+      console.error("Error downloading the pdf file", error);
+    }
+  };
 
   return (
     <section className="pb-52">
@@ -129,13 +148,9 @@ const SeguroIndividual = ({ params }) => {
         {seguro?.documentos?.[0] ? (
           <section className="grid grid-cols-2">
             <p className="text-left">Poliza</p>
-            <a
-              href={seguro?.documentos?.[0]}
-              download={seguro?.documentos?.[0]}
-              className="text-right underline"
-            >
+            <p onClick={downloadPdf} className="text-right underline">
               Visualizar
-            </a>
+            </p>
           </section>
         ) : (
           <p>No hay documentos adjuntos</p>

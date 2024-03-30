@@ -8,12 +8,33 @@ import { useRouter } from "next/navigation";
 
 import Link from "next/link";
 
+import axios from "axios";
+
 import "./styles.css";
 
 const InsuranceList = () => {
   const { seguros, getSeguros, _id } = useUserStore((state) => state);
 
   const router = useRouter();
+
+  const downloadPdf = async (seguro) => {
+    try {
+      const response = await axios.get(
+        `/api/download/poliza.pdf?url=${seguro.documentos[0]}`,
+        {
+          responseType: "blob",
+        }
+      );
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "poliza.pdf");
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+      console.error("Error downloading the pdf file", error);
+    }
+  };
 
   useEffect(() => {
     if (!_id) {
@@ -110,10 +131,9 @@ const InsuranceList = () => {
                   </a>
 
                   {seguro.documentos[0] ? (
-                    <a
+                    <div
                       className="text-right underline"
-                      href={seguro.documentos[0]}
-                      download={seguro.documentos[0]}
+                      onClick={() => downloadPdf(seguro)}
                     >
                       <div className="flex justify-center items-center bg-yellowCall rounded-full h-5 w-5">
                         <svg
@@ -128,7 +148,7 @@ const InsuranceList = () => {
                           />
                         </svg>
                       </div>
-                    </a>
+                    </div>
                   ) : null}
                 </div>
               </td>
