@@ -129,12 +129,13 @@ const SeguroIndividual = ({ params }) => {
         {seguro?.documentos?.[0] ? (
           <section className="grid grid-cols-2">
             <p className="text-left">Poliza</p>
-            <Link
+            <a
               href={seguro?.documentos?.[0]}
+              download={seguro?.documentos?.[0]}
               className="text-right underline"
             >
               Visualizar
-            </Link>
+            </a>
           </section>
         ) : (
           <p>No hay documentos adjuntos</p>

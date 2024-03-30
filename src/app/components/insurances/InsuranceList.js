@@ -110,9 +110,10 @@ const InsuranceList = () => {
                   </a>
 
                   {seguro.documentos[0] ? (
-                    <Link
+                    <a
                       className="text-right underline"
                       href={seguro.documentos[0]}
+                      download={seguro.documentos[0]}
                     >
                       <div className="flex justify-center items-center bg-yellowCall rounded-full h-5 w-5">
                         <svg
@@ -127,7 +128,7 @@ const InsuranceList = () => {
                           />
                         </svg>
                       </div>
-                    </Link>
+                    </a>
                   ) : null}
                 </div>
               </td>
