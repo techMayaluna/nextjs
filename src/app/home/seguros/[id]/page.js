@@ -1,9 +1,8 @@
 "use client";
+import Link from "next/link";
 import useUserStore from "../../../stores/userStore";
 import { useState, useEffect } from "react";
 import { companiasSeguros } from "../../../utils/insuranceCompaniesList";
-
-import { saveAs } from "file-saver";
 
 import { useRouter } from "next/navigation";
 
@@ -16,12 +15,6 @@ const SeguroIndividual = ({ params }) => {
     seguro: "",
     asistencia: "",
   });
-
-  const handleDownload = async (url) => {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    saveAs(blob, "poliza.pdf"); // or any other filename
-  };
 
   useEffect(() => {
     const seguroEncontrado =
@@ -136,13 +129,12 @@ const SeguroIndividual = ({ params }) => {
         {seguro?.documentos?.[0] ? (
           <section className="grid grid-cols-2">
             <p className="text-left">Poliza</p>
-            <a
+            <Link
               href={seguro?.documentos?.[0]}
-              download
               className="text-right underline"
             >
               Visualizar
-            </a>
+            </Link>
           </section>
         ) : (
           <p>No hay documentos adjuntos</p>

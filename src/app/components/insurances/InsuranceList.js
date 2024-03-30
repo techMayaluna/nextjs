@@ -8,20 +8,12 @@ import { useRouter } from "next/navigation";
 
 import Link from "next/link";
 
-import { saveAs } from "file-saver";
-
 import "./styles.css";
 
 const InsuranceList = () => {
   const { seguros, getSeguros, _id } = useUserStore((state) => state);
 
   const router = useRouter();
-
-  const handleDownload = async (url) => {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    saveAs(blob, "poliza.pdf"); // or any other filename
-  };
 
   useEffect(() => {
     if (!_id) {
@@ -118,10 +110,9 @@ const InsuranceList = () => {
                   </a>
 
                   {seguro.documentos[0] ? (
-                    <a
+                    <Link
                       className="text-right underline"
                       href={seguro.documentos[0]}
-                      download
                     >
                       <div className="flex justify-center items-center bg-yellowCall rounded-full h-5 w-5">
                         <svg
@@ -136,7 +127,7 @@ const InsuranceList = () => {
                           />
                         </svg>
                       </div>
-                    </a>
+                    </Link>
                   ) : null}
                 </div>
               </td>
