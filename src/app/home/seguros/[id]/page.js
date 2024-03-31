@@ -16,6 +16,8 @@ const SeguroIndividual = ({ params }) => {
     asistencia: "",
   });
 
+  const [isDownloading, setIsDownloading] = useState(false);
+
   useEffect(() => {
     const seguroEncontrado =
       seguros.find((seguro) => seguro._id === params.id) || null;
@@ -148,14 +150,28 @@ const SeguroIndividual = ({ params }) => {
         {seguro?.documentos?.[0] ? (
           <section className="grid grid-cols-2">
             <p className="text-left">Poliza</p>
-            <p onClick={downloadPdf} className="text-right underline">
+            <a
+              href={seguro.documentos[0]}
+              onClick={() => setIsDownloading(true)}
+              target="_blank"
+              className="text-right underline"
+            >
               Visualizar
-            </p>
+            </a>
           </section>
         ) : (
           <p>No hay documentos adjuntos</p>
         )}
       </div>
+
+      {isDownloading ? (
+        <p className="text-center mt-2">
+          Si la descarga de tu documento no fue exitosa,{" "}
+          <span className="underline" onClick={downloadPdf}>
+            haz click aquí para intentarlo de nuevo.
+          </span>
+        </p>
+      ) : null}
 
       {seguro?.vehiculos?.length > 0 ? (
         <div className="bg-primary py-4 px-4 mt-4 rounded-2xl">
