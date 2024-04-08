@@ -54,23 +54,56 @@ function FormMandarEmail({ params }) {
       router.push("/home");
     }
 
-   updateGeo();
+    updateGeo();
   }, []);
 
   async function convertImagesToBase64() {
     const base64Images = await Promise.all(
       images.map(async (image) => {
-        return new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            resolve(e.target.result);
-          };
-          reader.readAsDataURL(image);
-        });
+        return resizeImage(image);
       })
     );
 
     return base64Images;
+  }
+
+  function resizeImage(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0);
+
+          const MAX_WIDTH = 800;
+          const MAX_HEIGHT = 600;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          ctx.drawImage(img, 0, 0, width, height);
+
+          resolve(canvas.toDataURL());
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
   }
 
   async function generatePDF() {
