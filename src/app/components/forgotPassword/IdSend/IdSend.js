@@ -47,7 +47,7 @@ function IdSend({ send }) {
 
       <div className="flex flex-col	items-center">
         <div>
-          <p className="text-left">Correo de recuperación</p>
+          <p className="text-left">Correo electrónico</p>
           <input
             type="email"
             onChange={handleInputChange}

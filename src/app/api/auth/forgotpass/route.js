@@ -1,10 +1,11 @@
 import { connectDB } from "@/app/utils/mongoose";
 import User from "@/models/users";
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
-import { ForgotPasswordTemplate } from "@/app/components/email-templates/ForgotPasswordTemplate";
 
-const resend = new Resend(process.env.RESEND_URI);
+const acountSid = process.env.TWILIO_ACCOUNT_ID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+
+const client = require("twilio")(acountSid, authToken);
 
 export async function POST(request) {
   try {
@@ -24,21 +25,21 @@ export async function POST(request) {
       );
     }
 
-    try {
-      const data= await resend.emails.send({
-        from: "Seguros Mayaluna <onboarding@resend.dev>",
-        to: ["noreply@mayalunaseguros.com", email],
-        subject: "Tu codigo de Recuperación ✅ - Mayaluna",
-        react: ForgotPasswordTemplate({ code: code }),
-      });
-      
-      console.log("Resend API Response:", data);
-    } catch (error) {
-      console.log("Error sending email: ", error);
-      return NextResponse.error();
-    }
+    console.log("enviado al celular", user.celular, code);
 
-    return NextResponse.json("Correo enviado");
+    await client.messages
+      .create({
+        from: "MG6fa13751d6def000a2d443822ca88579",
+        contentSid: "HX96102b7c68c50ac38720cc96fcce2802",
+        contentVariables: JSON.stringify({
+          1: `${code}`,
+        }),
+        to: `whatsapp:+57${user.celular}`,
+      })
+      .then((message) => console.log(message.sid))
+      .catch((error) => console.error("Error sending message:", error));
+
+    return NextResponse.json("Mensaje enviado");
   } catch (error) {
     console.log("General error: ", error);
     return NextResponse.error();

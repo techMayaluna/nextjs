@@ -22,7 +22,7 @@ function IdVerificaction({ send, context }) {
   return (
     <div className="mx-5">
       <h3 className="text-center text-xl font-bold leading-9 tracking-tight text-gray-900">
-        Ingresa el código enviado a su correo{" "}
+        Ingresa el código enviado a su número de celular{" "}
       </h3>
 
       <div className="flex flex-col	items-center">
