@@ -24,7 +24,7 @@ function FormMandarEmail({ params }) {
 
   const [guardarDoc, setGuardarDoc] = useState(false);
 
-  const [images, setImages] = useState([null, null, null, null]);
+  const [images, setImages] = useState([null, null, null]);
   const imgR1 = useRef();
   const imgR2 = useRef();
   const imgR3 = useRef();

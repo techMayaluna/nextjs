@@ -11,8 +11,4 @@ export const imageTitleConstants = [
     id: "img_3",
     title: "Fotos de señales de tránsito, marcas de frenadas, etc.",
   },
-  {
-    id: "img_4",
-    title: "Fotos de señales de tránsito, marcas de frenadas, etc.",
-  },
 ];
