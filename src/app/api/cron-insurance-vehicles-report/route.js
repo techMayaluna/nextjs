@@ -134,7 +134,7 @@ export async function GET() {
     try {
       const data = await resend.emails.send({
         from: "Acme <onboarding@resend.dev>",
-        to: ["noreply@mayalunaseguros.com", insurance.userEmail],
+        to: ["emaya@mayalunaseguros.com", insurance.userEmail],
         subject: "Reporte mensual estado de vehículos",
 
         react: ExcelVehiclesTemplate({
