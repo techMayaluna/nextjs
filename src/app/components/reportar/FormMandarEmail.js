@@ -35,7 +35,7 @@ function FormMandarEmail({ params }) {
     comoOcurrio: "",
     numeroHeridos: 1,
     nombreTestigo: "",
-    numeroTestigo: "",
+    numeroTestigo: ""
   });
 
   const {
@@ -46,7 +46,7 @@ function FormMandarEmail({ params }) {
     direccion,
     ciudad,
     geo,
-    updateGeo,
+    updateGeo
   } = useUserStore((state) => state);
 
   useEffect(() => {
@@ -121,12 +121,10 @@ function FormMandarEmail({ params }) {
             colSpan: 6,
             rowSpan: 1,
             styles: {
-              halign: "center",
-              fillColor: "##e3fcf7",
-              textColor: "#fff",
-            },
-          },
-        ],
+              halign: "center"
+            }
+          }
+        ]
       ],
       body: [
         [
@@ -135,7 +133,7 @@ function FormMandarEmail({ params }) {
           "Correo Electrónico",
           "Número de Contacto",
           "Dirección de Residencia",
-          "Ciudad",
+          "Ciudad"
         ],
         [
           `${nombre}`,
@@ -143,12 +141,12 @@ function FormMandarEmail({ params }) {
           `${email}`,
           `${celular}`,
           `${direccion}`,
-          `${ciudad}`,
-        ],
-      ],
+          `${ciudad}`
+        ]
+      ]
     });
 
-    // Accident Information
+    // // Accident Information
     doc.autoTable({
       startY: doc.autoTable.previous.finalY + 5,
       head: [
@@ -158,13 +156,10 @@ function FormMandarEmail({ params }) {
             colSpan: 4,
             rowSpan: 1,
             styles: {
-              halign: "center",
-              fillColor: "#cee6fe",
-              fontStyle: "bold",
-              textColor: "#000000",
-            },
-          },
-        ],
+              halign: "center"
+            }
+          }
+        ]
       ],
       body: [
         [
@@ -172,7 +167,7 @@ function FormMandarEmail({ params }) {
           "Fecha de Reporte",
           "Tipo de Accidente",
           "Ubicación",
-          "Número de Heridos",
+          "Número de Heridos"
         ],
         [
           `${placa}`,
@@ -183,7 +178,7 @@ function FormMandarEmail({ params }) {
             dataVaraible.numeroHeridos !== 0
               ? dataVaraible.numeroHeridos
               : "N/A"
-          }`,
+          }`
         ],
         [
           {
@@ -194,9 +189,9 @@ function FormMandarEmail({ params }) {
               halign: "center",
               fillColor: "#cee6fe",
               fontStyle: "bold",
-              textColor: "#000000",
-            },
-          },
+              textColor: "#000000"
+            }
+          }
         ],
         [
           {
@@ -204,13 +199,13 @@ function FormMandarEmail({ params }) {
               dataVaraible.comoOcurrio ? dataVaraible.comoOcurrio : "N/A"
             }`,
             colSpan: 4,
-            rowSpan: 1,
-          },
-        ],
-      ],
+            rowSpan: 1
+          }
+        ]
+      ]
     });
 
-    // Witnesses Information
+    // // Witnesses Information
     doc.autoTable({
       startY: doc.autoTable.previous.finalY + 5,
       head: [
@@ -220,24 +215,21 @@ function FormMandarEmail({ params }) {
             colSpan: 2,
             rowSpan: 1,
             styles: {
-              halign: "center",
-              fillColor: "#cee6fe",
-              fontStyle: "bold",
-              textColor: "#000000",
-            },
-          },
-        ],
+              halign: "center"
+            }
+          }
+        ]
       ],
       body: [
         ["Nombre", "Número de Contacto"],
         [
           `${dataVaraible.nombreTestigo ? dataVaraible.nombreTestigo : "N/A"}`,
-          `${dataVaraible.numeroTestigo ? dataVaraible.numeroTestigo : "N/A"}`,
-        ],
-      ],
+          `${dataVaraible.numeroTestigo ? dataVaraible.numeroTestigo : "N/A"}`
+        ]
+      ]
     });
 
-    // Photos Information
+    // // Photos Information
     doc.autoTable({
       startY: doc.autoTable.previous.finalY + 5,
       head: [
@@ -247,13 +239,11 @@ function FormMandarEmail({ params }) {
             colSpan: 2,
             rowSpan: 1,
             styles: {
-              halign: "center",
-              fillColor: "##e3fcf7",
-              textColor: "#fff",
-            },
-          },
-        ],
-      ],
+              halign: "center"
+            }
+          }
+        ]
+      ]
     });
 
     let prevY = doc.autoTable.previous.finalY;
