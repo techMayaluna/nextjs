@@ -186,10 +186,7 @@ function FormMandarEmail({ params }) {
             colSpan: 4,
             rowSpan: 1,
             styles: {
-              halign: "center",
-              fillColor: "#cee6fe",
-              fontStyle: "bold",
-              textColor: "#000000"
+              halign: "center"
             }
           }
         ],
