@@ -8,6 +8,9 @@ function ChangePassword({ context }) {
 
   const { idUser, email } = context;
 
+
+  console.log(email)
+
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);

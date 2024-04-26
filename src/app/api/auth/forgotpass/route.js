@@ -39,7 +39,7 @@ export async function POST(request) {
       .then((message) => console.log(message.sid))
       .catch((error) => console.error("Error sending message:", error));
 
-    return NextResponse.json("Mensaje enviado");
+    return NextResponse.json(user, { status: 200 });
   } catch (error) {
     console.log("General error: ", error);
     return NextResponse.error();

@@ -21,11 +21,13 @@ function IdSend({ send }) {
     sendEmailForgotPass(email, code)
 
       .then((res) => {
+
+        console.warn(res)
         send({
           type: "START",
           idChangePass: code,
           idUser: res._id,
-          email: res.email,
+          email: email,
         });
       })
 
