@@ -27,7 +27,7 @@ function FormMandarEmail({ params }) {
   const imgR1 = useRef();
   const imgR2 = useRef();
   const imgR3 = useRef();
-  const imgR4 = useRef();
+  const imgR4 = useRef(); 
   const inputRefs = [imgR1, imgR2, imgR3, imgR4];
 
   const [dataVaraible, setDataVariable] = useState({
