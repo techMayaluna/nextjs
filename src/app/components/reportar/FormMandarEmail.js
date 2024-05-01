@@ -288,27 +288,34 @@ function FormMandarEmail({ params }) {
         dataVaraible.numeroTestigo ? dataVaraible.numeroTestigo : "N/A"
       }`,
       images: [
-        await cloudImageUpload(base64Images[0]),
-        await cloudImageUpload(base64Images[1]),
-        await cloudImageUpload(base64Images[2])
+        await cloudImageUpload(images[0]),
+        await cloudImageUpload(images[1]),
+        await cloudImageUpload(images[2])
       ]
     };
     try {
       const res = await axios.post("/api/report", values);
       console.log(res);
-    } catch (error) {
-      console.log(error);
-    } finally {
       setIsLoading(false);
       setIsOpen(true);
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  const cloudImageUpload = async (base64Image) => {
+  const cloudImageUpload = async (image) => {
     try {
-      const res = await axios.post("/api/submit-image", { image: base64Image });
+      const formData = new FormData();
+      formData.append("image", image);
+
+      const res = await axios.post("/api/report/submit-image", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+
       console.log(res);
-      return res;
+      return res.data;
     } catch (error) {
       console.log(error);
     }
