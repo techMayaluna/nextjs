@@ -31,19 +31,20 @@ export async function POST(request) {
     console.log(error);
   }
 
-  await client.messages
-    .create({
+  const numbers = [3142758675, 3244924827]; 
+
+  for (let number of numbers) {
+    await client.messages.create({
       from: "MG6fa13751d6def000a2d443822ca88579",
       contentSid: "HX9edfa83c11e686e1ade631263499a7f9",
       contentVariables: JSON.stringify({
         1: `${report._id}`,
         2: `${report.nombre}`,
-        3: `${report.placaDelVehiculo}`,
+        3: `${report.placaDelVehiculo}`
       }),
-      to: `whatsapp:+57${3142758675}`
-    })
-    .then((message) => console.log(message.sid))
-    .catch((error) => console.error("Error sending message:", error));
+      to: `whatsapp:+57${number}`
+    });
+  }
 
   return NextResponse.json({
     message: "Report saved successfully"
