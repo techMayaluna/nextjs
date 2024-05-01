@@ -254,15 +254,9 @@ function FormMandarEmail({ params }) {
       prevY += 75;
     }
 
-    if (guardarDoc) doc.save("reporte.pdf");
-
-    const blob = new Blob([doc.output("blob")], { type: "application/pdf" });
+    doc.save("reporte.pdf");
 
     sendData2();
-    // const formData = new FormData();
-    // formData.append("pdf", blob);
-
-    // sendData(formData);
   }
 
   const sendData2 = async () => {
@@ -318,19 +312,6 @@ function FormMandarEmail({ params }) {
       return res.data;
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const sendData = async (formData) => {
-    // Envía el FormData al backend
-    try {
-      const res = await axios.post("/api/email2", formData);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-      setIsOpen(true);
     }
   };
 
