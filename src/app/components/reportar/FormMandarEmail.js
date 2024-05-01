@@ -417,6 +417,7 @@ function FormMandarEmail({ params }) {
 
         <h2 className="pb-2 pt-4 font-semibold">Evidencias fotográficas</h2>
         <h3 className="pb-2 ">Adjunte 1 fotografía en cada sección.</h3>
+        <h3 className="pb-2 text-slate-600">Para que las imagenes sean procesadas, es necesario que pesen menos de 4Mbs.</h3>
 
         <div className="bg-primary p-6 rounded-2xl">
           {imageTitleConstants.map((item, index) => (
