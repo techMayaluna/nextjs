@@ -7,7 +7,6 @@ import Modal from "../shared/Modal";
 import ImageUploader from "./ImageUploader";
 import { reportDateFormat } from "../../utils/todayDay";
 import { imageTitleConstants } from "./constants";
-
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 
@@ -259,9 +258,63 @@ function FormMandarEmail({ params }) {
 
     const blob = new Blob([doc.output("blob")], { type: "application/pdf" });
 
-    const formData = new FormData();
-    formData.append("pdf", blob);
+    sendData2();
+    // const formData = new FormData();
+    // formData.append("pdf", blob);
 
+    // sendData(formData);
+  }
+
+  const sendData2 = async () => {
+    const values = {
+      nombre: nombre,
+      numeroDeIdentificacion: identificacion,
+      correoElectronico: email,
+      numeroDeContacto: celular,
+      direccionDeResidencia: direccion,
+      ciudad: ciudad,
+      placaDelVehiculo: placa,
+      fechaDeReporte: reportDateFormat(),
+      tipoDeAccidente: tipo,
+      ubicacion: `${geo.latitude}, ${geo.longitude}`,
+      númeroDeHeridos: `${
+        dataVaraible.numeroHeridos !== 0 ? dataVaraible.numeroHeridos : "N/A"
+      }`,
+      comoOcurrio: dataVaraible.comoOcurrio ? dataVaraible.comoOcurrio : "N/A",
+      nombreTestigo: `${
+        dataVaraible.nombreTestigo ? dataVaraible.nombreTestigo : "N/A"
+      }`,
+      numeroTestigo: `${
+        dataVaraible.numeroTestigo ? dataVaraible.numeroTestigo : "N/A"
+      }`,
+      images: [
+        await cloudImageUpload(base64Images[0]),
+        await cloudImageUpload(base64Images[1]),
+        await cloudImageUpload(base64Images[2])
+      ]
+    };
+    try {
+      const res = await axios.post("/api/report", values);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+      setIsOpen(true);
+    }
+  };
+
+  const cloudImageUpload = async (base64Image) => {
+    try {
+      const res = await axios.post("/api/submit-image", { image: base64Image });
+      console.log(res);
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const sendData = async (formData) => {
     // Envía el FormData al backend
     try {
       const res = await axios.post("/api/email2", formData);
@@ -272,7 +325,7 @@ function FormMandarEmail({ params }) {
       setIsLoading(false);
       setIsOpen(true);
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
