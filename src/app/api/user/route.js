@@ -8,10 +8,6 @@ export async function POST(request) {
     await connectDB();
     const { idUser } = await request.json();
 
-    console.log("GET USER")
-    console.log(idUser)
-
-
     const user = await User.findOne({ identificacion: idUser });
 
 
@@ -29,7 +25,6 @@ export async function POST(request) {
     }
     user.password = undefined;
 
-    console.log(user);
     return NextResponse.json(user);
   } catch (error) {
     console.log(error);

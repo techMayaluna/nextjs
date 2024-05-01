@@ -3,6 +3,11 @@ import Report from "@/models/report";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+const acountSid = process.env.TWILIO_ACCOUNT_ID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+
+const client = require("twilio")(acountSid, authToken);
+
 const resend = new Resend(process.env.RESEND_URI);
 
 export async function POST(request) {
@@ -14,9 +19,9 @@ export async function POST(request) {
   await report.save();
 
   const urlReporte = `https://mayaluna-admin-three.vercel.app/home/reporte/${report._id}`;
-  
+
   try {
-    const data = await resend.emails.send({
+    await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: ["emaya@mayalunaseguros.com"],
       subject: "Envio de reporte de siniestro",
@@ -25,6 +30,20 @@ export async function POST(request) {
   } catch (error) {
     console.log(error);
   }
+
+  await client.messages
+    .create({
+      from: "MG6fa13751d6def000a2d443822ca88579",
+      contentSid: "HX9edfa83c11e686e1ade631263499a7f9",
+      contentVariables: JSON.stringify({
+        1: `${report._id}`,
+        2: `${report.nombre}`,
+        3: `${report.placaDelVehiculo}`,
+      }),
+      to: `whatsapp:+57${3142758675}`
+    })
+    .then((message) => console.log(message.sid))
+    .catch((error) => console.error("Error sending message:", error));
 
   return NextResponse.json({
     message: "Report saved successfully"
