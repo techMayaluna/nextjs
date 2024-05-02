@@ -27,7 +27,7 @@ function FormMandarEmail({ params }) {
   const imgR1 = useRef();
   const imgR2 = useRef();
   const imgR3 = useRef();
-  const imgR4 = useRef(); 
+  const imgR4 = useRef();
   const inputRefs = [imgR1, imgR2, imgR3, imgR4];
 
   const [dataVaraible, setDataVariable] = useState({
@@ -271,9 +271,7 @@ function FormMandarEmail({ params }) {
       fechaDeReporte: reportDateFormat(),
       tipoDeAccidente: tipo,
       ubicacion: `${geo.latitude}, ${geo.longitude}`,
-      númeroDeHeridos: `${
-        dataVaraible.numeroHeridos !== 0 ? dataVaraible.numeroHeridos : "N/A"
-      }`,
+      numeroDeHeridos: `${dataVaraible.numeroHeridos || "N/A"}`,
       comoOcurrio: dataVaraible.comoOcurrio ? dataVaraible.comoOcurrio : "N/A",
       nombreTestigo: `${
         dataVaraible.nombreTestigo ? dataVaraible.nombreTestigo : "N/A"
@@ -417,7 +415,10 @@ function FormMandarEmail({ params }) {
 
         <h2 className="pb-2 pt-4 font-semibold">Evidencias fotográficas</h2>
         <h3 className="pb-2 ">Adjunte 1 fotografía en cada sección.</h3>
-        <h3 className="pb-2 text-slate-600">Para que las imagenes sean procesadas, es necesario que pesen menos de 4Mbs.</h3>
+        <h3 className="pb-2 text-slate-600">
+          Para que las imagenes sean procesadas, es necesario que pesen menos de
+          4Mbs.
+        </h3>
 
         <div className="bg-primary p-6 rounded-2xl">
           {imageTitleConstants.map((item, index) => (
