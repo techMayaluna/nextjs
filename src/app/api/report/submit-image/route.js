@@ -7,7 +7,8 @@ const apiSecret = process.env.CLOUDAPI_SECRET;
 cloudinary.config({
   cloud_name: "dz7keixqs",
   api_key: apiKey,
-  api_secret: apiSecret
+  api_secret: apiSecret,
+  secure: true
 });
 
 export async function POST(request) {
@@ -26,7 +27,9 @@ export async function POST(request) {
       }
     );
 
-    return NextResponse.json(result.url);
+    const secureUrl = result.secure_url || result.url.replace('http://', 'https://');
+
+    return NextResponse.json(secureUrl);
   } catch (error) {
     console.log(error);
     return NextResponse.error({ status: "paila" });
