@@ -282,7 +282,8 @@ function FormMandarEmail({ params }) {
       images: [
         await cloudImageUpload(images[0]),
         await cloudImageUpload(images[1]),
-        await cloudImageUpload(images[2])
+        await cloudImageUpload(images[2]),
+        await cloudImageUpload(images[3]),
       ]
     };
     try {
