@@ -1,8 +1,9 @@
 import NavAction from "./navAction";
 import LogoutButton from "./LogoutButton";
-import Image from "next/image";
-import call from "../../../../public/call.png";
 import { cookies } from "next/headers";
+import CallInsurance from "./callInsurance";
+
+
 
 export default function MenuInferior() {
 
@@ -19,17 +20,7 @@ export default function MenuInferior() {
         <LogoutButton />
 
         <div className="circulo rounded-full flex flex-col items-center justify-center">
-          <a
-            href="tel:123"
-            className="bg-yellowCall w-20 h-20 rounded-full flex items-center justify-center"
-          >
-            <Image
-              alt="Llamada emergencia"
-              src={call}
-              width={40}
-              height={40}
-            ></Image>
-          </a>
+          <CallInsurance/>
         </div>
       </footer>
     </div>

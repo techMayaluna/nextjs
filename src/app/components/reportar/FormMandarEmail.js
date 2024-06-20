@@ -254,9 +254,10 @@ function FormMandarEmail({ params }) {
       prevY += 75;
     }
 
-    doc.save("reporte.pdf");
 
-    sendData2();
+    sendData2().then(()=>{
+      doc.save("reporte.pdf");
+    });
   }
 
   const sendData2 = async () => {
