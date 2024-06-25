@@ -9,8 +9,6 @@ export default function CallInsurance({}) {
   const parts = pathname.split("/"); // Divide el pathname en partes
   const id = parts[parts.length - 1]; // Obtiene la última parte, que es el ID
 
-  console.log(id); // Muestra el ID
-
   const { seguros } = useUserStore((state) => state);
 
   const numberToCall1 =

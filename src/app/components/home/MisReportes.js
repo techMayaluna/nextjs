@@ -8,10 +8,9 @@ export default function MisReportes({ seguros, placaConductor, rol }) {
   const [showModal2, setShowModal2] = useState(false);
   const [showVehiculoModal, setShowVehiculoModal] = useState(false);
 
-  const hasAutoInsurance = seguros?.some((seguro) =>
-    seguro.tipoPoliza.includes("Autos")
-  );
-
+  const hasAutoInsurance =
+    seguros?.some((seguro) => seguro.tipoPoliza.includes("Autos")) ||
+    seguros[0]?.vehiculos;
   const autoInsurances = seguros?.filter(
     (seguro) =>
       seguro.tipoPoliza.includes("Autos") || seguro.tipoPoliza.includes("SOAT")
