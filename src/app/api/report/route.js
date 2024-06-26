@@ -18,7 +18,7 @@ export async function POST(request) {
 
   const urlReporte = `https://mayaluna-admin-three.vercel.app/home/reporte/${report._id}`;
 
-  const numbers = [3142758675, 3244924827]; 
+  const numbers = [3244924827, 3108229260]; 
 
   for (let number of numbers) {
     await client.messages.create({
