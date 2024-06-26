@@ -40,7 +40,6 @@ function MisSeguros() {
 
   return (
     <>
-      {rol !== "conductor" ? (
         <>
           <section className="pt-6">
             <h2 className="mb-1">MIS SEGUROS</h2>
@@ -67,7 +66,6 @@ function MisSeguros() {
             </div>
           </section>
         </>
-      ) : null}
 
       {rol !== "Colectivo" ? (
         <MisReportes

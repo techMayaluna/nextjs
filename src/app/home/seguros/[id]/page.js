@@ -9,12 +9,14 @@ import axios from "axios";
 const SeguroIndividual = ({ params }) => {
   const router = useRouter();
 
-  const { seguros } = useUserStore((state) => state);
+  const { seguros, rol, placaConductor } = useUserStore((state) => state);
 
   const [seguro, setSeguro] = useState({
     seguro: "",
-    asistencia: "",
+    asistencia: ""
   });
+
+  console.log(rol);
 
   const [isDownloading, setIsDownloading] = useState(false);
 
@@ -25,7 +27,7 @@ const SeguroIndividual = ({ params }) => {
       console.log(seguroEncontrado);
 
       setSeguro({
-        ...seguroEncontrado,
+        ...seguroEncontrado
       });
     } else {
       router.push("/home");
@@ -37,7 +39,7 @@ const SeguroIndividual = ({ params }) => {
       const response = await axios.get(
         `/api/download/poliza.pdf?url=${seguro.documentos[0]}`,
         {
-          responseType: "blob",
+          responseType: "blob"
         }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -74,7 +76,7 @@ const SeguroIndividual = ({ params }) => {
               ? new Date(seguro.fechaInicial).toLocaleDateString("es-ES", {
                   year: "numeric",
                   month: "long",
-                  day: "numeric",
+                  day: "numeric"
                 })
               : "Fecha no disponible"}
           </p>
@@ -87,7 +89,7 @@ const SeguroIndividual = ({ params }) => {
               ? new Date(seguro.fechaInicial).toLocaleDateString("es-ES", {
                   year: "numeric",
                   month: "long",
-                  day: "numeric",
+                  day: "numeric"
                 })
               : "Fecha no disponible"}
           </p>
@@ -121,7 +123,7 @@ const SeguroIndividual = ({ params }) => {
                     ).toLocaleDateString("es-ES", {
                       year: "numeric",
                       month: "long",
-                      day: "numeric",
+                      day: "numeric"
                     })
                   : "Fecha no disponible"}
               </p>
@@ -135,7 +137,7 @@ const SeguroIndividual = ({ params }) => {
                     ).toLocaleDateString("es-ES", {
                       year: "numeric",
                       month: "long",
-                      day: "numeric",
+                      day: "numeric"
                     })
                   : "Fecha no disponible"}
               </p>
@@ -177,7 +179,23 @@ const SeguroIndividual = ({ params }) => {
         <div className="bg-primary py-4 px-4 mt-4 rounded-2xl">
           <h2 className="font-bold pb-4 text-xl">Vehiculos y Vencimientos </h2>
           {seguro?.vehiculos?.length > 1 ? (
-            <Table data={seguro?.vehiculos} />
+            rol === "conductor" ? (
+              <Table
+                data={
+                  seguro.vehiculos.find(
+                    (seguro) => seguro.placa === placaConductor
+                  )
+                    ? [
+                        seguro.vehiculos.find(
+                          (seguro) => seguro.placa === placaConductor
+                        )
+                      ]
+                    : []
+                }
+              />
+            ) : (
+              <Table data={seguro.vehiculos} />
+            )
           ) : (
             <p className="text-center">
               No hay vehiculos registrados, pide la plantilla del excel con la
