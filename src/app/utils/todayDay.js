@@ -9,23 +9,23 @@ const ciudades = [
     reglas: [
       {
         dia: "Lunes",
-        placas: ["6", "7", "8", "9", "0"],
+        placas: ["1", "2", "3", "4", "5"],
       },
       {
         dia: "Martes",
-        placas: ["1", "2", "3", "4", "5"],
+        placas: ["6", "7", "8", "9", "0"],
       },
       {
         dia: "Miércoles",
-        placas: ["6", "7", "8", "9", "0"],
-      },
-      {
-        dia: "Jueves",
         placas: ["1", "2", "3", "4", "5"],
       },
       {
-        dia: "Viernes",
+        dia: "Jueves",
         placas: ["6", "7", "8", "9", "0"],
+      },
+      {
+        dia: "Viernes",
+        placas: ["1", "2", "3", "4", "5"],
       },
       {
         dia: "Sábado",
@@ -75,23 +75,23 @@ const ciudades = [
     reglas: [
       {
         dia: "Lunes",
-        placas: ["1", "2"],
-      },
-      {
-        dia: "Martes",
-        placas: ["3", "4"],
-      },
-      {
-        dia: "Miércoles",
-        placas: ["5", "6"],
-      },
-      {
-        dia: "Jueves",
         placas: ["7", "8"],
       },
       {
-        dia: "Viernes",
+        dia: "Martes",
         placas: ["9", "0"],
+      },
+      {
+        dia: "Miércoles",
+        placas: ["1", "2"],
+      },
+      {
+        dia: "Jueves",
+        placas: ["3", "4"],
+      },
+      {
+        dia: "Viernes",
+        placas: ["5", "6"],
       },
       {
         dia: "Sábado",
@@ -279,23 +279,23 @@ const ciudades = [
     reglas: [
       {
         dia: "Lunes",
-        placas: ["6", "7"],
+        placas: ["4", "5"],
       },
       {
         dia: "Martes",
-        placas: ["8", "9"],
+        placas: ["6", "7"],
       },
       {
         dia: "Miércoles",
-        placas: ["0", "1"],
+        placas: ["8", "9"],
       },
       {
         dia: "Jueves",
-        placas: ["2", "3"],
+        placas: ["0", "1"],
       },
       {
         dia: "Viernes",
-        placas: ["4", "5"],
+        placas: ["2", "3"],
       },
       {
         dia: "Sábado",
