@@ -22,7 +22,7 @@ const InsuranceList = () => {
       const response = await axios.get(
         `/api/download/poliza.pdf?url=${seguro.documentos[0]}`,
         {
-          responseType: "blob",
+          responseType: "blob"
         }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -43,6 +43,16 @@ const InsuranceList = () => {
     getSeguros(_id);
     console.log(seguros);
   }, []);
+
+  function sumarUnDiaYFormatear(fecha) {
+    const nuevaFecha = new Date(fecha);
+    nuevaFecha.setDate(nuevaFecha.getDate() + 1);
+    return nuevaFecha.toLocaleDateString("es-ES", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+  }
 
   return (
     <section className="bg-primary py-4 px-4 rounded-2xl">
@@ -70,19 +80,9 @@ const InsuranceList = () => {
                   ""
                 )}
                 VIGENCIA
-                <br /> Desde{" "}
-                {new Date(seguro.fechaInicial).toLocaleDateString("es-ES", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
+                <br /> Desde {sumarUnDiaYFormatear(seguro.fechaInicial)}
                 <br />
-                Hasta{" "}
-                {new Date(seguro.fechaVencimiento).toLocaleDateString("es-ES", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
+                Hasta {sumarUnDiaYFormatear(seguro.fechaVencimiento)}
               </td>
 
               <td className="">

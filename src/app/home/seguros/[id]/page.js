@@ -16,8 +16,6 @@ const SeguroIndividual = ({ params }) => {
     asistencia: ""
   });
 
-  console.log(rol);
-
   const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
