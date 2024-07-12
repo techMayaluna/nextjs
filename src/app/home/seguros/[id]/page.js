@@ -71,7 +71,9 @@ const SeguroIndividual = ({ params }) => {
           <p className="text-left">Fecha Inicio</p>
           <p className="text-right">
             {seguro.fechaInicial && !isNaN(new Date(seguro.fechaInicial))
-              ? new Date(seguro.fechaInicial).toLocaleDateString("es-ES", {
+              ? new Date(
+                  new Date(seguro.fechaInicial).getTime() + 86400000
+                ).toLocaleDateString("es-ES", {
                   year: "numeric",
                   month: "long",
                   day: "numeric"
@@ -84,7 +86,9 @@ const SeguroIndividual = ({ params }) => {
           <p className="text-right">
             {seguro.fechaVencimiento &&
             !isNaN(new Date(seguro.fechaVencimiento))
-              ? new Date(seguro.fechaInicial).toLocaleDateString("es-ES", {
+              ? new Date(
+                  new Date(seguro.fechaVencimiento).getTime() + 86400000
+                ).toLocaleDateString("es-ES", {
                   year: "numeric",
                   month: "long",
                   day: "numeric"
