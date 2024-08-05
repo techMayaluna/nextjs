@@ -278,10 +278,10 @@ function FormMandarEmail({ params }) {
         dataVaraible.numeroTestigo ? dataVaraible.numeroTestigo : "N/A"
       }`,
       images: [
-        await cloudImageUpload(images[0]) || "",
-        await cloudImageUpload(images[1] || "") ,
-        await cloudImageUpload(images[2] || ""),
-        await cloudImageUpload(images[3] || "")
+        await cloudImageUpload(images[0]) || "1",
+        await cloudImageUpload(images[1] || "2") ,
+        await cloudImageUpload(images[2] || "3"),
+        await cloudImageUpload(images[3] || "4")
       ]
     };
     try {

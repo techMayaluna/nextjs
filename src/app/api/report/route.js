@@ -1,7 +1,6 @@
 import { connectDB } from "@/app/utils/mongoose";
 import Report from "@/models/report";
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
 
 const acountSid = process.env.TWILIO_ACCOUNT_ID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -10,8 +9,8 @@ const client = require("twilio")(acountSid, authToken);
 
 export async function POST(request) {
   await connectDB();
-  console.log("Request body", request.body);
   const requestBody = await request.json();
+  console.log("Request body", requestBody);
 
   const report = new Report(requestBody);
   await report.save();

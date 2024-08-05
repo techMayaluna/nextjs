@@ -24,6 +24,8 @@ export async function POST(request) {
       emailInfo
     });
   } catch (error) {
+    console.error("Error al enviar el correo:", error);
+
     return NextResponse.json({ error });
   }
 }
@@ -42,21 +44,24 @@ export async function sendEmail(emailData) {
     <p>Su equipo de soporte</p>
   </section>
   `;
+  try {
+    const info = await transporter.sendMail({
+      from: '"Mayaluna Seguros " <segurosmayaluna@gmail.com>', // sender address
+      to: [
+        "emaya@mayalunaseguros.com",
+        "german@mayalunaseguros.com",
+        emailData.email
+      ],
+      subject: `Reporte de siniestro ${emailData.placaDelVehiculo} `,
+      html: htmlContent
+    });
 
-  const info = await transporter.sendMail({
-    from: '"Mayaluna Seguros " <segurosmayaluna@gmail.com>', // sender address
-    to: [
-      "emaya@mayalunaseguros.com",
-      "german@mayalunaseguros.com",
-      "wildchamo@gmail.com",
-      reporte.email
-    ],
-    subject: `Reporte de siniestro ${emailData.placaDelVehiculo} `,
-    html: htmlContent
-  });
-
-  console.log("Message sent: %s", info.messageId);
-  return info.messageId;
+    console.log("Message sent: %s", info.messageId);
+    return info.messageId;
+  } catch (error) {
+    console.error("Error al enviar el correo:", error);
+    throw new Error("Error al enviar el correo: " + error.message);
+  }
 }
 
 function generateTable(values) {
