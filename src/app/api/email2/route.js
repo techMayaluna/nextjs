@@ -50,7 +50,7 @@ export async function sendEmail(emailData) {
       to: [
         "emaya@mayalunaseguros.com",
         "german@mayalunaseguros.com",
-        emailData.email
+        emailData.correoElectronico
       ],
       subject: `Reporte de siniestro ${emailData.placaDelVehiculo} `,
       html: htmlContent
