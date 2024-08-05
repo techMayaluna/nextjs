@@ -16,7 +16,6 @@ const transporter = nodemailer.createTransport({
 export async function POST(request) {
   const reporte = await request.json();
 
-  console.log(reporte);
   try {
     const emailInfo = await sendEmail(reporte);
 
@@ -46,7 +45,12 @@ export async function sendEmail(emailData) {
 
   const info = await transporter.sendMail({
     from: '"Mayaluna Seguros " <segurosmayaluna@gmail.com>', // sender address
-    to: ["", "wildchamo@gmail.com"],
+    to: [
+      "emaya@mayalunaseguros.com",
+      "german@mayalunaseguros.com",
+      "wildchamo@gmail.com",
+      reporte.email
+    ],
     subject: `Reporte de siniestro ${emailData.placaDelVehiculo} `,
     html: htmlContent
   });
