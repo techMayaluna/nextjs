@@ -27,11 +27,12 @@ export async function POST(request) {
       }
     );
 
-    const secureUrl = result.secure_url || result.url.replace('http://', 'https://');
+    const secureUrl =
+      result.secure_url || result.url.replace("http://", "https://");
 
     return NextResponse.json(secureUrl);
   } catch (error) {
     console.log(error);
-    return NextResponse.error({ status: "paila" });
+    return NextResponse.json("imagen muy pesada");
   }
 }
