@@ -21,8 +21,6 @@ function FormMandarEmail({ params }) {
   const [isLoading, setIsLoading] = useState(false);
   const [missingImage, setMissingImage] = useState(false);
 
-  const [guardarDoc, setGuardarDoc] = useState(false);
-
   const [images, setImages] = useState([null, null, null]);
   const imgR1 = useRef();
   const imgR2 = useRef();
@@ -254,8 +252,7 @@ function FormMandarEmail({ params }) {
       prevY += 75;
     }
 
-
-    sendData2().then(()=>{
+    sendData2().then(() => {
       doc.save("reporte.pdf");
     });
   }
@@ -284,12 +281,14 @@ function FormMandarEmail({ params }) {
         await cloudImageUpload(images[0]),
         await cloudImageUpload(images[1]),
         await cloudImageUpload(images[2]),
-        await cloudImageUpload(images[3]),
+        await cloudImageUpload(images[3])
       ]
     };
     try {
       const res = await axios.post("/api/report", values);
+      const reS2 = await axios.post("/api/email2", values);
       console.log(res);
+      console.log(reS2);
       setIsLoading(false);
       setIsOpen(true);
     } catch (error) {
@@ -437,17 +436,6 @@ function FormMandarEmail({ params }) {
             />
           ))}
 
-          <div className="mt-3">
-            <label>
-              <input
-                type="checkbox"
-                value={guardarDoc}
-                className="form-checkbox h-4 w-4 text-green-600"
-                onChange={() => setGuardarDoc(!guardarDoc)}
-              ></input>{" "}
-              Descargar documento
-            </label>
-          </div>
         </div>
 
         <div className="mt-4 text-end">

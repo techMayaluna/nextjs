@@ -1,37 +1,79 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_URI);
 
 export const dynamic = "force-dynamic";
 
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  auth: {
+    user: process.env.MAIL_EMAIL,
+    pass: process.env.MAIL_PASSWORD
+  }
+});
+
 export async function POST(request) {
-  const reporte = await request.formData();
+  const reporte = await request.json();
 
-  const pdfBlob = reporte.get("pdf");
-  const pdfBuffer = await pdfBlob.arrayBuffer();
-  const pdfBase64 = Buffer.from(pdfBuffer).toString('base64');
-
-
+  console.log(reporte);
   try {
-    const data = await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
-      to: ["emaya@mayalunaseguros.com"],
-      subject: "Envio de reporte de siniestro",
-      html: "Se adjunta el reporte de siniestro",
-      attachments: [
-        {
-          filename: "reporte.pdf",
-          content: pdfBase64,
-        },
-      ],
-    });
+    const emailInfo = await sendEmail(reporte);
 
     return NextResponse.json({
       message: "Correo enviado exitosamente",
-      data,
+      emailInfo
     });
   } catch (error) {
     return NextResponse.json({ error });
   }
+}
+
+export async function sendEmail(emailData) {
+  let htmlContent;
+  const table = generateTable(emailData);
+
+  htmlContent = `
+  <section>
+
+      <p>Estimado/a,</p>
+    <p>Por favor, encuentre a continuación los detalles del reporte:</p>
+    ${table}
+    <p>Saludos,</p>
+    <p>Su equipo de soporte</p>
+  </section>
+  `;
+
+  const info = await transporter.sendMail({
+    from: '"Mayaluna Seguros " <segurosmayaluna@gmail.com>', // sender address
+    to: ["", "wildchamo@gmail.com"],
+    subject: `Reporte de siniestro ${emailData.placaDelVehiculo} `,
+    html: htmlContent
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  return info.messageId;
+}
+
+function generateTable(values) {
+  let table = `<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">`;
+  for (const key in values) {
+    if (key !== "images") {
+      table += `
+        <tr>
+          <td><strong>${key}</strong></td>
+          <td>${values[key]}</td>
+        </tr>`;
+    } else {
+      table += `
+        <tr>
+          <td><strong>${key}</strong></td>
+          <td>${values[key]
+            .map((img) => `<img src="${img}" width="100" />`)
+            .join(" ")}</td>
+        </tr>`;
+    }
+  }
+  table += `</table>`;
+  return table;
 }
