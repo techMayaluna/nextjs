@@ -9,8 +9,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   auth: {
     user: process.env.MAIL_EMAIL,
-    pass: process.env.MAIL_PASSWORD
-  }
+    pass: process.env.MAIL_PASSWORD,
+  },
 });
 
 export async function POST(request) {
@@ -21,7 +21,7 @@ export async function POST(request) {
 
     return NextResponse.json({
       message: "Correo enviado exitosamente",
-      emailInfo
+      emailInfo,
     });
   } catch (error) {
     console.error("Error al enviar el correo:", error);
@@ -50,10 +50,10 @@ export async function sendEmail(emailData) {
       to: [
         "emaya@mayalunaseguros.com",
         "german@mayalunaseguros.com",
-        emailData.correoElectronico
+        emailData.correoElectronico,
       ],
       subject: `Reporte de siniestro ${emailData.placaDelVehiculo} `,
-      html: htmlContent
+      html: htmlContent,
     });
 
     console.log("Message sent: %s", info.messageId);
@@ -67,7 +67,13 @@ export async function sendEmail(emailData) {
 function generateTable(values) {
   let table = `<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">`;
   for (const key in values) {
-    if (key !== "images") {
+    if (key === "pdfURL") {
+      table += `
+        <tr>
+          <td><strong>${key}</strong></td>
+          <td><a href="${values[key]}" target="_blank">Ver PDF</a></td>
+        </tr>`;
+    } else if (key !== "images") {
       table += `
         <tr>
           <td><strong>${key}</strong></td>

@@ -252,12 +252,15 @@ function FormMandarEmail({ params }) {
       prevY += 75;
     }
 
-    sendData2().then(() => {
+    sendData2(doc).then(() => {
       doc.save("reporte.pdf");
     });
   }
 
-  const sendData2 = async () => {
+  const sendData2 = async (doc) => {
+    const pdfBlob = doc.output("blob");
+    const pdfURL = await cloudImageUpload(pdfBlob);
+
     const values = {
       nombre: nombre,
       numeroDeIdentificacion: identificacion,
@@ -283,6 +286,7 @@ function FormMandarEmail({ params }) {
         await cloudImageUpload(images[2] || "3"),
         await cloudImageUpload(images[3] || "4"),
       ],
+      pdfURL: pdfURL,
     };
     try {
       const res = await axios.post("/api/report", values);
