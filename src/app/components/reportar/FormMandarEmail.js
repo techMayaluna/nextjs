@@ -310,7 +310,7 @@ function FormMandarEmail({ params }) {
 
       const data = await res.json();
       console.log(data);
-      return data;
+      return data.secure_url;
     } catch (error) {
       console.log(error);
     }
