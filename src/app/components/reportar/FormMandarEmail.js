@@ -32,7 +32,7 @@ function FormMandarEmail({ params }) {
     comoOcurrio: "",
     numeroHeridos: 1,
     nombreTestigo: "",
-    numeroTestigo: ""
+    numeroTestigo: "",
   });
 
   const {
@@ -43,7 +43,7 @@ function FormMandarEmail({ params }) {
     direccion,
     ciudad,
     geo,
-    updateGeo
+    updateGeo,
   } = useUserStore((state) => state);
 
   useEffect(() => {
@@ -118,10 +118,10 @@ function FormMandarEmail({ params }) {
             colSpan: 6,
             rowSpan: 1,
             styles: {
-              halign: "center"
-            }
-          }
-        ]
+              halign: "center",
+            },
+          },
+        ],
       ],
       body: [
         [
@@ -130,7 +130,7 @@ function FormMandarEmail({ params }) {
           "Correo Electrónico",
           "Número de Contacto",
           "Dirección de Residencia",
-          "Ciudad"
+          "Ciudad",
         ],
         [
           `${nombre}`,
@@ -138,9 +138,9 @@ function FormMandarEmail({ params }) {
           `${email}`,
           `${celular}`,
           `${direccion}`,
-          `${ciudad}`
-        ]
-      ]
+          `${ciudad}`,
+        ],
+      ],
     });
 
     // // Accident Information
@@ -153,10 +153,10 @@ function FormMandarEmail({ params }) {
             colSpan: 4,
             rowSpan: 1,
             styles: {
-              halign: "center"
-            }
-          }
-        ]
+              halign: "center",
+            },
+          },
+        ],
       ],
       body: [
         [
@@ -164,7 +164,7 @@ function FormMandarEmail({ params }) {
           "Fecha de Reporte",
           "Tipo de Accidente",
           "Ubicación",
-          "Número de Heridos"
+          "Número de Heridos",
         ],
         [
           `${placa}`,
@@ -175,7 +175,7 @@ function FormMandarEmail({ params }) {
             dataVaraible.numeroHeridos !== 0
               ? dataVaraible.numeroHeridos
               : "N/A"
-          }`
+          }`,
         ],
         [
           {
@@ -183,9 +183,9 @@ function FormMandarEmail({ params }) {
             colSpan: 4,
             rowSpan: 1,
             styles: {
-              halign: "center"
-            }
-          }
+              halign: "center",
+            },
+          },
         ],
         [
           {
@@ -193,10 +193,10 @@ function FormMandarEmail({ params }) {
               dataVaraible.comoOcurrio ? dataVaraible.comoOcurrio : "N/A"
             }`,
             colSpan: 4,
-            rowSpan: 1
-          }
-        ]
-      ]
+            rowSpan: 1,
+          },
+        ],
+      ],
     });
 
     // // Witnesses Information
@@ -209,18 +209,18 @@ function FormMandarEmail({ params }) {
             colSpan: 2,
             rowSpan: 1,
             styles: {
-              halign: "center"
-            }
-          }
-        ]
+              halign: "center",
+            },
+          },
+        ],
       ],
       body: [
         ["Nombre", "Número de Contacto"],
         [
           `${dataVaraible.nombreTestigo ? dataVaraible.nombreTestigo : "N/A"}`,
-          `${dataVaraible.numeroTestigo ? dataVaraible.numeroTestigo : "N/A"}`
-        ]
-      ]
+          `${dataVaraible.numeroTestigo ? dataVaraible.numeroTestigo : "N/A"}`,
+        ],
+      ],
     });
 
     // // Photos Information
@@ -233,11 +233,11 @@ function FormMandarEmail({ params }) {
             colSpan: 2,
             rowSpan: 1,
             styles: {
-              halign: "center"
-            }
-          }
-        ]
-      ]
+              halign: "center",
+            },
+          },
+        ],
+      ],
     });
 
     let prevY = doc.autoTable.previous.finalY;
@@ -281,8 +281,8 @@ function FormMandarEmail({ params }) {
         (await cloudImageUpload(images[0])) || "1",
         await cloudImageUpload(images[1] || "2"),
         await cloudImageUpload(images[2] || "3"),
-        await cloudImageUpload(images[3] || "4")
-      ]
+        await cloudImageUpload(images[3] || "4"),
+      ],
     };
     try {
       const res = await axios.post("/api/report", values);
@@ -298,17 +298,19 @@ function FormMandarEmail({ params }) {
 
   const cloudImageUpload = async (image) => {
     try {
+      const url = "https://api.cloudinary.com/v1_1/dz7keixqs/image/upload";
       const formData = new FormData();
-      formData.append("image", image);
+      formData.append("file", image);
+      formData.append("upload_preset", "wildchamo123");
 
-      const res = await axios.post("/api/report/submit-image", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
+      const res = await fetch(url, {
+        method: "POST",
+        body: formData,
       });
 
-      console.log(res);
-      return res.data;
+      const data = await res.json();
+      console.log(data);
+      return data;
     } catch (error) {
       console.log(error);
     }
