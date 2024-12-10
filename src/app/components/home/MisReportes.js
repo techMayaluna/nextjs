@@ -34,16 +34,34 @@ export default function MisReportes({ seguros, placaConductor, rol }) {
     }
   };
 
-  return (
-    <section className="py-6">
-      <h2 className="mb-1">MIS REPORTES</h2>
-      <div className="flex justify-start gap-4 bg-primary h-fit p-6 rounded-2xl text-sm">
+  const displayInspection = () => {
+    if (!rol === "conductor") {
+      return null;
+    } else {
+      return (
         <ActionSection
-          src="reportar"
-          text="Generar reporte Accidentalidad"
+          src="inspeccion"
+          text="Generar Inspección"
           onClick={handleModalClick}
         />
-      </div>
+      );
+    }
+  };
+
+  return (
+    <>
+      <section className="py-6">
+        <h2 className="mb-1">MIS REPORTES</h2>
+        <div className="flex justify-start gap-4 bg-primary h-fit p-6 rounded-2xl text-sm">
+          <ActionSection
+            src="reportar"
+            text="Generar reporte"
+            onClick={handleModalClick}
+          />
+
+          {displayInspection()}
+        </div>
+      </section>
 
       {showVehiculoModal && (
         <ModalVehiculoTipo
@@ -57,7 +75,7 @@ export default function MisReportes({ seguros, placaConductor, rol }) {
       {showModal2 && (
         <ModalNoAutoInsurance onClose={() => setShowModal2(false)} />
       )}
-    </section>
+    </>
   );
 }
 
