@@ -13,7 +13,7 @@ const SeguroIndividual = ({ params }) => {
 
   const [seguro, setSeguro] = useState({
     seguro: "",
-    asistencia: ""
+    asistencia: "",
   });
 
   const [isDownloading, setIsDownloading] = useState(false);
@@ -25,7 +25,7 @@ const SeguroIndividual = ({ params }) => {
       console.log(seguroEncontrado);
 
       setSeguro({
-        ...seguroEncontrado
+        ...seguroEncontrado,
       });
     } else {
       router.push("/home");
@@ -37,7 +37,7 @@ const SeguroIndividual = ({ params }) => {
       const response = await axios.get(
         `/api/download/poliza.pdf?url=${seguro.documentos[0]}`,
         {
-          responseType: "blob"
+          responseType: "blob",
         }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -76,7 +76,7 @@ const SeguroIndividual = ({ params }) => {
                 ).toLocaleDateString("es-ES", {
                   year: "numeric",
                   month: "long",
-                  day: "numeric"
+                  day: "numeric",
                 })
               : "Fecha no disponible"}
           </p>
@@ -91,7 +91,7 @@ const SeguroIndividual = ({ params }) => {
                 ).toLocaleDateString("es-ES", {
                   year: "numeric",
                   month: "long",
-                  day: "numeric"
+                  day: "numeric",
                 })
               : "Fecha no disponible"}
           </p>
@@ -119,14 +119,16 @@ const SeguroIndividual = ({ params }) => {
             <section className="grid grid-cols-2">
               <p className="text-left">Extintor Vence</p>
               <p className="text-right">
-                {!isNaN(new Date(seguro.fechaVencimientoExtintor))
-                  ? new Date(
-                      seguro.fechaVencimientoExtintor
-                    ).toLocaleDateString("es-ES", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric"
-                    })
+                {seguro.fechaVencimientoExtintor
+                  ? !isNaN(new Date(seguro.fechaVencimientoExtintor))
+                    ? new Date(
+                        seguro.fechaVencimientoExtintor
+                      ).toLocaleDateString("es-ES", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })
+                    : "Fecha no disponible"
                   : "Fecha no disponible"}
               </p>
             </section>
@@ -139,7 +141,7 @@ const SeguroIndividual = ({ params }) => {
                     ).toLocaleDateString("es-ES", {
                       year: "numeric",
                       month: "long",
-                      day: "numeric"
+                      day: "numeric",
                     })
                   : "Fecha no disponible"}
               </p>
@@ -190,7 +192,7 @@ const SeguroIndividual = ({ params }) => {
                     ? [
                         seguro.vehiculos.find(
                           (seguro) => seguro.placa === placaConductor
-                        )
+                        ),
                       ]
                     : []
                 }
