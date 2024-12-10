@@ -15,28 +15,8 @@ function MisSeguros() {
   );
 
   useEffect(() => {
-    getSeguros(_id).then(() => {
-      if (rol !== "conductor") {
-        const hoy = new Date();
-        const diasAviso = 10; // Número de días antes del vencimiento para mostrar el aviso
-
-        seguros.forEach((seguro) => {
-          const fechaVencimiento = new Date(seguro.fechaVencimiento);
-          const diasRestantes = Math.ceil(
-            (fechaVencimiento - hoy) / (1000 * 60 * 60 * 24)
-          );
-
-          if (diasRestantes <= 0) {
-            return toast.info(`El seguro de ${seguro.tipoPoliza} está vencido`);
-          } else if (diasRestantes <= diasAviso && diasRestantes > 0) {
-            return toast.info(
-              `El seguro de ${seguro.tipoPoliza} está a punto de vencer`
-            );
-          }
-        });
-      }
-    });
-  }, [seguros, rol, getSeguros, _id]);
+    getSeguros(_id);
+  }, []);
 
   return (
     <>

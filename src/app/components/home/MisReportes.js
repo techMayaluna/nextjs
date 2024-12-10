@@ -37,10 +37,10 @@ export default function MisReportes({ seguros, placaConductor, rol }) {
   return (
     <section className="py-6">
       <h2 className="mb-1">MIS REPORTES</h2>
-      <div className="flex justify-start gap-4 bg-primary h-32 p-6 rounded-2xl text-sm">
+      <div className="flex justify-start gap-4 bg-primary h-fit p-6 rounded-2xl text-sm">
         <ActionSection
           src="reportar"
-          text="Generar reporte"
+          text="Generar reporte Accidentalidad"
           onClick={handleModalClick}
         />
       </div>
