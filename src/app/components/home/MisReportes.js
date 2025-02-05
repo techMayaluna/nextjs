@@ -59,7 +59,7 @@ export default function MisReportes({ seguros, placaConductor, rol }) {
             onClick={handleModalClick}
           />
 
-          {displayInspection()}
+          {/* {displayInspection()} */}
         </div>
       </section>
 
