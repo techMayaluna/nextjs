@@ -5,7 +5,6 @@ import useUserStore from "@/app/stores/userStore";
 import InsuranceButton from "./InsuranceButton";
 import { useEffect } from "react";
 import dynamic from "next/dynamic";
-import { Toaster, toast } from "sonner";
 
 import MisReportes from "./MisReportes";
 
@@ -54,8 +53,6 @@ function MisSeguros() {
           rol={rol}
         />
       ) : null}
-
-      <Toaster position="top-center" duration="1500" />
     </>
   );
 }
