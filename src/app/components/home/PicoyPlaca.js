@@ -1,7 +1,7 @@
 "use client";
 import Modal from "../shared/Modal";
-// import ScrollerPicoyPlaca from "./scrollerPicoyPlaca";
-import { aplicaONo } from "../../utils/todayDay";
+import ScrollerPicoyPlaca from "./scrollerPicoyPlaca";
+import { getDiaHoy } from "../../utils/todayDay";
 import useUserStore from "../../stores/userStore";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
@@ -19,7 +19,7 @@ function PicoyPlaca() {
         const response = await fetch("/api/get-plate-restrictions");
 
         const data = await response.json();
-        console.log(data);
+        console.log("data", data);
         setPlateRestrictions(data);
       } catch (error) {
         console.error("Error fetching plate restrictions:", error);
@@ -28,22 +28,24 @@ function PicoyPlaca() {
 
     fetchPlateRestrictions();
   }, []);
+
+  const city = plateRestrictions?.find((city) => city._id === ciudad);
+  const today = getDiaHoy();
+
+  const reglaDeHoy = city?.reglas.find((regla) => regla.dia === today);
+
   return (
     <section>
       <h2 className="mb-1">PICO Y PLACA</h2>
       <div className="flex flex-col justify-between bg-primary h-32 p-6 rounded-2xl text-sm">
         <p>
           {" "}
-          Pico y placa hoy en <b className="underline">{ciudad}</b> para{" "}
-          <b className="underline">particulares</b>
-          {aplicaONo(ciudad) === "No aplica" ? (
-            <span> no aplica</span>
-          ) : (
-            <span>
-              {" "}
-              es <b className="">{aplicaONo(ciudad)}</b>
-            </span>
-          )}
+          Pico y placa hoy en <b className="underline">
+            {city?.nombre}
+          </b> para <b className="underline">particulares</b>
+          {reglaDeHoy?.placas
+            ? " es para las placas terminadas en " + reglaDeHoy.placas
+            : " no aplica"}
         </p>
         <div className="flex justify-end">
           <button
@@ -55,7 +57,7 @@ function PicoyPlaca() {
         </div>
       </div>
       {showModal && (
-        <ModalPico ciudad={ciudad} onClose={() => setShowModal(false)} />
+        <ModalPico ciudad={city} onClose={() => setShowModal(false)} />
       )}
     </section>
   );
@@ -65,7 +67,7 @@ function ModalPico({ onClose, ciudad }) {
   return (
     <Modal className="">
       <h2 className="text-lg font-bold mb-4">PICO Y PLACA</h2>
-      {/* <ScrollerPicoyPlaca ciudad={ciudad} /> */}
+      <ScrollerPicoyPlaca ciudad={ciudad} />
 
       <div className="flex justify-end">
         <button
