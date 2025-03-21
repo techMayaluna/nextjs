@@ -13,7 +13,7 @@ function PicoyPlaca() {
 
   const today = getDiaHoy();
 
-  const reglaDeHoy = ciudad?.reglas.find((regla) => regla.dia === today);
+  const reglaDeHoy = ciudad?.reglas?.find((regla) => regla.dia === today);
 
   return (
     <section>
