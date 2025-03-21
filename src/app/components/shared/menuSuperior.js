@@ -18,7 +18,7 @@ const MenuSuperior = () => {
       router.push("/login");
     }
 
-    getUser(identificacion).then(() => {});
+    getUser(identificacion);
   }, []);
 
   const goBack = () => {
@@ -80,9 +80,7 @@ function ModalError() {
       <p>
         Si has denegado el acceso a la ubicación, por favor ve a la
         configuración de tu navegador y permite el acceso a la ubicación para
-        este sitio.
-
-        Luego recarga la página.
+        este sitio. Luego recarga la página.
       </p>
     </Modal>
   );

@@ -4,35 +4,16 @@ import ScrollerPicoyPlaca from "./scrollerPicoyPlaca";
 import { getDiaHoy } from "../../utils/todayDay";
 import useUserStore from "../../stores/userStore";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function PicoyPlaca() {
   const [showModal, setShowModal] = useState(false);
 
-  const [plateRestrictions, setPlateRestrictions] = useState(null);
-
   const { ciudad } = useUserStore((state) => state);
 
-  useEffect(() => {
-    const fetchPlateRestrictions = async () => {
-      try {
-        const response = await fetch("/api/get-plate-restrictions");
-
-        const data = await response.json();
-        console.log("data", data);
-        setPlateRestrictions(data);
-      } catch (error) {
-        console.error("Error fetching plate restrictions:", error);
-      }
-    };
-
-    fetchPlateRestrictions();
-  }, []);
-
-  const city = plateRestrictions?.find((city) => city._id === ciudad);
   const today = getDiaHoy();
 
-  const reglaDeHoy = city?.reglas.find((regla) => regla.dia === today);
+  const reglaDeHoy = ciudad?.reglas.find((regla) => regla.dia === today);
 
   return (
     <section>
@@ -41,7 +22,7 @@ function PicoyPlaca() {
         <p>
           {" "}
           Pico y placa hoy en <b className="underline">
-            {city?.nombre}
+            {ciudad?.nombre}
           </b> para <b className="underline">particulares</b>
           {reglaDeHoy?.placas
             ? " es para las placas terminadas en " + reglaDeHoy.placas
@@ -57,7 +38,7 @@ function PicoyPlaca() {
         </div>
       </div>
       {showModal && (
-        <ModalPico ciudad={city} onClose={() => setShowModal(false)} />
+        <ModalPico ciudad={ciudad} onClose={() => setShowModal(false)} />
       )}
     </section>
   );

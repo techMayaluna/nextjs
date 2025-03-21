@@ -267,7 +267,7 @@ function FormMandarEmail({ params }) {
       correoElectronico: email,
       numeroDeContacto: celular,
       direccionDeResidencia: direccion,
-      ciudad: ciudad,
+      ciudad: ciudad.nombre,
       placaDelVehiculo: placa,
       fechaDeReporte: reportDateFormat(),
       tipoDeAccidente: tipo,
