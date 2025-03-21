@@ -1,16 +1,33 @@
 "use client";
 import Modal from "../shared/Modal";
-import ScrollerPicoyPlaca from "./scrollerPicoyPlaca";
+// import ScrollerPicoyPlaca from "./scrollerPicoyPlaca";
 import { aplicaONo } from "../../utils/todayDay";
 import useUserStore from "../../stores/userStore";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function PicoyPlaca() {
   const [showModal, setShowModal] = useState(false);
 
+  const [plateRestrictions, setPlateRestrictions] = useState(null);
+
   const { ciudad } = useUserStore((state) => state);
 
+  useEffect(() => {
+    const fetchPlateRestrictions = async () => {
+      try {
+        const response = await fetch("/api/get-plate-restrictions");
+
+        const data = await response.json();
+        console.log(data);
+        setPlateRestrictions(data);
+      } catch (error) {
+        console.error("Error fetching plate restrictions:", error);
+      }
+    };
+
+    fetchPlateRestrictions();
+  }, []);
   return (
     <section>
       <h2 className="mb-1">PICO Y PLACA</h2>
@@ -48,7 +65,7 @@ function ModalPico({ onClose, ciudad }) {
   return (
     <Modal className="">
       <h2 className="text-lg font-bold mb-4">PICO Y PLACA</h2>
-      <ScrollerPicoyPlaca ciudad={ciudad} />
+      {/* <ScrollerPicoyPlaca ciudad={ciudad} /> */}
 
       <div className="flex justify-end">
         <button

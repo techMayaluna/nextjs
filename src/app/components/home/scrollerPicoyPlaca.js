@@ -28,7 +28,6 @@ export default function ScrollerPicoyPlaca({ ciudad }) {
         ))}
       </select>
       {picoyplacahoy.reglas.length === 0 ? (
-        <p>Explora el pico y placa en otras ciudades</p>
       ) : (
         <>{diaHoy}</>
       )}
