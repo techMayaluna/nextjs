@@ -1,7 +1,7 @@
 "use client";
 import Modal from "../shared/Modal";
 import ScrollerPicoyPlaca from "./scrollerPicoyPlaca";
-import { aplicaONo } from "../../utils/todayDay";
+import { getDiaHoy } from "../../utils/todayDay";
 import useUserStore from "../../stores/userStore";
 import dynamic from "next/dynamic";
 import { useState } from "react";
@@ -11,22 +11,22 @@ function PicoyPlaca() {
 
   const { ciudad } = useUserStore((state) => state);
 
+  const today = getDiaHoy();
+
+  const reglaDeHoy = ciudad?.reglas?.find((regla) => regla.dia === today);
+
   return (
     <section>
       <h2 className="mb-1">PICO Y PLACA</h2>
       <div className="flex flex-col justify-between bg-primary h-32 p-6 rounded-2xl text-sm">
         <p>
           {" "}
-          Pico y placa hoy en <b className="underline">{ciudad}</b> para{" "}
-          <b className="underline">particulares</b>
-          {aplicaONo(ciudad) === "No aplica" ? (
-            <span> no aplica</span>
-          ) : (
-            <span>
-              {" "}
-              es <b className="">{aplicaONo(ciudad)}</b>
-            </span>
-          )}
+          Pico y placa hoy en <b className="underline">
+            {ciudad?.nombre}
+          </b> para <b className="underline">particulares</b>
+          {reglaDeHoy?.placas
+            ? " es para las placas terminadas en " + reglaDeHoy.placas
+            : " no aplica"}
         </p>
         <div className="flex justify-end">
           <button

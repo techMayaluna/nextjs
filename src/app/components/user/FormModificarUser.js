@@ -74,14 +74,14 @@ function FormModificarUser() {
 
         <div className="w-full flex flex-col">
           <label>Ciudad:</label>
-          <select
-            className="block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            name="ciudad"
-            value={ciudad}
+
+          <input
+            type="text"
             readOnly
-          >
-            <option value={ciudad}>{ciudad}</option>
-          </select>
+            value={ciudad.nombre}
+            className="appearance-none bg-gray-200 text-gray-700 border rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
+            placeholder="123456789"
+          />
         </div>
       </div>
 
@@ -145,7 +145,6 @@ function FormModificarUser() {
           placeholder="emaya@mayalunaseguros.com"
         />
       </div>
-
 
       <article className="bg-primary py-4 px-4 mt-4 rounded-2xl mb-4">
         Si deseas cambiar algún dato personal o actualizar un documento, por
