@@ -15,6 +15,8 @@ function PicoyPlaca() {
 
   const reglaDeHoy = ciudad?.reglas?.find((regla) => regla.dia === today);
 
+  console.log("reglaDeHoy", reglaDeHoy);
+
   return (
     <section>
       <h2 className="mb-1">PICO Y PLACA</h2>
@@ -24,7 +26,7 @@ function PicoyPlaca() {
           Pico y placa hoy en <b className="underline">
             {ciudad?.nombre}
           </b> para <b className="underline">particulares</b>
-          {reglaDeHoy?.placas
+          {reglaDeHoy?.placas.trim()
             ? " es para las placas terminadas en " + reglaDeHoy.placas
             : " no aplica"}
         </p>
@@ -50,7 +52,18 @@ function ModalPico({ onClose, ciudad }) {
       <h2 className="text-lg font-bold mb-4">PICO Y PLACA</h2>
       <ScrollerPicoyPlaca ciudad={ciudad} />
 
-      <div className="flex justify-end">
+      {ciudad.nombre === "Pasto" && (
+        <a
+          href="https://www.pasto.gov.co/wp-content/uploads/2023/01/DECRETO-002-DE-2023-PICO-Y-PLACA-PASTO.pdf"
+          target="_blank"
+          className="underline"
+          rel="noopener noreferrer"
+        >
+          Ver Decreto de Pico y Placa en Pasto
+        </a>
+      )}
+
+      <div className="flex justify-end mt-2">
         <button
           className="bg-secondary text-white px-4 py-2 rounded-lg"
           onClick={onClose}
