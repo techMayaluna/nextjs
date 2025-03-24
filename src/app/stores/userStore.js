@@ -96,6 +96,7 @@ const useUserStore = create((set) => {
         });
         return res;
       } catch (error) {
+        console.error(error);
         throw new Error(error.response);
       }
     },
