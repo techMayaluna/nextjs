@@ -54,7 +54,7 @@ function ModalPico({ onClose, ciudad }) {
 
       {ciudad.nombre === "Pasto" && (
         <a
-          href="https://www.pasto.gov.co/wp-content/uploads/2023/01/DECRETO-002-DE-2023-PICO-Y-PLACA-PASTO.pdf"
+          href="https://www.pasto.gov.co/images/2025/mar/pico_placa_marzo.jpeg"
           target="_blank"
           className="underline"
           rel="noopener noreferrer"
