@@ -78,7 +78,7 @@ function FormModificarUser() {
           <input
             type="text"
             readOnly
-            value={ciudad.nombre}
+            value={ciudad}
             className="appearance-none bg-gray-200 text-gray-700 border rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
             placeholder="123456789"
           />

@@ -82,12 +82,13 @@ const useUserStore = create((set) => {
           idUser: idUser,
         });
 
+
         const userData = res.data._doc;
 
         set({
           nombre: userData.nombre,
           identificacion: userData.identificacion,
-          ciudad: userData.ciudad,
+          ciudad: res.data.ciudad.nombre,
           direccion: userData.direccion,
           celular: userData.celular,
           fechaNacimiento: userData.fechaNacimiento,
