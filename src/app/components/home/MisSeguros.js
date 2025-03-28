@@ -9,12 +9,12 @@ import dynamic from "next/dynamic";
 import MisReportes from "./MisReportes";
 
 function MisSeguros() {
-  const { seguros, getSeguros, _id, rol, placaConductor } = useUserStore(
+  const { seguros, getSeguros, rol, placaConductor } = useUserStore(
     (state) => state
   );
 
   useEffect(() => {
-    getSeguros(_id);
+    getSeguros();
   }, []);
 
   return (

@@ -41,10 +41,7 @@ function ChangePassword({ context }) {
       });
   };
 
-  const nextScreen = () => {
-    router.push("/login");
-  };
-
+ 
   const handleInputChange = (event) => {
     setPasswords({
       ...passwords,

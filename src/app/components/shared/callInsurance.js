@@ -21,7 +21,6 @@ export default function CallInsurance({}) {
       ? `tel:%23${numberToCall1}`
       : `tel:${numberToCall1}`;
 
-  console.log(numberToCall2);
 
   return (
     <a

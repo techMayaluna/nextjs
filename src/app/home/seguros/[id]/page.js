@@ -215,11 +215,14 @@ const SeguroIndividual = ({ params }) => {
 const Table = ({ data }) => (
   <table className="min-w-full divide-y divide-gray-200 mb-4">
     <thead className="">
+      <tr>
+
       <th>Placa</th>
       <th>Tecnomecánica</th>
       <th>Extintor</th>
       <th>Tarjeta de operación</th>
       <th>SOAT</th>
+      </tr>
     </thead>
     <tbody className="bg-white divide-y divide-gray-200">
       {data?.map((vehiculo) => (

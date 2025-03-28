@@ -73,38 +73,48 @@ const useUserStore = create((set) => {
       }
     },
 
-    getUser: async (id) => {
+    getUser: async () => {
+
+      const idUser = useUserStore.getState().identificacion;
+
       try {
         const res = await axios.post("/api/user", {
-          idUser: id,
+          idUser: idUser,
         });
 
+        const userData = res.data._doc;
+
         set({
-          nombre: res.data.nombre,
-          identificacion: res.data.identificacion,
-          ciudad: res.data.ciudad,
-          direccion: res.data.direccion,
-          celular: res.data.celular,
-          fechaNacimiento: res.data.fechaNacimiento,
-          fechaVencimientoLicencia: res.data.fechaVencimientoLicencia,
-          isActive: res.data.isActive,
-          email: res.data.email,
-          _id: res.data._id,
-          documentos: res.data.documentos,
-          tipoDocumento: res.data.tipoDocumento,
-          tipoPersona: res.data.tipoPersona,
+          nombre: userData.nombre,
+          identificacion: userData.identificacion,
+          ciudad: userData.ciudad,
+          direccion: userData.direccion,
+          celular: userData.celular,
+          fechaNacimiento: userData.fechaNacimiento,
+          fechaVencimientoLicencia: userData.fechaVencimientoLicencia,
+          isActive: userData.isActive,
+          email: userData.email,
+          _id: userData._id,
+          documentos: userData.documentos,
+          tipoDocumento: userData.tipoDocumento,
+          tipoPersona: userData.tipoPersona,
         });
-        return res;
+
+        return userData;
       } catch (error) {
         console.error(error);
         throw new Error(error.response);
       }
     },
 
-    getSeguros: async (idUser) => {
+    getSeguros: async () => {
+
+      const idUser = useUserStore.getState()._id;
+
+        console.log(idUser);
       try {
         const res = await axios.post("/api/get-seguros", {
-          idUser: idUser,
+          idUser:idUser,
         });
         let seguros = res.data;
         seguros = seguros.map((seguro) => {

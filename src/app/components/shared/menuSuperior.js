@@ -10,16 +10,22 @@ import { usePathname, useRouter } from "next/navigation";
 const MenuSuperior = () => {
   const router = useRouter();
 
-  const { nombre, error, updateGeo, fechaNacimiento, getUser, identificacion } =
+  const { nombre, error, fechaNacimiento, getUser, identificacion } =
     useUserStore((state) => state);
 
-  useEffect(() => {
-    if (!identificacion) {
-      router.push("/login");
-    }
+    useEffect(() => {
+      const fetchData = async () => {
+        const user = await getUser();
 
-    getUser(identificacion);
-  }, []);
+    
+        if (!identificacion) {
+          router.push("/login");
+        }
+    
+      };
+    
+      fetchData();
+    }, []);
 
   const goBack = () => {
     router.back();

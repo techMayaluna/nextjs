@@ -37,10 +37,8 @@ const InsuranceList = () => {
   };
 
   useEffect(() => {
-    if (!_id) {
-      router.push("/login");
-    }
-    getSeguros(_id);
+
+   getSeguros();
     console.log(seguros);
   }, []);
 

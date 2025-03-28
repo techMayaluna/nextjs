@@ -1,4 +1,3 @@
-import axios from "axios";
 
 export function getDiaHoy() {
   return diasSemana[new Date().getDay()];
@@ -44,13 +43,4 @@ export async function fetchUserData(userId) {
 
   const data = await response.json();
   return data;
-}
-
-export async function fetchInsurance(userId) {
-  console.log(userId);
-  const res = await axios.post(`${ruta}/api/get-seguros`, {
-    idUser: userId,
-  });
-
-  return res.data;
 }
