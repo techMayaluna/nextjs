@@ -50,8 +50,6 @@ export async function POST(request) {
 
     user.password = undefined;
 
-    console.log("USER", user);
-
     return NextResponse.json(user);
   } catch (error) {
     console.log(error);
