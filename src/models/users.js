@@ -22,7 +22,8 @@ const userSchema = new Schema({
     // required: true,
   },
   ciudad: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "PlateRestriction",
     required: true,
   },
   email: {

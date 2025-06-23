@@ -9,37 +9,43 @@ export async function POST(request) {
     await connectDB();
     const { identificacion, password } = await request.json();
 
-    let user = await User.findOne({ identificacion });
+    // Populate the "ciudad" reference so the frontend receives the full object, not just the ObjectId
+    let user = await User.findOne({ identificacion }).populate("ciudad");
+
+    console.log(user);
 
     if (!user) {
       const insurance = await Insurance.findOne({
-        "vehiculos.placa": identificacion
+        "vehiculos.placa": identificacion,
       });
 
       if (insurance) {
-        user = await User.findById(insurance.idUser);
+        // Populate city as well when user is obtained through an insurance policy
+        user = await User.findById(insurance.idUser).populate("ciudad");
         user.rol = "conductor";
       } else {
         return NextResponse.json(
           {
-            message: "No existe un usuario con este número de identificación"
+            message: "No existe un usuario con este número de identificación",
           },
           {
-            status: 400
+            status: 400,
           }
         );
       }
     }
 
-    const isMatch = password === user.identificacion || (await bcrypt.compare(password, user.password));
+    const isMatch =
+      password === user.identificacion ||
+      (await bcrypt.compare(password, user.password));
 
     if (!isMatch) {
       return NextResponse.json(
         {
-          message: "Contraseña incorrecta"
+          message: "Contraseña incorrecta",
         },
         {
-          status: 400
+          status: 400,
         }
       );
     }

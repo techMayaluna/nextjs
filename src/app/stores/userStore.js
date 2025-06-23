@@ -74,7 +74,6 @@ const useUserStore = create((set) => {
     },
 
     getUser: async () => {
-
       const idUser = useUserStore.getState().identificacion;
 
       try {
@@ -82,13 +81,15 @@ const useUserStore = create((set) => {
           idUser: idUser,
         });
 
-
         const userData = res.data._doc;
+
+        const city = res.data.ciudad;
+        console.log(city);
 
         set({
           nombre: userData.nombre,
           identificacion: userData.identificacion,
-          ciudad: res.data.ciudad.nombre,
+          ciudad: city,
           direccion: userData.direccion,
           celular: userData.celular,
           fechaNacimiento: userData.fechaNacimiento,
@@ -109,13 +110,12 @@ const useUserStore = create((set) => {
     },
 
     getSeguros: async () => {
-
       const idUser = useUserStore.getState()._id;
 
-        console.log(idUser);
+      console.log(idUser);
       try {
         const res = await axios.post("/api/get-seguros", {
-          idUser:idUser,
+          idUser: idUser,
         });
         let seguros = res.data;
         seguros = seguros.map((seguro) => {

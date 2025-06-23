@@ -20,15 +20,20 @@ export async function POST(request) {
       );
     }
 
+    console.log(user);
+
     const ciudad = await PlateRestriction.findOne({
       _id: user.ciudad,
     });
+    console.log("CIUDAD", ciudad);
 
     const returnedUser = {
       ...user,
       ciudad: ciudad,
       password: undefined,
     };
+
+    console.log("RETURNED USER", returnedUser);
 
     return NextResponse.json(returnedUser);
   } catch (error) {
