@@ -15,7 +15,6 @@ function PicoyPlaca() {
 
   const reglaDeHoy = ciudad?.reglas?.find((regla) => regla.dia === today);
 
-
   return (
     <section>
       <h2 className="mb-1">PICO Y PLACA</h2>
@@ -51,7 +50,7 @@ function ModalPico({ onClose, ciudad }) {
       <h2 className="text-lg font-bold mb-4">PICO Y PLACA</h2>
       <ScrollerPicoyPlaca ciudad={ciudad} />
 
-      {ciudad.nombre === "Pasto" && (
+      {ciudad?.nombre === "Pasto" && (
         <a
           href="https://www.pasto.gov.co/images/2025/mar/pico_placa_marzo.jpeg"
           target="_blank"

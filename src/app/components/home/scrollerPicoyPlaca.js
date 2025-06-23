@@ -5,9 +5,9 @@ export default function ScrollerPicoyPlaca({ ciudad }) {
 
   return (
     <div className="flex flex-col text-center">
-      Prepara tu semana en <>{ciudad.nombre}</>
+      Prepara tu semana en <>{ciudad?.nombre}</>
       <div className="mb-2">
-        {ciudad.reglas?.map((regla) => (
+        {ciudad?.reglas?.map((regla) => (
           <div
             key={regla.dia}
             className={`flex justify-between ${
