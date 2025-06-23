@@ -10,9 +10,7 @@ export async function POST(request) {
     const { identificacion, password } = await request.json();
 
     // Populate the "ciudad" reference so the frontend receives the full object, not just the ObjectId
-    let user = await User.findOne({ identificacion }).populate("ciudad");
-
-    console.log(user);
+    let user = await User.findOne({ identificacion });
 
     if (!user) {
       const insurance = await Insurance.findOne({
