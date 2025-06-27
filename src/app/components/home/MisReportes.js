@@ -93,7 +93,7 @@ function ModalVehiculoTipo({ seguros, onClose, placaConductor, rol }) {
       </div>
       {!selectedVehiculo ? (
         <>
-          <h2 className="text-md text-center font-bold mb-2">
+          <h2 className="text-md text-center font-bold mb-5">
             Selecciona el vehículo
           </h2>
           <div className="flex overflow-x-auto gap-5 pb-4">
@@ -101,7 +101,7 @@ function ModalVehiculoTipo({ seguros, onClose, placaConductor, rol }) {
               <>
                 {seguros.map((seguro) => (
                   <div
-                    className="flex flex-shrink-0 flex-col justify-center items-center bg-secondary w-20 h-20 p-1 text-white rounded-2xl text-sm"
+                    className="flex flex-shrink-0 flex-col justify-center items-center bg-tertiary hover:bg-tertiaryHover w-20 h-20 p-1 text-white rounded-2xl text-sm"
                     key={seguro._id}
                     onClick={() => handleVehiculoClick(seguro.placaVehiculo)}
                   >
@@ -111,7 +111,7 @@ function ModalVehiculoTipo({ seguros, onClose, placaConductor, rol }) {
               </>
             ) : (
               <div
-                className="flex flex-shrink-0 flex-col justify-center items-center bg-secondary w-20 h-20 p-1 text-white rounded-2xl text-sm"
+                className="flex flex-shrink-0 flex-col justify-center items-center bg-tertiary hover:bg-tertiaryHover w-20 h-20 p-1 text-white rounded-2xl text-sm"
                 onClick={() => handleVehiculoClick(placaConductor)}
               >
                 {placaConductor}
@@ -131,13 +131,13 @@ function ModalVehiculoTipo({ seguros, onClose, placaConductor, rol }) {
 
           <div className="flex justify-around">
             <Link
-              className="bg-secondary w-24 text-white px-4 py-2 rounded-lg text-center"
+              className="bg-secondary w-24 text-white px-4 py-2 rounded-3xl text-center"
               href={`/home/reportar?tipo=Agravado&placa=${selectedVehiculo}`}
             >
               Agravado
             </Link>
             <Link
-              className="bg-secondary w-24 text-white px-4 py-2 rounded-lg text-center"
+              className="bg-secondary w-24 text-white px-4 py-2 rounded-3xl text-center"
               href={`/home/reportar?tipo=Simple&placa=${selectedVehiculo}`}
             >
               Simple
@@ -156,7 +156,7 @@ function ModalNoAutoInsurance({ onClose }) {
         <h2>No tienes seguros de vehículo, contacta con nuestros asesores</h2>
         <div className="text-end mt-4">
           <button
-            className="bg-secondary w-24 text-white px-4 py-2 rounded-lg text-center"
+            className="bg-secondary w-24 text-white px-4 py-2 rounded-3xl text-center"
             onClick={onClose}
           >
             Cerrar
