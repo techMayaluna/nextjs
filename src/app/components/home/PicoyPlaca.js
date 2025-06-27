@@ -47,7 +47,7 @@ function PicoyPlaca() {
 function ModalPico({ onClose, ciudad }) {
   return (
     <Modal className="">
-      <h2 className="text-lg font-bold mb-4">PICO Y PLACA</h2>
+      <h2 className="text-lg font-bold mb-4 text-center">PICO Y PLACA</h2>
       <ScrollerPicoyPlaca ciudad={ciudad} />
 
       {ciudad?.nombre === "Pasto" && (
@@ -63,7 +63,7 @@ function ModalPico({ onClose, ciudad }) {
 
       <div className="flex justify-end mt-2">
         <button
-          className="bg-secondary text-white px-4 py-2 rounded-lg"
+          className="bg-tertiary hover:bg-tertiaryHover text-white px-4 py-2 rounded-lg"
           onClick={onClose}
         >
           Regresar

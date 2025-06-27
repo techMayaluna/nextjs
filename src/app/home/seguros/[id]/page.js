@@ -1,36 +1,44 @@
 "use client";
 import useUserStore from "../../../stores/userStore";
 import { useState, useEffect } from "react";
-
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
+import ModalExtintor from "../../../components/insurances/ModalExtintor";
 
 const SeguroIndividual = ({ params }) => {
   const router = useRouter();
-
-  const { seguros, rol, placaConductor } = useUserStore((state) => state);
-
+  const { seguros, rol, placaConductor, updateSeguro } = useUserStore(
+    (state) => state
+  );
   const [seguro, setSeguro] = useState({
     seguro: "",
     asistencia: "",
   });
-
   const [isDownloading, setIsDownloading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const seguroEncontrado =
       seguros.find((seguro) => seguro._id === params.id) || null;
     if (seguroEncontrado) {
-      console.log(seguroEncontrado);
-
-      setSeguro({
-        ...seguroEncontrado,
-      });
+      setSeguro(seguroEncontrado);
     } else {
       router.push("/home");
     }
   }, [seguros, params.id]);
+
+  const handleUpdateExtintor = async (newDate) => {
+    try {
+      const updatedSeguro = { ...seguro, fechaVencimientoExtintor: newDate };
+      await axios.put(`/api/seguros/${seguro._id}`, updatedSeguro);
+      updateSeguro(updatedSeguro);
+      setSeguro(updatedSeguro);
+      setShowModal(false);
+    } catch (error) {
+      console.error("Error updating extintor date", error);
+    }
+  };
 
   const downloadPdf = async () => {
     try {
@@ -119,21 +127,29 @@ const SeguroIndividual = ({ params }) => {
               <p className="text-left">Placa</p>
               <p className="text-right">{seguro.placaVehiculo}</p>
             </section>
-            <section className="grid grid-cols-2">
+            <section className="grid grid-cols-2 items-center">
               <p className="text-left">Extintor Vence</p>
-              <p className="text-right">
-                {seguro.fechaVencimientoExtintor &&
-                !isNaN(new Date(seguro.fechaVencimientoExtintor))
-                  ? new Date(
-                      new Date(seguro.fechaVencimientoExtintor).getTime() +
-                        86400000
-                    ).toLocaleDateString("es-ES", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })
-                  : "Fecha no disponible"}
-              </p>
+              <div className="text-right">
+                <span>
+                  {seguro.fechaVencimientoExtintor &&
+                  !isNaN(new Date(seguro.fechaVencimientoExtintor))
+                    ? new Date(
+                        new Date(seguro.fechaVencimientoExtintor).getTime() +
+                          86400000
+                      ).toLocaleDateString("es-ES", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })
+                    : "No disponible"}
+                </span>
+                <button
+                  onClick={() => setShowModal(true)}
+                  className="ml-2 text-sm underline"
+                >
+                  Editar
+                </button>
+              </div>
             </section>
             <section className="grid grid-cols-2">
               <p className="text-left">RTM Vence</p>
@@ -183,6 +199,14 @@ const SeguroIndividual = ({ params }) => {
           </span>
         </p>
       ) : null}
+
+      {showModal && (
+        <ModalExtintor
+          seguro={seguro}
+          onClose={() => setShowModal(false)}
+          onUpdate={handleUpdateExtintor}
+        />
+      )}
 
       {seguro?.vehiculos?.length > 0 ? (
         <div className="mt-4 border-t border-gray-300 pt-4">
