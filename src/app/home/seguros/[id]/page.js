@@ -8,9 +8,7 @@ import ModalExtintor from "../../../components/insurances/ModalExtintor";
 
 const SeguroIndividual = ({ params }) => {
   const router = useRouter();
-  const { seguros, rol, placaConductor, updateSeguro } = useUserStore(
-    (state) => state
-  );
+  const { seguros, rol, placaConductor } = useUserStore((state) => state);
   const [seguro, setSeguro] = useState({
     seguro: "",
     asistencia: "",
