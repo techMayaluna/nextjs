@@ -22,7 +22,7 @@ const InsuranceList = () => {
       const response = await axios.get(
         `/api/download/poliza.pdf?url=${seguro.documentos[0]}`,
         {
-          responseType: "blob"
+          responseType: "blob",
         }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -37,8 +37,7 @@ const InsuranceList = () => {
   };
 
   useEffect(() => {
-
-   getSeguros();
+    getSeguros();
     console.log(seguros);
   }, []);
 
@@ -48,7 +47,7 @@ const InsuranceList = () => {
     return nuevaFecha.toLocaleDateString("es-ES", {
       year: "numeric",
       month: "long",
-      day: "numeric"
+      day: "numeric",
     });
   }
 
@@ -86,7 +85,7 @@ const InsuranceList = () => {
               <td className="">
                 <div className="flex gap-2">
                   <Link href={`/home/seguros/${seguro._id}`} key={seguro._id}>
-                    <div className="flex justify-center items-center bg-secondary rounded-full h-5 w-5">
+                    <div className="flex justify-center items-center bg-tertiaryHover rounded-full h-5 w-5">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="14"

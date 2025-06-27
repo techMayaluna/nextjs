@@ -7,8 +7,6 @@ export default function LayoutHome({ children }) {
       <div className="max-w-screen-sm w-full">
         <MenuSuperior />
         <section className="mx-8 my-4">{children}</section>
-
-        <MenuInferior />
       </div>
     </div>
   );

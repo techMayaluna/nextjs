@@ -53,8 +53,11 @@ const SeguroIndividual = ({ params }) => {
 
   return (
     <section className="pb-52">
+      <h2 className="text-center">MIS SEGUROS</h2>
       <div className="bg-primary py-4 px-4 rounded-2xl">
-        <h2 className="font-bold pb-4 text-xl">Información General</h2>
+        <h2 className="font-bold pb-4 text-xl text-center">
+          {seguro.tipoPoliza}
+        </h2>
         <section className="grid grid-cols-2">
           <p className="text-left">Póliza No.</p>
           <p className="text-right">{seguro.nombrePoliza}</p>
@@ -216,12 +219,11 @@ const Table = ({ data }) => (
   <table className="min-w-full divide-y divide-gray-200 mb-4">
     <thead className="">
       <tr>
-
-      <th>Placa</th>
-      <th>Tecnomecánica</th>
-      <th>Extintor</th>
-      <th>Tarjeta de operación</th>
-      <th>SOAT</th>
+        <th>Placa</th>
+        <th>Tecnomecánica</th>
+        <th>Extintor</th>
+        <th>Tarjeta de operación</th>
+        <th>SOAT</th>
       </tr>
     </thead>
     <tbody className="bg-white divide-y divide-gray-200">
