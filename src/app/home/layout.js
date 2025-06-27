@@ -1,5 +1,5 @@
 import MenuSuperior from "../components/shared/menuSuperior";
-import CallInsurance from "../components/shared/callInsurance";
+import MenuInferior from "../components/shared/menuInferior";
 
 export default function LayoutHome({ children }) {
   return (
@@ -8,9 +8,7 @@ export default function LayoutHome({ children }) {
         <MenuSuperior />
         <section className="mx-8 my-4">{children}</section>
 
-        <div className="circulo rounded-full flex flex-col items-center justify-center">
-          <CallInsurance />
-        </div>
+        <MenuInferior />
       </div>
     </div>
   );
