@@ -132,7 +132,7 @@ export default function LoginBar() {
 
           <button
             type="submit"
-            className="flex w-80 justify-center rounded-2xl bg-tertiary hover:bg-tertiaryHover  px-6 py-2.5 text-lg font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            className="flex w-80 justify-center rounded-2xl bg-tertiary hover:bg-secondary px-6 py-2.5 text-lg font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             onClick={handleClick}
           >
             {loading ? (
@@ -153,7 +153,7 @@ export default function LoginBar() {
                 />
               </svg>
             ) : (
-              "Entrar"
+              "Iniciar Sesión"
             )}
           </button>
         </form>

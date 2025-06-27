@@ -41,7 +41,7 @@ export default function Login() {
         alt="logoMayaluna"
       />
 
-      <h3 className="text-center text-xl font-bold leading-9 tracking-tight text-gray-900">
+      <h3 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
         INGRESA SESIÓN
       </h3>
       <LoginBar />
