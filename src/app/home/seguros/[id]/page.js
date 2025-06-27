@@ -3,7 +3,7 @@ import useUserStore from "../../../stores/userStore";
 import { useState, useEffect } from "react";
 
 import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 import axios from "axios";
 
 const SeguroIndividual = ({ params }) => {
@@ -53,7 +53,7 @@ const SeguroIndividual = ({ params }) => {
 
   return (
     <section className="pb-52">
-      <h2 className="text-center">MIS SEGUROS</h2>
+      <h2 className="text-center mb-4">MIS SEGUROS</h2>
       <div className="bg-primary py-4 px-4 rounded-2xl">
         <h2 className="font-bold pb-4 text-xl text-center">
           {seguro.tipoPoliza}
@@ -61,15 +61,15 @@ const SeguroIndividual = ({ params }) => {
         <section className="grid grid-cols-2">
           <p className="text-left">Póliza No.</p>
           <p className="text-right">{seguro.nombrePoliza}</p>
-        </section>{" "}
+        </section>
         <section className="grid grid-cols-2">
           <p className="text-left">Tipo Póliza</p>
           <p className="text-right">{seguro.tipoPoliza}</p>
-        </section>{" "}
+        </section>
         <section className="grid grid-cols-2">
           <p className="text-left">Aseguradora</p>
           <p className="text-right">{seguro.companiaAseguradora}</p>
-        </section>{" "}
+        </section>
         <section className="grid grid-cols-2">
           <p className="text-left">Fecha Inicio</p>
           <p className="text-right">
@@ -104,7 +104,7 @@ const SeguroIndividual = ({ params }) => {
           <a
             className="text-right underline"
             href={
-              "" + seguro.asistencia?.length < 4
+              seguro.asistencia?.length < 4
                 ? `tel:%23${seguro.asistencia}`
                 : `tel:${seguro.asistencia}`
             }
@@ -112,7 +112,7 @@ const SeguroIndividual = ({ params }) => {
             {seguro.asistencia?.length < 4 && "#"}
             {seguro.asistencia}
           </a>
-        </section>{" "}
+        </section>
         {seguro.placaVehiculo ? (
           <>
             <section className="grid grid-cols-2">
@@ -122,25 +122,27 @@ const SeguroIndividual = ({ params }) => {
             <section className="grid grid-cols-2">
               <p className="text-left">Extintor Vence</p>
               <p className="text-right">
-                {seguro.fechaVencimientoExtintor
-                  ? !isNaN(new Date(seguro.fechaVencimientoExtintor))
-                    ? new Date(
-                        seguro.fechaVencimientoExtintor
-                      ).toLocaleDateString("es-ES", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })
-                    : "Fecha no disponible"
+                {seguro.fechaVencimientoExtintor &&
+                !isNaN(new Date(seguro.fechaVencimientoExtintor))
+                  ? new Date(
+                      new Date(seguro.fechaVencimientoExtintor).getTime() +
+                        86400000
+                    ).toLocaleDateString("es-ES", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
                   : "Fecha no disponible"}
               </p>
             </section>
             <section className="grid grid-cols-2">
               <p className="text-left">RTM Vence</p>
               <p className="text-right">
-                {!isNaN(new Date(seguro.fechaVencimientoTecnomecanica))
+                {seguro.fechaVencimientoTecnomecanica &&
+                !isNaN(new Date(seguro.fechaVencimientoTecnomecanica))
                   ? new Date(
-                      seguro.fechaVencimientoTecnomecanica
+                      new Date(seguro.fechaVencimientoTecnomecanica).getTime() +
+                        86400000
                     ).toLocaleDateString("es-ES", {
                       year: "numeric",
                       month: "long",
@@ -151,52 +153,46 @@ const SeguroIndividual = ({ params }) => {
             </section>
           </>
         ) : null}
-      </div>
-
-      <div className="bg-primary py-4 px-4 mt-4 rounded-2xl">
-        <h2 className="font-bold pb-4 text-xl">Documentos</h2>
 
         {seguro?.documentos?.[0] ? (
-          <section className="grid grid-cols-2">
-            <p className="text-left">Poliza</p>
-            <a
-              href={seguro.documentos[0]}
-              onClick={() => setIsDownloading(true)}
-              target="_blank"
-              className="text-right underline"
-            >
-              Visualizar
-            </a>
-          </section>
-        ) : (
-          <p>No hay documentos adjuntos</p>
-        )}
+          <>
+            <div className="mt-4 w-full h-96">
+              <iframe
+                src={seguro.documentos[0]}
+                className="w-full h-full border rounded-lg"
+                title="Vista previa de la póliza"
+              />
+            </div>
+            <div className="text-center mt-4">
+              <Link href={seguro.documentos[0]} target="_blank">
+                {" "}
+                <button className="bg-tertiary hover:bg-tertiaryHover text-white px-4 py-2 rounded-lg">
+                  Ver archivo
+                </button>
+              </Link>
+            </div>
+          </>
+        ) : null}
       </div>
 
       {isDownloading ? (
         <p className="text-center mt-2">
-          Si la descarga de tu documento no fue exitosa,{" "}
+          Iniciando descarga... Si no funciona,{" "}
           <span className="underline" onClick={downloadPdf}>
-            haz click aquí para intentarlo de nuevo.
+            intenta de nuevo.
           </span>
         </p>
       ) : null}
 
       {seguro?.vehiculos?.length > 0 ? (
-        <div className="bg-primary py-4 px-4 mt-4 rounded-2xl">
-          <h2 className="font-bold pb-4 text-xl">Vehiculos y Vencimientos </h2>
-          {seguro?.vehiculos?.length > 1 ? (
+        <div className="mt-4 border-t border-gray-300 pt-4">
+          <h2 className="font-bold pb-4 text-xl">Vehículos y Vencimientos</h2>
+          {seguro?.vehiculos?.length > 0 ? (
             rol === "conductor" ? (
               <Table
                 data={
-                  seguro.vehiculos.find(
-                    (seguro) => seguro.placa === placaConductor
-                  )
-                    ? [
-                        seguro.vehiculos.find(
-                          (seguro) => seguro.placa === placaConductor
-                        ),
-                      ]
+                  seguro.vehiculos.find((v) => v.placa === placaConductor)
+                    ? [seguro.vehiculos.find((v) => v.placa === placaConductor)]
                     : []
                 }
               />
