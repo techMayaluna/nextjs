@@ -187,7 +187,11 @@ const SeguroIndividual = ({ params }) => {
       ) : null}
 
       {showModal && (
-        <ModalExtintor seguro={seguro} onClose={() => setShowModal(false)} />
+        <ModalExtintor
+          seguro={seguro}
+          onClose={() => setShowModal(false)}
+          onUpdate={() => (window.location.href = "/home/seguros/")}
+        />
       )}
 
       {seguro?.vehiculos?.length > 0 ? (

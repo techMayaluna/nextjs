@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/mongodb';
-import Insurance from '@/models/insurances';
+import { NextResponse } from "next/server";
+import { connectDB } from "@/app/utils/mongoose";
+import Insurance from "@/models/insurances";
 
 export async function PUT(request) {
   try {
@@ -8,7 +8,7 @@ export async function PUT(request) {
 
     if (!id || !fechaVencimiento) {
       return NextResponse.json(
-        { message: 'ID y fecha de vencimiento son requeridos' },
+        { message: "ID y fecha de vencimiento son requeridos" },
         { status: 400 }
       );
     }
@@ -23,7 +23,7 @@ export async function PUT(request) {
 
     if (!updatedInsurance) {
       return NextResponse.json(
-        { message: 'Seguro no encontrado' },
+        { message: "Seguro no encontrado" },
         { status: 404 }
       );
     }
@@ -33,9 +33,12 @@ export async function PUT(request) {
       data: updatedInsurance,
     });
   } catch (error) {
-    console.error('Error al actualizar la fecha del extintor:', error);
+    console.error("Error al actualizar la fecha del extintor:", error);
     return NextResponse.json(
-      { message: 'Error al actualizar la fecha del extintor', error: error.message },
+      {
+        message: "Error al actualizar la fecha del extintor",
+        error: error.message,
+      },
       { status: 500 }
     );
   }

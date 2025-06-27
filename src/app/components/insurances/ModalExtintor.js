@@ -45,7 +45,10 @@ export default function ModalExtintor({ seguro, onClose, onUpdate }) {
       }
 
       setSuccess("Fecha de vencimiento actualizada correctamente");
-      onUpdate(data.data);
+      setTimeout(() => {
+        onClose();
+        onUpdate();
+      }, 1000);
     } catch (error) {
       console.error("Error:", error);
       setError(error.message || "Error al actualizar la fecha de vencimiento");
@@ -82,7 +85,6 @@ export default function ModalExtintor({ seguro, onClose, onUpdate }) {
             type="date"
             id="fechaVencimiento"
             value={fechaVencimiento}
-            min={new Date().toISOString().split("T")[0]}
             onChange={(e) => setFechaVencimiento(e.target.value)}
             className="w-full px-3 py-2 border rounded-lg"
             required
