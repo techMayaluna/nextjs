@@ -354,7 +354,7 @@ function FormMandarEmail({ params }) {
         <div>
           <h1 className="text-center uppercase font-bold	">Reporte {tipo}</h1>
 
-          <h2 className="py-2 font-semibold		">Información del accidente</h2>
+          <h2 className="py-2 font-semibold">Información del accidente</h2>
 
           <div className="flex flex-col justify-between bg-primary p-6 rounded-2xl text-sm">
             <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -445,7 +445,7 @@ function FormMandarEmail({ params }) {
 
         <div className="mt-4 text-end">
           <button
-            className="shadow bg-secondary focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded "
+            className="shadow bg-tertiary hover:bg-tertiaryHover focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-3xl "
             type="submit"
           >
             Reportar caso
@@ -472,11 +472,16 @@ function ModalTipo() {
   return (
     <Modal>
       <h3 className="text-md text-left font-bold mb-4">
-        Reporte enviado exitosamente. Gracias por confiar en seguros Mayaluna
+        Reporte enviado exitosamente
       </h3>
+      <p>
+        Hemos enviado un correo con la información brindada y la ubicación del
+        accidente a un asesor especializado de Mayaluna junto con una copia a su
+        correo
+      </p>
       <div className="text-right mt-5">
         <button
-          className="bg-secondary w-24 text-white px-4 py-2 rounded-lg"
+          className="bg-tertiary hover:bg-tertiaryHover rounded-3xl w-24 text-white px-4 py-2"
           onClick={sendBack}
         >
           Aceptar
