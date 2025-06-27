@@ -123,16 +123,13 @@ export default function LoginBar() {
 
           {error && (
             <p className="text-center text-sm text-gray-500">
-              <span className=" text-sm text-red-500">
-                Usuario o contraseña incorrectos. <br />
-                Por favor intente de nuevamente.
-              </span>
+              <span className=" text-sm text-red-500">{error}</span>
             </p>
           )}
 
           <button
             type="submit"
-            className="flex w-80 justify-center rounded-2xl bg-tertiary hover:bg-secondary px-6 py-2.5 text-lg font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            className="flex w-80 justify-center rounded-2xl bg-tertiary hover:tertiaryHover px-6 py-2.5 text-lg font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             onClick={handleClick}
           >
             {loading ? (

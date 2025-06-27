@@ -11,21 +11,23 @@ function LogoutButton() {
   const cerrarSesion = (e) => {
     e.preventDefault();
     logout();
-    router.push("/login");
+    router.push("/");
   };
 
   return (
     <button
       onClick={cerrarSesion}
-      className={"w-16 h-16 rounded-full flex items-center justify-center"}
+      className={
+        "w-[50px] h-[45px] bg-gray-200 rounded-xl flex items-center justify-center"
+      }
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="50"
-        height="50"
+        width="24"
+        height="24"
         viewBox="0 0 24 24"
       >
-        <g fill="#ffffff">
+        <g fill="#000">
           <path
             fillRule="evenodd"
             d="M16.125 12a.75.75 0 0 0-.75-.75H4.402l1.961-1.68a.75.75 0 1 0-.976-1.14l-3.5 3a.75.75 0 0 0 0 1.14l3.5 3a.75.75 0 1 0 .976-1.14l-1.96-1.68h10.972a.75.75 0 0 0 .75-.75Z"

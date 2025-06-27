@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import Modal from "./Modal";
 import { usePathname, useRouter } from "next/navigation";
+import LogoutButton from "./LogoutButton";
 
 const MenuSuperior = () => {
   const router = useRouter();
@@ -13,19 +14,17 @@ const MenuSuperior = () => {
   const { nombre, error, fechaNacimiento, getUser, identificacion } =
     useUserStore((state) => state);
 
-    useEffect(() => {
-      const fetchData = async () => {
-        const user = await getUser();
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = await getUser();
 
-    
-        if (!identificacion) {
-          router.push("/login");
-        }
-    
-      };
-    
-      fetchData();
-    }, []);
+      if (!identificacion) {
+        router.push("/login");
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const goBack = () => {
     router.back();
@@ -41,30 +40,27 @@ const MenuSuperior = () => {
     );
   };
 
+  const nameSection = isBirthday() ? (
+    <h3 className="uppercase">¡Feliz cumpleaños {nombre}!</h3>
+  ) : (
+    <h3 className="uppercase">¡Bienvenido {nombre}!</h3>
+  );
+
   return (
     <>
-      <div className="flex justify-between mr-8 ml-8 mt-8">
+      <div className="text-center mr-8 ml-8 mt-8">
         {usePathname() === "/home" ? (
-          isBirthday() ? (
-            <h3>¡Feliz cumpleaños {nombre}!</h3>
-          ) : (
-            <h3>¡Bienvenido {nombre}!</h3>
-          )
+          <div className="space-y-2">
+            <div className="flex justify-end">
+              <LogoutButton />
+            </div>
+            {nameSection}
+          </div>
         ) : (
           <div onClick={goBack} className="uppercase">
             Regresar
           </div>
         )}
-
-        <Link href="/home">
-          <Image
-            className="w-auto h-auto"
-            src="/logomayaluna.jpg"
-            width={80}
-            height={80}
-            alt="logoMayaluna"
-          />
-        </Link>
       </div>
       {error ? <ModalError /> : ""}
     </>
