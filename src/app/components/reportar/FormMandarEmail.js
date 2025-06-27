@@ -478,15 +478,14 @@ function ModalTipo() {
         Hemos enviado un correo con la información brindada y la ubicación del
         accidente a un asesor especializado de Mayaluna junto con una copia a su
         correo
+        <span className="text-tertiary"> segurosmayaluna@gmail.com</span>
       </p>
-      <div className="text-right mt-5">
-        <button
-          className="bg-tertiary hover:bg-tertiaryHover rounded-3xl w-24 text-white px-4 py-2"
-          onClick={sendBack}
-        >
-          Aceptar
-        </button>
-      </div>
+      <button
+        className="mt-4 w-full bg-tertiary hover:bg-tertiaryHover rounded-3xl  text-white px-4 py-2"
+        onClick={sendBack}
+      >
+        Aceptar
+      </button>
     </Modal>
   );
 }
