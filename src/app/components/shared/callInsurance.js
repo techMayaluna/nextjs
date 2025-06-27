@@ -21,7 +21,6 @@ export default function CallInsurance({}) {
       ? `tel:%23${numberToCall1}`
       : `tel:${numberToCall1}`;
 
-
   return (
     <a
       href={numberToCall2}

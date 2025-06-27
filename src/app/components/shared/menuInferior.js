@@ -1,16 +1,11 @@
 import NavAction from "./navAction";
 import LogoutButton from "./LogoutButton";
 import { cookies } from "next/headers";
-import CallInsurance from "./callInsurance";
-
-
 
 export default function MenuInferior() {
-
-  const cookiesStore = cookies()
+  const cookiesStore = cookies();
 
   const user = cookiesStore.get("user");
-
 
   return (
     <div className="flex justify-center h-20 fixed inset-x-0 bottom-2">
@@ -18,10 +13,6 @@ export default function MenuInferior() {
         <NavAction href="/home"></NavAction>
         <NavAction href="/home/user"></NavAction>
         <LogoutButton />
-
-        <div className="circulo rounded-full flex flex-col items-center justify-center">
-          <CallInsurance/>
-        </div>
       </footer>
     </div>
   );

@@ -2,7 +2,7 @@ export default function ActionSection({ src, text, onClick }) {
   return (
     <div
       onClick={onClick}
-      className="flex flex-col justify-center items-center bg-secondary w-20 h-20 p-1 text-white rounded-2xl text-sm"
+      className="flex flex-col justify-center items-center bg-tertiary hover:bg-tertiaryHover w-20 h-20 p-1 text-white rounded-2xl text-sm"
     >
       {svg(src)}
       <p className="text-center text-sm">{text}</p>

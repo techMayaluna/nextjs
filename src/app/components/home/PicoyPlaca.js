@@ -30,7 +30,7 @@ function PicoyPlaca() {
         </p>
         <div className="flex justify-end">
           <button
-            className="bg-secondary text-white w-28 h-8 rounded-2xl"
+            className="bg-tertiary hover:bg-tertiaryHover text-white w-28 h-8 rounded-2xl"
             onClick={() => setShowModal(true)}
           >
             Ver más
