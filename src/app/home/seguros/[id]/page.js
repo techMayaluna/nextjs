@@ -28,18 +28,6 @@ const SeguroIndividual = ({ params }) => {
     }
   }, [seguros, params.id]);
 
-  const handleUpdateExtintor = async (newDate) => {
-    try {
-      const updatedSeguro = { ...seguro, fechaVencimientoExtintor: newDate };
-      await axios.put(`/api/seguros/${seguro._id}`, updatedSeguro);
-      updateSeguro(updatedSeguro);
-      setSeguro(updatedSeguro);
-      setShowModal(false);
-    } catch (error) {
-      console.error("Error updating extintor date", error);
-    }
-  };
-
   const downloadPdf = async () => {
     try {
       const response = await axios.get(
@@ -201,11 +189,7 @@ const SeguroIndividual = ({ params }) => {
       ) : null}
 
       {showModal && (
-        <ModalExtintor
-          seguro={seguro}
-          onClose={() => setShowModal(false)}
-          onUpdate={handleUpdateExtintor}
-        />
+        <ModalExtintor seguro={seguro} onClose={() => setShowModal(false)} />
       )}
 
       {seguro?.vehiculos?.length > 0 ? (

@@ -2,13 +2,14 @@ import Modal from "../shared/Modal";
 
 import { useState } from "react";
 
-export default function ModalExtintor({ seguro, onClose, onUpdate }) {
+export default function ModalExtintor({ seguro, onClose }) {
   const [fechaVencimiento, setFechaVencimiento] = useState(
     seguro.fechaVencimientoExtintor
   );
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(fechaVencimiento, seguro);
     onUpdate(fechaVencimiento);
   };
 
