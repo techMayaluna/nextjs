@@ -18,6 +18,7 @@ module.exports = {
         primary: "#ECFFE2",
         secondary: "#7FBF5F",
         tertiary: "#306B12",
+        tertiaryHover: "#3d8518",
         background: "#ffffff",
         button: "#248e46",
         lighttext: "#666666",
@@ -28,10 +29,8 @@ module.exports = {
         yellowCall: "#EDC949",
       },
       backgroundImage: {
-        "hero-background":
-          "url('/familia2.jpg')",
-        "section-background":
-          "url('/fondoVerde.jpg')",
+        "hero-background": "url('/familia2.jpg')",
+        "section-background": "url('/fondoVerde.jpg')",
       },
     },
   },

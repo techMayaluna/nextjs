@@ -59,11 +59,8 @@ export default function LoginBar() {
           method="POST"
         >
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              No de Identificación
+            <label htmlFor="email" className="sr-only">
+              Documento de identidad
             </label>
             <div className="mt-2">
               <input
@@ -73,17 +70,17 @@ export default function LoginBar() {
                 autoComplete="email"
                 ref={userIdRef}
                 required
-                className="block w-80 rounded-md border-0 pt-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                placeholder="Documento de identidad"
+                className={`block w-80 rounded-2xl border-2 pt-1.5 px-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-secondary sm:text-sm sm:leading-6 ${
+                  error ? "border-red-600" : ""
+                }`}
               />
             </div>
           </div>
 
           <div>
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
+              <label htmlFor="password" className="sr-only">
                 Contraseña
               </label>
               <div className="mt-2">
@@ -94,7 +91,10 @@ export default function LoginBar() {
                   autoComplete="current-password"
                   ref={passwordRef}
                   required
-                  className="block w-80 rounded-md border-0 pt-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Contraseña"
+                  className={`block w-80 rounded-2xl border-2 pt-1.5 px-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-secondary sm:text-sm sm:leading-6 ${
+                    error ? "border-red-600" : ""
+                  }`}
                 />
               </div>
             </div>
@@ -121,9 +121,18 @@ export default function LoginBar() {
             </div>
           </div>
 
+          {error && (
+            <p className="text-center text-sm text-gray-500">
+              <span className=" text-sm text-red-500">
+                Usuario o contraseña incorrectos. <br />
+                Por favor intente de nuevamente.
+              </span>
+            </p>
+          )}
+
           <button
             type="submit"
-            className="flex w-80 justify-center rounded-2xl bg-secondary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            className="flex w-80 justify-center rounded-2xl bg-tertiary hover:bg-tertiaryHover  px-6 py-2.5 text-lg font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             onClick={handleClick}
           >
             {loading ? (
@@ -144,22 +153,18 @@ export default function LoginBar() {
                 />
               </svg>
             ) : (
-              "Iniciar Sesión"
+              "Entrar"
             )}
           </button>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
-            {error && <span className=" text-sm text-red-500"> {error}</span>}
-            <br />
-            ¿Olvidaste tu contraseña?{" "}
-            <Link
-              href="/forgotpass"
-              className="font-semibold leading-6 text-secondary"
-            >
-              Reestablecela aquí
-            </Link>
-          </p>
         </form>
+        <p className="text-center text-sm text-gray-500 mt-4">
+          <Link
+            href="/forgotpass"
+            className="font-semibold leading-6 underline"
+          >
+            Olvidé mi contraseña
+          </Link>
+        </p>
       </div>
     </main>
   );

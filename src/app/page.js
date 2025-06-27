@@ -8,7 +8,6 @@
 // import CarouselSection from "./components/LandingPage/CarouselSection";
 // import Footer from "./components/LandingPage/Footer";
 
-
 // export default function LandingPage() {
 //   return (
 //     <main className="relative z-0 bg-background">
@@ -33,18 +32,17 @@ import Image from "next/image";
 
 export default function Login() {
   return (
-    <main className="w-screen h-screen bg-gradient-to-t from-gradientGreen to-white">
+    <main className="w-screen h-screen bg-[linear-gradient(to_top,theme(colors.gradientGreen)_0%,theme(colors.gradientGreen)_20%,theme(colors.white)_70%,theme(colors.white)_100%)]">
       <Image
         className="mx-auto mb-14 mt-6"
         src="/logomayaluna.jpg"
-
         width={150}
         height={150}
         alt="logoMayaluna"
       />
 
-      <h3 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-        ¡Bienvenido de Nuevo!
+      <h3 className="text-center text-xl font-bold leading-9 tracking-tight text-gray-900">
+        INGRESA SESIÓN
       </h3>
       <LoginBar />
     </main>
