@@ -23,10 +23,10 @@ function MisSeguros() {
         <section className="pt-6">
           <h2 className="mb-1">MIS SEGUROS</h2>
 
-          <div className="flex justify-between flex-wrap bg-primary p-6 rounded-2xl text-sm">
+          <div className="flex justify-between bg-primary p-6 rounded-2xl text-sm">
             {seguros.length > 0 ? (
               <>
-                {seguros.slice(0, 5).map((seguro) => (
+                {seguros.slice(0, 4).map((seguro) => (
                   <Link href={`/home/seguros/${seguro._id}`} key={seguro._id}>
                     <InsuranceButton text={seguro.tipoPoliza} />
                   </Link>
