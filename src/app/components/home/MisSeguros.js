@@ -23,7 +23,7 @@ function MisSeguros() {
         <section className="pt-6">
           <h2 className="mb-1">MIS SEGUROS</h2>
 
-          <div className="flex justify-between bg-primary p-6 rounded-2xl text-sm">
+          <div className="flex flex-wrap gap-4 md:justify-between bg-primary p-6 rounded-2xl text-sm">
             {seguros.length > 0 ? (
               <>
                 {seguros.slice(0, 4).map((seguro) => (
