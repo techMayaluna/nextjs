@@ -1,5 +1,5 @@
 export const companiasSeguros = [
-    {nombre:"QUÁLITAS COMPAÑÍA DE SEGUROS COLOMBIA S.A.", asistencia:"3207259740"},
+  { nombre: "QUÁLITAS COMPAÑÍA DE SEGUROS COLOMBIA S.A.", asistencia: "#963" },
   { nombre: "ALLIANZ SEGUROS S.A", asistencia: "265" },
   { nombre: "ARL SURA", asistencia: "01800 051 1414" },
   { nombre: "ASEGURADORA SOLIDARIA DE COLOMBIA LTDA", asistencia: "789" },
