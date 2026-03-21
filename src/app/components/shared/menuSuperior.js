@@ -1,39 +1,22 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
 import useUserStore from "../../stores/userStore";
 import { useEffect } from "react";
-import dynamic from "next/dynamic";
 import Modal from "./Modal";
 import { usePathname, useRouter } from "next/navigation";
 import LogoutButton from "./LogoutButton";
 
-const MenuSuperior = () => {
+const MenuSuperior = ({ user }) => {
   const router = useRouter();
-
-  const { nombre, error, fechaNacimiento, getUser, identificacion } =
-    useUserStore((state) => state);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const user = await getUser();
-
-      if (!identificacion) {
-        router.push("/login");
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { error } = useUserStore((state) => state);
 
   const goBack = () => {
     router.back();
   };
 
   const isBirthday = () => {
-    const birthDate = new Date(fechaNacimiento);
+    if (!user?.fechaNacimiento) return false;
+    const birthDate = new Date(user.fechaNacimiento);
     const currentDate = new Date();
-
     return (
       birthDate.getDate() === currentDate.getDate() &&
       birthDate.getMonth() === currentDate.getMonth()
@@ -41,9 +24,9 @@ const MenuSuperior = () => {
   };
 
   const nameSection = isBirthday() ? (
-    <h3 className="uppercase">¡Feliz cumpleaños {nombre}!</h3>
+    <h3 className="uppercase">¡Feliz cumpleaños {user?.nombre}!</h3>
   ) : (
-    <h3 className="uppercase">¡Bienvenido {nombre}!</h3>
+    <h3 className="uppercase">¡Bienvenido {user?.nombre}!</h3>
   );
 
   return (
@@ -60,9 +43,7 @@ const MenuSuperior = () => {
           <div className="flex justify-start">
             <button
               onClick={goBack}
-              className={
-                "w-[45px] h-[45px] bg-gray-200 rounded-xl flex items-center justify-center"
-              }
+              className="w-[45px] h-[45px] bg-gray-200 rounded-xl flex items-center justify-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -105,4 +86,4 @@ function ModalError() {
   );
 }
 
-export default dynamic(() => Promise.resolve(MenuSuperior), { ssr: false });
+export default MenuSuperior;

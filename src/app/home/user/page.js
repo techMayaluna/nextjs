@@ -1,11 +1,12 @@
+import { getServerUser } from "@/app/utils/serverData";
 import FormModificarUser from "@/app/components/user/FormModificarUser";
 
-const UserPage = () => {
+export default async function UserPage() {
+  const user = await getServerUser();
+
   return (
-    <section className="">
-      <FormModificarUser />
+    <section>
+      <FormModificarUser user={user} />
     </section>
   );
-};
-
-export default UserPage;
+}

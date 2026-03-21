@@ -1,29 +1,18 @@
 "use client";
 
-import useUserStore from "@/app/stores/userStore";
-
-import { useEffect } from "react";
-
 import { useRouter } from "next/navigation";
-
 import Link from "next/link";
-
 import axios from "axios";
-
 import "./styles.css";
 
-const InsuranceList = () => {
-  const { seguros, getSeguros, _id } = useUserStore((state) => state);
-
+const InsuranceList = ({ seguros = [] }) => {
   const router = useRouter();
 
   const downloadPdf = async (seguro) => {
     try {
       const response = await axios.get(
         `/api/download/poliza.pdf?url=${seguro.documentos[0]}`,
-        {
-          responseType: "blob",
-        }
+        { responseType: "blob" }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
@@ -35,11 +24,6 @@ const InsuranceList = () => {
       console.error("Error downloading the pdf file", error);
     }
   };
-
-  useEffect(() => {
-    getSeguros();
-    console.log(seguros);
-  }, []);
 
   function sumarUnDiaYFormatear(fecha) {
     const nuevaFecha = new Date(fecha);
@@ -82,7 +66,7 @@ const InsuranceList = () => {
                 Hasta {sumarUnDiaYFormatear(seguro.fechaVencimiento)}
               </td>
 
-              <td className="">
+              <td>
                 <div className="flex gap-2">
                   <Link href={`/home/seguros/${seguro._id}`} key={seguro._id}>
                     <div className="flex justify-center items-center bg-tertiaryHover rounded-full h-5 w-5">

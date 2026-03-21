@@ -1,11 +1,12 @@
+import { getServerUser } from "@/app/utils/serverData";
 import FormMandarEmail from "../../components/reportar/FormMandarEmail";
 
-const ReportarCaso = (props) => {
+export default async function ReportarCaso({ searchParams }) {
+  const user = await getServerUser();
+
   return (
     <section className="pb-28">
-      <FormMandarEmail params={props.searchParams} />
+      <FormMandarEmail params={searchParams} user={user} />
     </section>
   );
-};
-
-export default ReportarCaso;
+}

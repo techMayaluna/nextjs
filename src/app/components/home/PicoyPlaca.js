@@ -2,17 +2,12 @@
 import Modal from "../shared/Modal";
 import ScrollerPicoyPlaca from "./scrollerPicoyPlaca";
 import { getDiaHoy } from "../../utils/todayDay";
-import useUserStore from "../../stores/userStore";
-import dynamic from "next/dynamic";
 import { useState } from "react";
 
-function PicoyPlaca() {
+export default function PicoyPlaca({ ciudad }) {
   const [showModal, setShowModal] = useState(false);
 
-  const { ciudad } = useUserStore((state) => state);
-
   const today = getDiaHoy();
-
   const reglaDeHoy = ciudad?.reglas?.find((regla) => regla.dia === today);
 
   return (
@@ -72,5 +67,3 @@ function ModalPico({ onClose, ciudad }) {
     </Modal>
   );
 }
-
-export default dynamic(() => Promise.resolve(PicoyPlaca), { ssr: false });

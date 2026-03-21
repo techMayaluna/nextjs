@@ -1,8 +1,6 @@
 "use client";
-import useUserStore from "../../stores/userStore";
-import dynamic from "next/dynamic";
 
-function FormModificarUser() {
+export default function FormModificarUser({ user }) {
   const {
     nombre,
     identificacion,
@@ -12,11 +10,9 @@ function FormModificarUser() {
     fechaNacimiento,
     direccion,
     email,
-    documentos,
-    rol,
     tipoDocumento,
     tipoPersona,
-  } = useUserStore((state) => state);
+  } = user || {};
 
   return (
     <section className="pb-28">
@@ -28,9 +24,9 @@ function FormModificarUser() {
           type="text"
           name="nombre"
           readOnly
-          value={nombre}
+          value={nombre || ""}
           className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-          placeholder="Jose Luis "
+          placeholder="Jose Luis"
         />
       </div>
 
@@ -41,8 +37,9 @@ function FormModificarUser() {
             <input
               className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               name="tipoPersona"
+              readOnly
               value={tipoPersona || "Natural"}
-            ></input>
+            />
           </div>
         </div>
 
@@ -53,8 +50,9 @@ function FormModificarUser() {
               type="text"
               className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               name="tipoDocumento"
+              readOnly
               value={tipoDocumento || "CC"}
-            ></input>
+            />
           </div>
         </div>
       </div>
@@ -66,7 +64,7 @@ function FormModificarUser() {
             type="number"
             name="identificacion"
             readOnly
-            value={identificacion}
+            value={identificacion || ""}
             className="appearance-none bg-gray-200 text-gray-700 border rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
             placeholder="123456789"
           />
@@ -74,13 +72,12 @@ function FormModificarUser() {
 
         <div className="w-full flex flex-col">
           <label>Ciudad:</label>
-
           <input
             type="text"
             readOnly
-            value={ciudad}
+            value={ciudad?.nombre || ""}
             className="appearance-none bg-gray-200 text-gray-700 border rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
-            placeholder="123456789"
+            placeholder="Ciudad"
           />
         </div>
       </div>
@@ -91,11 +88,12 @@ function FormModificarUser() {
           type="tel"
           name="celular"
           readOnly
-          value={celular}
+          value={celular || ""}
           className="appearance-none w-full bg-gray-200 text-gray-700 border rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
           placeholder="123456789"
         />
       </div>
+
       {tipoPersona !== "Juridica" ? (
         <div>
           <div className="flex w-full gap-2">
@@ -107,7 +105,6 @@ function FormModificarUser() {
                 readOnly
                 value={fechaVencimientoLicencia?.split("T")[0] || ""}
                 className="appearance-none bg-gray-200 text-gray-700 border rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
-                placeholder="123456789"
               />
             </div>
             <div className="w-full flex flex-col">
@@ -118,7 +115,6 @@ function FormModificarUser() {
                 readOnly
                 value={fechaNacimiento?.split("T")[0] || ""}
                 className="appearance-none bg-gray-200 text-gray-700 border rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
-                placeholder="123456789"
               />
             </div>
           </div>
@@ -127,9 +123,9 @@ function FormModificarUser() {
             type="text"
             name="direccion"
             readOnly
-            value={direccion}
+            value={direccion || ""}
             className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
-            placeholder="Calle 5 N° 38 - 25 "
+            placeholder="Calle 5 N° 38 - 25"
           />
         </div>
       ) : null}
@@ -140,7 +136,7 @@ function FormModificarUser() {
           type="email"
           name="email"
           readOnly
-          value={email}
+          value={email || ""}
           className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white"
           placeholder="emaya@mayalunaseguros.com"
         />
@@ -153,7 +149,3 @@ function FormModificarUser() {
     </section>
   );
 }
-
-export default dynamic(() => Promise.resolve(FormModificarUser), {
-  ssr: false,
-});

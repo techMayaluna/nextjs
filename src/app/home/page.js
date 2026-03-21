@@ -1,12 +1,23 @@
+import { getAuthCookie, getServerUser, getServerSeguros } from "../utils/serverData";
 import PicoyPlaca from "../components/home/PicoyPlaca.js";
 import MisSeguros from "../components/home/MisSeguros.js";
 import MenuInferior from "../components/shared/menuInferior";
 
 export default async function Home() {
+  const auth = getAuthCookie();
+  const [user, seguros] = await Promise.all([
+    getServerUser(),
+    getServerSeguros(auth?.userId),
+  ]);
+
   return (
     <main className="pb-20">
-      <PicoyPlaca />
-      <MisSeguros />
+      <PicoyPlaca ciudad={user?.ciudad} />
+      <MisSeguros
+        seguros={seguros}
+        rol={auth?.rol}
+        placaConductor={auth?.placaConductor}
+      />
       <MenuInferior />
     </main>
   );

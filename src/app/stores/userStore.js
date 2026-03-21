@@ -1,63 +1,17 @@
 import Cookies from "js-cookie";
 import { create } from "zustand";
 import axios from "axios";
-import { companiasSeguros } from "../utils/insuranceCompaniesList";
 
 const useUserStore = create((set) => {
-  const userCookie = Cookies.get("user");
-  const storedUser = userCookie ? JSON.parse(userCookie) : null;
-
   return {
-    _id: storedUser ? storedUser.userId : null,
-    nombre: null,
-    identificacion: storedUser ? storedUser.identificacion : null,
-    email: null,
-    celular: null,
-    direccion: null,
-    ciudad: null,
-    rol: storedUser ? storedUser.rol : null,
-    fechaNacimiento: null,
-    fechaVencimientoLicencia: null,
-    isActive: null,
     geo: null,
     error: null,
-    documentos: null,
-    tipoDocumento: null,
-    tipoPersona: null,
-    seguros: [],
-    placaConductor: storedUser ? storedUser.placaConductor : null,
 
-    updateUser: (userData) => {
-      set((state) => {
-        const updatedState = { ...state, ...userData };
-        console.log(userData);
-        Cookies.set("user", JSON.stringify(updatedState));
-        return updatedState;
-      });
-    },
     login: async (userid, password) => {
       try {
         const res = await axios.post("/api/auth/login", {
           identificacion: userid,
           password: password,
-        });
-        console.log(res.data);
-        set({
-          nombre: res.data.nombre,
-          identificacion: res.data.identificacion,
-          rol: res.data.rol,
-          ciudad: res.data.ciudad,
-          direccion: res.data.direccion,
-          celular: res.data.celular,
-          fechaNacimiento: res.data.fechaNacimiento,
-          fechaVencimientoLicencia: res.data.fechaVencimientoLicencia,
-          isActive: res.data.isActive,
-          email: res.data.email,
-          _id: res.data._id,
-          documentos: res.data.documentos,
-          tipoDocumento: res.data.tipoDocumento,
-          tipoPersona: res.data.tipoPersona,
-          placaConductor: userid,
         });
 
         const cookieValue = {
@@ -68,67 +22,6 @@ const useUserStore = create((set) => {
         };
         Cookies.set("user", JSON.stringify(cookieValue));
         return res.data;
-      } catch (error) {
-        throw new Error(error.response.data.message);
-      }
-    },
-
-    getUser: async () => {
-      const idUser = useUserStore.getState().identificacion;
-
-      try {
-        const res = await axios.post("/api/user", {
-          idUser: idUser,
-        });
-
-        const userData = res.data._doc;
-
-        const city = res.data.ciudad;
-        console.log(city);
-
-        set({
-          nombre: userData.nombre,
-          identificacion: userData.identificacion,
-          ciudad: city,
-          direccion: userData.direccion,
-          celular: userData.celular,
-          fechaNacimiento: userData.fechaNacimiento,
-          fechaVencimientoLicencia: userData.fechaVencimientoLicencia,
-          isActive: userData.isActive,
-          email: userData.email,
-          _id: userData._id,
-          documentos: userData.documentos,
-          tipoDocumento: userData.tipoDocumento,
-          tipoPersona: userData.tipoPersona,
-        });
-
-        return userData;
-      } catch (error) {
-        console.error(error);
-        throw new Error(error.response);
-      }
-    },
-
-    getSeguros: async () => {
-      const idUser = useUserStore.getState()._id;
-
-      console.log(idUser);
-      try {
-        const res = await axios.post("/api/get-seguros", {
-          idUser: idUser,
-        });
-        let seguros = res.data;
-        seguros = seguros.map((seguro) => {
-          const companiaSeguro = companiasSeguros.find(
-            (compania) => compania.nombre === seguro.companiaAseguradora
-          );
-          return {
-            ...seguro,
-            asistencia: companiaSeguro ? companiaSeguro.asistencia : undefined,
-          };
-        });
-        set({ seguros: seguros });
-        return seguros;
       } catch (error) {
         throw new Error(error.response.data.message);
       }
@@ -182,7 +75,6 @@ const useUserStore = create((set) => {
       }
     },
     logout: () => {
-      set({ nombre: null, identificacion: null, rol: null, ciudad: null });
       Cookies.remove("user");
     },
   };

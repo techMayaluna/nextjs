@@ -10,7 +10,7 @@ import { imageTitleConstants } from "./constants";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 
-function FormMandarEmail({ params }) {
+function FormMandarEmail({ params, user }) {
   const doc = new jsPDF();
 
   const { tipo, placa } = params;
@@ -35,16 +35,10 @@ function FormMandarEmail({ params }) {
     numeroTestigo: "",
   });
 
-  const {
-    nombre,
-    identificacion,
-    email,
-    celular,
-    direccion,
-    ciudad,
-    geo,
-    updateGeo,
-  } = useUserStore((state) => state);
+  const { geo, updateGeo } = useUserStore((state) => state);
+
+  const { nombre, identificacion, email, celular, direccion, ciudad } =
+    user || {};
 
   useEffect(() => {
     if (!tipo) {
