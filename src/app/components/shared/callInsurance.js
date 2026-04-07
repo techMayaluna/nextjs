@@ -12,18 +12,21 @@ export default function CallInsurance({}) {
   const { seguros } = useUserStore((state) => state);
 
   const numberToCall1 =
-    id === "home"
+    !seguros?.length
+      ? undefined
+      : id === "home"
       ? seguros[0]?.asistencia
       : seguros.find((seguro) => seguro._id === id)?.asistencia;
 
-  const numberToCall2 =
-    numberToCall1?.length < 4
+  const numberToCall2 = numberToCall1
+    ? numberToCall1.length < 4
       ? `tel:%23${numberToCall1}`
-      : `tel:${numberToCall1}`;
+      : `tel:${numberToCall1}`
+    : null;
 
   return (
     <a
-      href={numberToCall2}
+      href={numberToCall2 ?? undefined}
       className="bg-yellowCall w-20 h-20 rounded-full flex items-center justify-center"
     >
       <Image

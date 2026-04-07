@@ -10,11 +10,11 @@ export default function MisReportes({ seguros, placaConductor, rol }) {
 
   const hasAutoInsurance =
     seguros?.some((seguro) => seguro.tipoPoliza.includes("Autos")) ||
-    seguros[0]?.vehiculos;
+    seguros?.[0]?.vehiculos;
   const autoInsurances = seguros?.filter(
     (seguro) =>
       seguro.tipoPoliza.includes("Autos") || seguro.tipoPoliza.includes("SOAT")
-  );
+  ) || [];
   const autoInsurancesUnicos = autoInsurances.reduce(
     (acc, seguro) => {
       if (!acc.placas.has(seguro.placaVehiculo)) {
@@ -35,7 +35,7 @@ export default function MisReportes({ seguros, placaConductor, rol }) {
   };
 
   const displayInspection = () => {
-    if (!rol === "conductor") {
+    if (rol !== "conductor") {
       return null;
     } else {
       return (

@@ -23,7 +23,7 @@ const useUserStore = create((set) => {
         Cookies.set("user", JSON.stringify(cookieValue));
         return res.data;
       } catch (error) {
-        throw new Error(error.response.data.message);
+        throw new Error(error.response?.data?.message || error.message || "An error occurred");
       }
     },
 
@@ -36,7 +36,7 @@ const useUserStore = create((set) => {
 
         return res.data;
       } catch (error) {
-        throw new Error(error.response.data.message);
+        throw new Error(error.response?.data?.message || error.message || "An error occurred");
       }
     },
 
@@ -50,7 +50,7 @@ const useUserStore = create((set) => {
 
         return res.data;
       } catch (error) {
-        throw new Error(error.response.data.message);
+        throw new Error(error.response?.data?.message || error.message || "An error occurred");
       }
     },
 

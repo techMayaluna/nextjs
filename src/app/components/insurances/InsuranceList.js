@@ -91,7 +91,7 @@ const InsuranceList = ({ seguros = [] }) => {
                   <a
                     className="text-right underline"
                     href={
-                      "" + seguro.asistencia?.length < 4
+                      (seguro.asistencia?.length ?? 0) < 4
                         ? `tel:%23${seguro.asistencia}`
                         : `tel:${seguro.asistencia}`
                     }
@@ -111,7 +111,7 @@ const InsuranceList = ({ seguros = [] }) => {
                     </div>
                   </a>
 
-                  {seguro.documentos[0] ? (
+                  {seguro.documentos?.[0] ? (
                     <div
                       className="text-right underline"
                       onClick={() => downloadPdf(seguro)}

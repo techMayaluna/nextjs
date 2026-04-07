@@ -164,7 +164,7 @@ function FormMandarEmail({ params, user }) {
           `${placa}`,
           `${reportDateFormat()}`,
           `${tipo}`,
-          `${geo.latitude}, ${geo.longitude}`,
+          `${geo?.latitude ?? "N/A"}, ${geo?.longitude ?? "N/A"}`,
           `${
             dataVaraible.numeroHeridos !== 0
               ? dataVaraible.numeroHeridos
@@ -261,11 +261,11 @@ function FormMandarEmail({ params, user }) {
       correoElectronico: email,
       numeroDeContacto: celular,
       direccionDeResidencia: direccion,
-      ciudad: ciudad.nombre,
+      ciudad: ciudad?.nombre,
       placaDelVehiculo: placa,
       fechaDeReporte: reportDateFormat(),
       tipoDeAccidente: tipo,
-      ubicacion: `${geo.latitude}, ${geo.longitude}`,
+      ubicacion: `${geo?.latitude ?? "N/A"}, ${geo?.longitude ?? "N/A"}`,
       numeroDeHeridos: `${dataVaraible.numeroHeridos || "N/A"}`,
       comoOcurrio: dataVaraible.comoOcurrio ? dataVaraible.comoOcurrio : "N/A",
       nombreTestigo: `${
@@ -274,12 +274,9 @@ function FormMandarEmail({ params, user }) {
       numeroTestigo: `${
         dataVaraible.numeroTestigo ? dataVaraible.numeroTestigo : "N/A"
       }`,
-      images: [
-        (await cloudImageUpload(images[0])) || "1",
-        await cloudImageUpload(images[1] || "2"),
-        await cloudImageUpload(images[2] || "3"),
-        await cloudImageUpload(images[3] || "4"),
-      ],
+      images: (
+        await Promise.all(images.map((img) => img ? cloudImageUpload(img) : null))
+      ).filter(Boolean),
       pdfURL: pdfURL,
     };
     try {
