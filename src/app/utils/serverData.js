@@ -11,7 +11,8 @@ export function getAuthCookie() {
   const userCookie = cookieStore.get("user");
   if (!userCookie) return null;
   try {
-    return JSON.parse(userCookie.value);
+    const parsed = JSON.parse(userCookie.value);
+    return parsed?.userId ? parsed : null;
   } catch {
     return null;
   }
@@ -19,10 +20,10 @@ export function getAuthCookie() {
 
 export const getServerUser = cache(async () => {
   const auth = getAuthCookie();
-  if (!auth?.identificacion) return null;
+  if (!auth?.userId) return null;
 
   await connectDB();
-  const user = await User.findOne({ identificacion: auth.identificacion }).lean();
+  const user = await User.findById(auth.userId).lean();
   if (!user) return null;
 
   const ciudad = await PlateRestriction.findOne({ _id: user.ciudad }).lean();

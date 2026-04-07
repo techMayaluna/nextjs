@@ -16,11 +16,12 @@ const useUserStore = create((set) => {
 
         const cookieValue = {
           userId: res.data._id,
-          identificacion: res.data.identificacion,
-          rol: res.data.rol,
-          placaConductor: userid,
+          ...(res.data.rol === "conductor" ? { placaConductor: userid } : {}),
         };
         Cookies.set("user", JSON.stringify(cookieValue));
+        if (typeof window !== "undefined") {
+          localStorage.setItem("userId", res.data._id);
+        }
         return res.data;
       } catch (error) {
         throw new Error(error.response?.data?.message || error.message || "An error occurred");
@@ -76,6 +77,9 @@ const useUserStore = create((set) => {
     },
     logout: () => {
       Cookies.remove("user");
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("userId");
+      }
     },
   };
 });

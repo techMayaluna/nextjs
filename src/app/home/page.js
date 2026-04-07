@@ -10,15 +10,17 @@ export default async function Home() {
     getServerSeguros(auth?.userId),
   ]);
 
+  const rol = auth?.placaConductor ? "conductor" : user?.rol;
+
   return (
     <main className="pb-20">
       <PicoyPlaca ciudad={user?.ciudad} />
       <MisSeguros
         seguros={seguros}
-        rol={auth?.rol}
+        rol={rol}
         placaConductor={auth?.placaConductor}
       />
-      <MenuInferior />
+      <MenuInferior seguros={seguros} />
     </main>
   );
 }

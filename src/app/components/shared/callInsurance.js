@@ -1,15 +1,12 @@
 "use client";
-import useUserStore from "@/app/stores/userStore";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-export default function CallInsurance({}) {
+export default function CallInsurance({ seguros }) {
   const pathname = usePathname();
 
   const parts = pathname.split("/"); // Divide el pathname en partes
   const id = parts[parts.length - 1]; // Obtiene la última parte, que es el ID
-
-  const { seguros } = useUserStore((state) => state);
 
   const numberToCall1 =
     !seguros?.length
