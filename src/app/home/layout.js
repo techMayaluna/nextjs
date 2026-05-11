@@ -12,7 +12,7 @@ export default async function LayoutHome({ children }) {
 
   return (
     <div className="flex justify-center h-screen">
-      <div className="max-w-screen-sm w-full">
+      <div className="max-w-screen-sm w-full relative">
         <MenuSuperior user={user} />
         <section className="mx-8 my-4">{children}</section>
       </div>
