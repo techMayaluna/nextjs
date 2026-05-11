@@ -14,7 +14,7 @@ const SeguroDetail = ({ seguro, rol, placaConductor }) => {
     try {
       const response = await axios.get(
         `/api/download/poliza.pdf?url=${seguro.documentos[0]}`,
-        { responseType: "blob" }
+        { responseType: "blob" },
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
@@ -51,7 +51,7 @@ const SeguroDetail = ({ seguro, rol, placaConductor }) => {
           <p className="text-right">
             {seguro.fechaInicial && !isNaN(new Date(seguro.fechaInicial))
               ? new Date(
-                  new Date(seguro.fechaInicial).getTime() + 86400000
+                  new Date(seguro.fechaInicial).getTime() + 86400000,
                 ).toLocaleDateString("es-ES", {
                   year: "numeric",
                   month: "long",
@@ -66,7 +66,7 @@ const SeguroDetail = ({ seguro, rol, placaConductor }) => {
             {seguro.fechaVencimiento &&
             !isNaN(new Date(seguro.fechaVencimiento))
               ? new Date(
-                  new Date(seguro.fechaVencimiento).getTime() + 86400000
+                  new Date(seguro.fechaVencimiento).getTime() + 86400000,
                 ).toLocaleDateString("es-ES", {
                   year: "numeric",
                   month: "long",
@@ -103,7 +103,7 @@ const SeguroDetail = ({ seguro, rol, placaConductor }) => {
                   !isNaN(new Date(seguro.fechaVencimientoExtintor))
                     ? new Date(
                         new Date(seguro.fechaVencimientoExtintor).getTime() +
-                          86400000
+                          86400000,
                       ).toLocaleDateString("es-ES", {
                         year: "numeric",
                         month: "long",
@@ -126,7 +126,7 @@ const SeguroDetail = ({ seguro, rol, placaConductor }) => {
                 !isNaN(new Date(seguro.fechaVencimientoTecnomecanica))
                   ? new Date(
                       new Date(seguro.fechaVencimientoTecnomecanica).getTime() +
-                        86400000
+                        86400000,
                     ).toLocaleDateString("es-ES", {
                       year: "numeric",
                       month: "long",
@@ -203,6 +203,7 @@ const Table = ({ data }) => (
         <th>Tecnomecánica</th>
         <th>Extintor</th>
         <th>Tarjeta de operación</th>
+        <th>Licencia conductor</th>
         <th>SOAT</th>
       </tr>
     </thead>
@@ -220,6 +221,9 @@ const Table = ({ data }) => (
           </td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
             {vehiculo.vencimientoTarjetaOperacion}
+          </td>
+          <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+            {vehiculo.vencimientoConductor}
           </td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
             {vehiculo.SOAT}

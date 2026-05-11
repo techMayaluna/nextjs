@@ -50,7 +50,7 @@ const insuranceSchema = new Schema({
       vencimientoTarjetaOperacion: String,
       vencimientoTecnomecanica: String,
       SOAT: String,
-
+      vencimientoConductor: String,
     },
   ],
 });
