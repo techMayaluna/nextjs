@@ -8,10 +8,9 @@ const NotFound = () => {
         <main className="w-screen h-screen bg-gradient-to-t from-gradientGreen to-white">
             <Image
                 className="mx-auto mb-14 mt-6"
-                src="/logomayaluna.jpg"
-
-                width={150}
-                height={150}
+                src="/logomayaluna.webp"
+                width={180}
+                height={180}
                 alt="logoMayaluna"
             />
 

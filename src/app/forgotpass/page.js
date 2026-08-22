@@ -8,9 +8,9 @@ export default function ForgotPasswordPage() {
       <Link href="/login">
         <Image
           className="mx-auto mb-14 mt-6"
-          src="/logomayaluna.jpg"
-          width={150}
-          height={150}
+          src="/logomayaluna.webp"
+          width={180}
+          height={180}
           alt="logoMayaluna"
         />
       </Link>

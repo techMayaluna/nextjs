@@ -35,9 +35,10 @@ export default function Login() {
     <main className="w-screen h-screen bg-[linear-gradient(to_top,theme(colors.gradientGreen)_0%,theme(colors.gradientGreen)_20%,theme(colors.white)_70%,theme(colors.white)_100%)]">
       <Image
         className="mx-auto mb-14 mt-6"
-        src="/logomayaluna.jpg"
-        width={150}
-        height={150}
+        src="/logomayaluna.webp"
+        width={180}
+        height={180}
+        priority
         alt="logoMayaluna"
       />
 

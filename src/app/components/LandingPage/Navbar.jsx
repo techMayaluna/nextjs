@@ -20,9 +20,9 @@ const Navbar = ({ atHome }) => {
             }}
           >
             <Image
-              className="h-14 w-36 sm:h-14 sm:w-auto"
-              src="/logomayaluna.jpg"
-              width={120}
+              className="h-14 w-auto sm:h-16"
+              src="/logomayaluna.webp"
+              width={130}
               height={130}
               priority={true}
               alt="logoMayaluna"
